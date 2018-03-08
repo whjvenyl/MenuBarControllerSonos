@@ -16,6 +16,7 @@
 		11C13476204F4DE600AC3581 /* VolumeControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C13475204F4DE600AC3581 /* VolumeControlVC.swift */; };
 		11C1347B204F5C7A00AC3581 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C13479204F5C7A00AC3581 /* Test.m */; };
 		11C1347C204F5C7A00AC3581 /* Test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11C1347A204F5C7A00AC3581 /* Test.xib */; };
+		11C67D7B2051F01C002777D4 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C67D7A2051F01C002777D4 /* EventMonitor.swift */; };
 		11F64BE720509F08005ED2E3 /* SSDPSearchTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BDF20509F07005ED2E3 /* SSDPSearchTarget.swift */; };
 		11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BE020509F07005ED2E3 /* SSDPUPnP.swift */; };
 		11F64BE920509F08005ED2E3 /* SSDPDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BE120509F07005ED2E3 /* SSDPDiscovery.swift */; };
@@ -63,6 +64,7 @@
 		11C13478204F5C7A00AC3581 /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		11C13479204F5C7A00AC3581 /* Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		11C1347A204F5C7A00AC3581 /* Test.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Test.xib; sourceTree = "<group>"; };
+		11C67D7A2051F01C002777D4 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		11F64BDF20509F07005ED2E3 /* SSDPSearchTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPSearchTarget.swift; sourceTree = "<group>"; };
 		11F64BE020509F07005ED2E3 /* SSDPUPnP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPUPnP.swift; sourceTree = "<group>"; };
 		11F64BE120509F07005ED2E3 /* SSDPDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPDiscovery.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				1116E9D22040C015009D940F /* AppDelegate.swift */,
 				11C13475204F4DE600AC3581 /* VolumeControlVC.swift */,
 				1168D985205138E60091E784 /* SonosCommandController.swift */,
+				11C67D7A2051F01C002777D4 /* EventMonitor.swift */,
 				11C13478204F5C7A00AC3581 /* Test.h */,
 				11C13479204F5C7A00AC3581 /* Test.m */,
 				11C1347A204F5C7A00AC3581 /* Test.xib */,
@@ -244,6 +247,7 @@
 				11F64BEC20509F08005ED2E3 /* SSDPCommon.swift in Sources */,
 				11F64BEB20509F08005ED2E3 /* SSDPMSearchRequest.swift in Sources */,
 				11F64BED20509F08005ED2E3 /* SSDPDiscoverySession.swift in Sources */,
+				11C67D7B2051F01C002777D4 /* EventMonitor.swift in Sources */,
 				11F64BEA20509F08005ED2E3 /* SSDPResponse.swift in Sources */,
 				1116E9D32040C015009D940F /* AppDelegate.swift in Sources */,
 			);

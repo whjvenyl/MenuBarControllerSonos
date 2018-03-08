@@ -17,17 +17,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let popover = NSPopover()
     
+    var eventMonitor: EventMonitor?
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        if let button = statusItem.button {
-            button.image = #imageLiteral(resourceName: "status_icon")
-            button.action = #selector(printQuote(_:))
-        }
         
-        if let button = statusItem.button {
-            button.image = NSImage(named:NSImage.Name("StatusBarButtonImage"))
-            button.action = #selector(togglePopover(_:))
-        }
+        let icon = NSImage(named:NSImage.Name("status_icon"))
+        icon?.isTemplate = true
+        statusItem.button?.image = icon
+        statusItem.button?.action = #selector(togglePopover(_:))
+        
         popover.contentViewController = VolumeControlVC.freshController()
+        
+        eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
+            if let strongSelf = self, strongSelf.popover.isShown {
+                strongSelf.closePopover(sender: event)
+            }
+        }
+        eventMonitor?.start()
     }
     
     @objc func togglePopover(_ sender: Any?) {
