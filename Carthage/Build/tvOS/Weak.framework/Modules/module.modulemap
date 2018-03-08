@@ -1,0 +1,4 @@
+framework module Weak {
+    header "Weak-Swift.h"
+    requires objc
+}

@@ -1,0 +1,33 @@
+PODS:
+  - AFNetworking (2.0.3):
+    - AFNetworking/NSURLConnection (= 2.0.3)
+    - AFNetworking/NSURLSession (= 2.0.3)
+    - AFNetworking/Reachability (= 2.0.3)
+    - AFNetworking/Security (= 2.0.3)
+    - AFNetworking/Serialization (= 2.0.3)
+    - AFNetworking/UIKit (= 2.0.3)
+  - AFNetworking/NSURLConnection (2.0.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.0.3):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.0.3)
+  - AFNetworking/Security (2.0.3)
+  - AFNetworking/Serialization (2.0.3)
+  - CocoaAsyncSocket (7.3.3)
+  - sonos-objc (0.1.1):
+    - AFNetworking (= 2.0.3)
+    - CocoaAsyncSocket (= 7.3.3)
+
+DEPENDENCIES:
+  - sonos-objc (~> 0.1.1)
+
+SPEC CHECKSUMS:
+  AFNetworking: 6b0f579b7cfe3ede501df0248c7ee1976e926aec
+  CocoaAsyncSocket: 9fb32966c7d8b0f987d031198d7f690bac1db30e
+  sonos-objc: f0a6b3c7b8a28cf6376196b73840ccc06ee96af6
+
+PODFILE CHECKSUM: 84e763131107f665ede78196f4d91490f5e7588a
+
+COCOAPODS: 1.4.0

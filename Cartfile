@@ -1,0 +1,3 @@
+github "robbiehanson/CocoaAsyncSocket" "master"
+github "nvzqz/Weak"
+github "drmohundro/SWXMLHash" ~> 4.0
