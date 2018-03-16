@@ -12,10 +12,10 @@
 		1116E9D72040C015009D940F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1116E9D62040C015009D940F /* Assets.xcassets */; };
 		1116E9DA2040C015009D940F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1116E9D82040C015009D940F /* Main.storyboard */; };
 		1116E9E32040CDA9009D940F /* SampleAudio_0.4mb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1116E9E22040CDA8009D940F /* SampleAudio_0.4mb.mp3 */; };
+		115232CB205B1B420048E130 /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115232CA205B1B420048E130 /* PlayState.swift */; };
+		115BA13B20599E29004CC5C2 /* SonosDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115BA13A20599E29004CC5C2 /* SonosDevice.swift */; };
 		1168D986205138E60091E784 /* SonosCommandController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168D985205138E60091E784 /* SonosCommandController.swift */; };
 		11C13476204F4DE600AC3581 /* VolumeControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C13475204F4DE600AC3581 /* VolumeControlVC.swift */; };
-		11C1347B204F5C7A00AC3581 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C13479204F5C7A00AC3581 /* Test.m */; };
-		11C1347C204F5C7A00AC3581 /* Test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11C1347A204F5C7A00AC3581 /* Test.xib */; };
 		11C67D7B2051F01C002777D4 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C67D7A2051F01C002777D4 /* EventMonitor.swift */; };
 		11F64BE720509F08005ED2E3 /* SSDPSearchTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BDF20509F07005ED2E3 /* SSDPSearchTarget.swift */; };
 		11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BE020509F07005ED2E3 /* SSDPUPnP.swift */; };
@@ -50,7 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1116E9CF2040C015009D940F /* Sonos_Volume_Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonos_Volume_Control.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1116E9CF2040C015009D940F /* Sonos Menu Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sonos Menu Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1116E9D22040C015009D940F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1116E9D42040C015009D940F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1116E9D62040C015009D940F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,13 +58,13 @@
 		1116E9DB2040C015009D940F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1116E9DC2040C015009D940F /* Sonos_Volume_Control.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sonos_Volume_Control.entitlements; sourceTree = "<group>"; };
 		1116E9E22040CDA8009D940F /* SampleAudio_0.4mb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SampleAudio_0.4mb.mp3; sourceTree = "<group>"; };
+		115232CA205B1B420048E130 /* PlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
+		115BA13A20599E29004CC5C2 /* SonosDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosDevice.swift; sourceTree = "<group>"; };
 		1168D985205138E60091E784 /* SonosCommandController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosCommandController.swift; sourceTree = "<group>"; };
 		11C13475204F4DE600AC3581 /* VolumeControlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeControlVC.swift; sourceTree = "<group>"; };
 		11C13477204F5C7A00AC3581 /* Sonos_Volume_Control-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sonos_Volume_Control-Bridging-Header.h"; sourceTree = "<group>"; };
-		11C13478204F5C7A00AC3581 /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
-		11C13479204F5C7A00AC3581 /* Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
-		11C1347A204F5C7A00AC3581 /* Test.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Test.xib; sourceTree = "<group>"; };
 		11C67D7A2051F01C002777D4 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		11CF3203205C2DA400A79D9A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		11F64BDF20509F07005ED2E3 /* SSDPSearchTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPSearchTarget.swift; sourceTree = "<group>"; };
 		11F64BE020509F07005ED2E3 /* SSDPUPnP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPUPnP.swift; sourceTree = "<group>"; };
 		11F64BE120509F07005ED2E3 /* SSDPDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPDiscovery.swift; sourceTree = "<group>"; };
@@ -95,6 +95,7 @@
 		1116E9C62040C015009D940F = {
 			isa = PBXGroup;
 			children = (
+				11CF3203205C2DA400A79D9A /* README.md */,
 				11F64C122050B1A0005ED2E3 /* SWXMLHash.framework */,
 				11F64C0D2050A2AE005ED2E3 /* CocoaAsyncSocket.framework */,
 				11F64C0C2050A2AE005ED2E3 /* Weak.framework */,
@@ -107,7 +108,7 @@
 		1116E9D02040C015009D940F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1116E9CF2040C015009D940F /* Sonos_Volume_Control.app */,
+				1116E9CF2040C015009D940F /* Sonos Menu Controller.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,10 +119,9 @@
 				1116E9D22040C015009D940F /* AppDelegate.swift */,
 				11C13475204F4DE600AC3581 /* VolumeControlVC.swift */,
 				1168D985205138E60091E784 /* SonosCommandController.swift */,
+				115BA13A20599E29004CC5C2 /* SonosDevice.swift */,
+				115232CA205B1B420048E130 /* PlayState.swift */,
 				11C67D7A2051F01C002777D4 /* EventMonitor.swift */,
-				11C13478204F5C7A00AC3581 /* Test.h */,
-				11C13479204F5C7A00AC3581 /* Test.m */,
-				11C1347A204F5C7A00AC3581 /* Test.xib */,
 				1116E9D42040C015009D940F /* ViewController.swift */,
 				1116E9D62040C015009D940F /* Assets.xcassets */,
 				1116E9D82040C015009D940F /* Main.storyboard */,
@@ -159,9 +159,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1116E9CE2040C015009D940F /* Sonos_Volume_Control */ = {
+		1116E9CE2040C015009D940F /* Sonos Menu Controller */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1116E9DF2040C015009D940F /* Build configuration list for PBXNativeTarget "Sonos_Volume_Control" */;
+			buildConfigurationList = 1116E9DF2040C015009D940F /* Build configuration list for PBXNativeTarget "Sonos Menu Controller" */;
 			buildPhases = (
 				1116E9CB2040C015009D940F /* Sources */,
 				1116E9CC2040C015009D940F /* Frameworks */,
@@ -172,9 +172,9 @@
 			);
 			dependencies = (
 			);
-			name = Sonos_Volume_Control;
+			name = "Sonos Menu Controller";
 			productName = Sonos_Volume_Control;
-			productReference = 1116E9CF2040C015009D940F /* Sonos_Volume_Control.app */;
+			productReference = 1116E9CF2040C015009D940F /* Sonos Menu Controller.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -193,7 +193,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -212,7 +212,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1116E9CE2040C015009D940F /* Sonos_Volume_Control */,
+				1116E9CE2040C015009D940F /* Sonos Menu Controller */,
 			);
 		};
 /* End PBXProject section */
@@ -223,7 +223,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1116E9D72040C015009D940F /* Assets.xcassets in Resources */,
-				11C1347C204F5C7A00AC3581 /* Test.xib in Resources */,
 				1116E9DA2040C015009D940F /* Main.storyboard in Resources */,
 				1116E9E32040CDA9009D940F /* SampleAudio_0.4mb.mp3 in Resources */,
 			);
@@ -238,7 +237,7 @@
 			files = (
 				11C13476204F4DE600AC3581 /* VolumeControlVC.swift in Sources */,
 				11F64BE720509F08005ED2E3 /* SSDPSearchTarget.swift in Sources */,
-				11C1347B204F5C7A00AC3581 /* Test.m in Sources */,
+				115BA13B20599E29004CC5C2 /* SonosDevice.swift in Sources */,
 				1116E9D52040C015009D940F /* ViewController.swift in Sources */,
 				11F64BEE20509F08005ED2E3 /* SSDPMSearchResponse.swift in Sources */,
 				11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */,
@@ -250,6 +249,7 @@
 				11C67D7B2051F01C002777D4 /* EventMonitor.swift in Sources */,
 				11F64BEA20509F08005ED2E3 /* SSDPResponse.swift in Sources */,
 				1116E9D32040C015009D940F /* AppDelegate.swift in Sources */,
+				115232CB205B1B420048E130 /* PlayState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,9 +378,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Sonos_Volume_Control/Sonos_Volume_Control.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = A5U65N39SD;
+				DEVELOPMENT_TEAM = X5VRBHBK8S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -388,7 +389,7 @@
 				);
 				INFOPLIST_FILE = Sonos_Volume_Control/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.alexander.heinrich.Sonos-Volume-Control";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.sn0wfreeze.Sonos-Volume-Control";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sonos_Volume_Control/Sonos_Volume_Control-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -401,9 +402,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Sonos_Volume_Control/Sonos_Volume_Control.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = A5U65N39SD;
+				DEVELOPMENT_TEAM = X5VRBHBK8S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -411,7 +413,7 @@
 				);
 				INFOPLIST_FILE = Sonos_Volume_Control/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.alexander.heinrich.Sonos-Volume-Control";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.sn0wfreeze.Sonos-Volume-Control";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sonos_Volume_Control/Sonos_Volume_Control-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -430,7 +432,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1116E9DF2040C015009D940F /* Build configuration list for PBXNativeTarget "Sonos_Volume_Control" */ = {
+		1116E9DF2040C015009D940F /* Build configuration list for PBXNativeTarget "Sonos Menu Controller" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1116E9E02040C015009D940F /* Debug */,

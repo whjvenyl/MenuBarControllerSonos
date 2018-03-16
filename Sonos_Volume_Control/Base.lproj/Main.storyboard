@@ -676,7 +676,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Sonos_Volume_Control" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Sonos_Menu_Controller" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -685,7 +685,7 @@
         <!--Volume ControlVC-->
         <scene sceneID="94k-eK-MxV">
             <objects>
-                <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="VolumeControlVC" customModule="Sonos_Volume_Control" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="VolumeControlVC" customModule="Sonos_Menu_Controller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Nqb-gx-wcn">
                         <rect key="frame" x="0.0" y="0.0" width="228" height="143"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -716,11 +716,85 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <customView hidden="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euI-Bt-dbz">
+                                <rect key="frame" x="54" y="8" width="141" height="24"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5">
+                                        <rect key="frame" x="65" y="-2" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="5cq-Fn-c7h"/>
+                                            <constraint firstAttribute="width" constant="24" id="IRh-8q-zCk"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ic_pause" imagePosition="overlaps" alignment="center" borderStyle="border" inset="2" id="tlJ-Vv-dgc">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="playPause:" target="UOE-Qu-9Vt" id="9L3-0T-4fk"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aUg-Gc-k5u">
+                                        <rect key="frame" x="110" y="-2" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="vEO-vv-8KR"/>
+                                            <constraint firstAttribute="height" constant="21" id="z0D-om-227"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ic_skip_next" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="EXQ-Qi-wPK">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="nextTrack:" target="UOE-Qu-9Vt" id="BHm-CG-1o6"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kdr-P3-YGY">
+                                        <rect key="frame" x="20" y="-2" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="2lF-eN-O5w"/>
+                                            <constraint firstAttribute="width" constant="24" id="CmW-BF-0vV"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ic_skip_previous" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="kmt-UO-k9p">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="prevTrack:" target="UOE-Qu-9Vt" id="ohV-BB-KS0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="KtY-82-ql5" firstAttribute="leading" secondItem="Kdr-P3-YGY" secondAttribute="trailing" constant="21" id="8Q3-Ko-34n"/>
+                                    <constraint firstItem="KtY-82-ql5" firstAttribute="centerX" secondItem="euI-Bt-dbz" secondAttribute="centerX" id="B78-Nl-gvJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="KtY-82-ql5" secondAttribute="bottom" id="b3I-Lc-i5g"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kdr-P3-YGY" secondAttribute="bottom" id="byq-lK-f58"/>
+                                    <constraint firstItem="aUg-Gc-k5u" firstAttribute="leading" secondItem="KtY-82-ql5" secondAttribute="trailing" constant="21" id="fcg-0o-VLY"/>
+                                    <constraint firstAttribute="bottom" secondItem="aUg-Gc-k5u" secondAttribute="bottom" id="pka-X1-4gm"/>
+                                    <constraint firstAttribute="height" constant="24" id="tcz-LD-liR"/>
+                                </constraints>
+                            </customView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o0R-YJ-mAi">
+                                <rect key="frame" x="209" y="8" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="0Ks-2D-AyY"/>
+                                    <constraint firstAttribute="height" constant="15" id="KKD-YJ-JNO"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="ic_settings" imagePosition="only" alignment="center" state="on" inset="2" id="7fP-Ak-t63">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showMenu:" target="UOE-Qu-9Vt" id="eHJ-cs-1ek"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="B5Z-p5-gA2" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="3XG-oX-ayF"/>
                             <constraint firstItem="B5Z-p5-gA2" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="20" id="AGS-ge-tlA"/>
+                            <constraint firstItem="euI-Bt-dbz" firstAttribute="trailing" secondItem="zTj-kC-HZv" secondAttribute="trailing" id="DeS-ta-aTc"/>
+                            <constraint firstItem="euI-Bt-dbz" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="EW2-Qh-7lS"/>
                             <constraint firstAttribute="bottom" secondItem="B5Z-p5-gA2" secondAttribute="bottom" constant="8" id="N8g-dp-38S"/>
+                            <constraint firstAttribute="trailing" secondItem="o0R-YJ-mAi" secondAttribute="trailing" constant="4" id="S2k-iZ-mZn"/>
+                            <constraint firstAttribute="bottom" secondItem="o0R-YJ-mAi" secondAttribute="bottom" constant="8" id="Zzl-vz-OvL"/>
                             <constraint firstAttribute="trailing" secondItem="V79-m7-Tey" secondAttribute="trailing" constant="20" id="an4-kd-nvP"/>
                             <constraint firstItem="V79-m7-Tey" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="dQw-kM-1v8"/>
                             <constraint firstAttribute="trailing" secondItem="zTj-kC-HZv" secondAttribute="trailing" constant="20" id="hiy-MS-qaJ"/>
@@ -728,18 +802,27 @@
                             <constraint firstItem="n4a-Gx-V86" firstAttribute="top" secondItem="zTj-kC-HZv" secondAttribute="bottom" constant="7" id="jKF-GY-le1"/>
                             <constraint firstItem="n4a-Gx-V86" firstAttribute="leading" secondItem="B5Z-p5-gA2" secondAttribute="trailing" constant="19" id="nWF-cD-WXg"/>
                             <constraint firstItem="zTj-kC-HZv" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="rME-8y-fml"/>
+                            <constraint firstItem="euI-Bt-dbz" firstAttribute="bottom" secondItem="V79-m7-Tey" secondAttribute="bottom" id="uoH-cO-g95"/>
                             <constraint firstAttribute="bottom" secondItem="V79-m7-Tey" secondAttribute="bottom" constant="8" id="vBF-Zg-OCO"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="controlsView" destination="euI-Bt-dbz" id="XvB-Xr-Tqk"/>
                         <outlet property="errorMessageLabel" destination="V79-m7-Tey" id="NVk-fz-QO8"/>
+                        <outlet property="pauseButton" destination="KtY-82-ql5" id="mQH-iA-1XV"/>
                         <outlet property="sonosSlider" destination="B5Z-p5-gA2" id="IYE-by-6uJ"/>
                         <outlet property="sonosStack" destination="n4a-Gx-V86" id="TgX-MU-ta8"/>
                     </connections>
                 </viewController>
                 <customObject id="Upz-cR-1rt" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-73" y="162"/>
+            <point key="canvasLocation" x="-73" y="161.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_pause" width="48" height="48"/>
+        <image name="ic_settings" width="15" height="15"/>
+        <image name="ic_skip_next" width="48" height="48"/>
+        <image name="ic_skip_previous" width="48" height="48"/>
+    </resources>
 </document>

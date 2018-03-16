@@ -76,102 +76,22 @@ class SonosCommand {
 
 enum SonosEndpoint:String {
     case rendering_endpoint = "/MediaRenderer/RenderingControl/Control"
+    case transport_endpoint = "/MediaRenderer/AVTransport/Control"
 }
 
 enum SononsService:String {
     case rendering_service = "urn:schemas-upnp-org:service:RenderingControl:1"
+    case transport_service = "urn:schemas-upnp-org:service:AVTransport:1"
 }
 
 enum SonosActions: String {
     case setVolume = "SetVolume"
     case getVolume = "GetVolume"
-}
-
-class SonosController: Equatable {
-    /// Name of the room
-    var roomName: String
-    /// Name of the device
-    var deviceName: String
-    /// URL where to find it 
-    var url: URL
-    var ip: String
-    var port: Int = 1400
-    var udn:String
-    var descriptionXML: XMLIndexer?
-    var active: Bool = true
-    var currentVolume = 0
-    
-    init(xml: XMLIndexer, url: URL) {
-        let device = xml["root"]["device"]
-        let displayName = device["displayName"].element?.text
-        let roomName = device["roomName"].element?.text
-        self.roomName = roomName ?? "unknown"
-        self.deviceName = displayName ?? "unknown"
-        self.url = url
-        self.ip = url.host ?? "127.0.0.0"
-        self.descriptionXML = xml
-        self.udn = device["UDN"].element?.text ?? "no-id"
-        self.updateCurrentVolume()
-    }
-    
-    init(roomName:String, deviceName:String, url:URL, ip: String, udn: String) {
-        self.roomName = roomName
-        self.deviceName = deviceName
-        self.url = url
-        self.ip = ip
-        self.udn = udn
-    }
-    
-    var readableName:String {
-        return "\(roomName) - \(deviceName)"
-    }
-    
-    /**
-     Set the volume of the Sonos device
-     
-     - Parameters:
-     - volume: between 0 and 100
-     */
-    func setVolume(volume: Int){
-        let command = SonosCommand(endpoint: .rendering_endpoint, action: .setVolume, service: .rendering_service)
-        command.put(key: "InstanceID", value: "0")
-        command.put(key: "Channel", value: "Master")
-        command.put(key: "DesiredVolume", value: String(volume))
-        command.execute(sonos: self)
-    }
-    
-    func getVolume(_ completion:@escaping (_ volume: Int)->Void) {
-        let command = SonosCommand(endpoint: .rendering_endpoint, action: .getVolume, service: .rendering_service)
-        command.put(key: "InstanceID", value: "0")
-        command.put(key: "Channel", value: "Master")
-        
-        command.execute(sonos: self, { data in
-            guard let data = data else {return}
-            let xml = SWXMLHash.parse(data)
-            //Get the volume out of the xml
-            if let volumeText = xml["s:Envelope"]["s:Body"]["u:GetVolumeResponse"]["CurrentVolume"].element?.text,
-                let volume = Int(volumeText) {
-                self.currentVolume = volume
-            }
-            DispatchQueue.main.async {completion(self.currentVolume)}
-        })
-    }
-    
-    func updateCurrentVolume() {
-        getVolume { (volume) in }
-    }
-    
-    @objc func activateDeactivate(button: NSButton) {
-        if button.state == .on {
-            self.active = true
-        }else if button.state == .off {
-            self.active = false
-        }
-    }
-    
-    static func ==(l:SonosController, r:SonosController) -> Bool {
-        return l.udn == r.udn
-    }
+    case play = "Play"
+    case pause = "Pause"
+    case next = "Next"
+    case prev = "Previous"
+    case getTransportInfo = "GetTransportInfo"
 }
 
 

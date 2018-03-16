@@ -14,6 +14,8 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     @IBOutlet weak var sonosStack: NSStackView!
     @IBOutlet weak var sonosSlider: NSSlider!
     @IBOutlet weak var errorMessageLabel: NSTextField!
+    @IBOutlet weak var controlsView: NSView!
+    @IBOutlet weak var pauseButton: NSButton!
     
     private let discovery: SSDPDiscovery = SSDPDiscovery.defaultDiscovery
     fileprivate var session: SSDPDiscoverySession?
@@ -32,7 +34,7 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     
     override func viewWillAppear() {
         searchForDevices()
-        updateSliderVolume()
+        updateState()
     }
     
     func searchForDevices() {
@@ -81,6 +83,7 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         }
         
         //New sonos system. Add it to the list
+        sonos.delegate = self
         self.sonosSystems.append(sonos)
         let button = NSButton(checkboxWithTitle: sonos.readableName, target: sonos, action: #selector(SonosController.activateDeactivate(button:)))
         button.state = .on
@@ -88,12 +91,10 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         devicesFoundCurrentSearch += 1
         self.errorMessageLabel.isHidden = true
         
-        
-        sonos.getVolume { (volume) in
-            if self.sonosSlider.integerValue < volume {
-                self.sonosSlider.integerValue = volume
-            }
+        if self.sonosSystems.count == 1 {
+            self.updateState()
         }
+        
     }
     
     /**
@@ -120,10 +121,80 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         }
     }
     
-    func updateSliderVolume() {
-        sonosSystems.first(where: {$0.active})?.getVolume({ (volume) in
+    @IBAction func playPause(_ sender: Any) {
+        for sonos in sonosSystems {
+            guard sonos.active else {continue}
+            if sonos.playState == .paused {
+                sonos.play()
+                self.updatePlayButton(forState: sonos.playState)
+            }else if sonos.playState == .playing {
+                sonos.pause()
+                self.updatePlayButton(forState: sonos.playState)
+            }
+            
+            
+        }
+    }
+    @IBAction func nextTrack(_ sender: Any) {
+        for sonos in sonosSystems {
+            guard sonos.active else {continue}
+            sonos.next()
+        }
+    }
+    
+    @IBAction func prevTrack(_ sender: Any) {
+        for sonos in sonosSystems {
+            guard sonos.active else {continue}
+            sonos.previous()
+        }
+    }
+    
+    @IBAction func showMenu(_ sender: NSView) {
+        let appMenu = NSMenu()
+        appMenu.addItem(withTitle: "Show Imprint", action: #selector(openImprint), keyEquivalent: "")
+        appMenu.addItem(withTitle: "Software licenses", action: #selector(openLicenses), keyEquivalent: "")
+        appMenu.addItem(withTitle: "Quit", action: #selector(quitApp), keyEquivalent: "")
+        
+        
+        let p = NSPoint(x: sender.frame.origin.x, y: sender.frame.origin.y - (sender.frame.height / 2))
+        appMenu.popUp(positioning: nil, at: p, in: sender.superview)
+    }
+    
+    @objc func quitApp() {
+        NSApp.terminate(self)
+    }
+    
+    @objc func openImprint() {
+        NSWorkspace.shared.open(URL(string:"http://sn0wfreeze.de/?p=522")!)
+    }
+    
+    @objc func openLicenses() {
+        NSWorkspace.shared.open(URL(string:"http://sn0wfreeze.de/?p=525")!)
+    }
+    
+    
+    func updateState() {
+        let firstSonos = sonosSystems.first(where: {$0.active})
+        firstSonos?.getVolume({ (volume) in
             self.sonosSlider.integerValue = volume
         })
+        
+        firstSonos?.getPlayState({ (state) in
+          self.updatePlayButton(forState: state)
+        })
+    }
+    
+    func updatePlayButton(forState state: PlayState) {
+        switch (state) {
+        case .playing:
+            self.pauseButton.image = #imageLiteral(resourceName: "ic_pause")
+            self.controlsView.isHidden = false
+        case .paused:
+            self.pauseButton.image = #imageLiteral(resourceName: "ic_play_arrow")
+            self.controlsView.isHidden = false
+        default:
+            self.controlsView.isHidden = true
+        }
     }
     
     func discoveredService(response: SSDPMSearchResponse, session: SSDPDiscoverySession) {
@@ -141,6 +212,8 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
                 self.sonosStack.removeView(view)
             }
             self.searchForDevices()
+        }else {
+            updateState()
         }
     }
     
@@ -158,6 +231,12 @@ extension VolumeControlVC {
             fatalError("Why cant i find QuotesViewController? - Check Main.storyboard")
         }
         return viewcontroller
+    }
+}
+
+extension VolumeControlVC: SonosControllerDelegate {
+    func didUpdateActiveState(forSonos sonos: SonosController, isActive: Bool) {
+        self.updateState()
     }
 }
 
