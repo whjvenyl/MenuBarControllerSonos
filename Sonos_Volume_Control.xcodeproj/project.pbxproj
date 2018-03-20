@@ -50,7 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1116E9CF2040C015009D940F /* Sonos Menu Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sonos Menu Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1116E9CF2040C015009D940F /* Menu Bar Controller for Sonos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Menu Bar Controller for Sonos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1116E9D22040C015009D940F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1116E9D42040C015009D940F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1116E9D62040C015009D940F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		1116E9D02040C015009D940F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1116E9CF2040C015009D940F /* Sonos Menu Controller.app */,
+				1116E9CF2040C015009D940F /* Menu Bar Controller for Sonos.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,9 +159,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1116E9CE2040C015009D940F /* Sonos Menu Controller */ = {
+		1116E9CE2040C015009D940F /* Menu Bar Controller for Sonos */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1116E9DF2040C015009D940F /* Build configuration list for PBXNativeTarget "Sonos Menu Controller" */;
+			buildConfigurationList = 1116E9DF2040C015009D940F /* Build configuration list for PBXNativeTarget "Menu Bar Controller for Sonos" */;
 			buildPhases = (
 				1116E9CB2040C015009D940F /* Sources */,
 				1116E9CC2040C015009D940F /* Frameworks */,
@@ -172,9 +172,9 @@
 			);
 			dependencies = (
 			);
-			name = "Sonos Menu Controller";
+			name = "Menu Bar Controller for Sonos";
 			productName = Sonos_Volume_Control;
-			productReference = 1116E9CF2040C015009D940F /* Sonos Menu Controller.app */;
+			productReference = 1116E9CF2040C015009D940F /* Menu Bar Controller for Sonos.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -212,7 +212,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1116E9CE2040C015009D940F /* Sonos Menu Controller */,
+				1116E9CE2040C015009D940F /* Menu Bar Controller for Sonos */,
 			);
 		};
 /* End PBXProject section */
@@ -432,7 +432,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1116E9DF2040C015009D940F /* Build configuration list for PBXNativeTarget "Sonos Menu Controller" */ = {
+		1116E9DF2040C015009D940F /* Build configuration list for PBXNativeTarget "Menu Bar Controller for Sonos" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1116E9E02040C015009D940F /* Debug */,

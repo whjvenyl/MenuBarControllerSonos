@@ -45,8 +45,8 @@ class SonosCommand {
         request.addValue("\(self.service.rawValue)#\(self.action.rawValue)", forHTTPHeaderField: "SOAPACTION")
         request.httpBody = body
         
-        print("Request", request)
-        print("Body", content)
+//        print("Request", request)
+//        print("Body", content)
         
         URLSession.init(configuration: .default).dataTask(with: request) { (data, response, error) in
             if let error = error {

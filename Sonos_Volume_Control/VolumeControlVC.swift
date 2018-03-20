@@ -35,6 +35,14 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     override func viewWillAppear() {
         searchForDevices()
         updateState()
+//        self.addTest()
+    }
+    
+    func addTest() {
+                let testSonos = SonosController(roomName: "Bedroom", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.99")!, ip: "192.168.178.99", udn: "some-udn")
+                testSonos.playState = .playing
+                self.addDeviceToList(sonos: testSonos)
+                self.controlsView.isHidden = false
     }
     
     func searchForDevices() {
@@ -53,7 +61,7 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     }
     
     func discoveredDevice(response: SSDPMSearchResponse, session: SSDPDiscoverySession) {
-        print("Found device \(response)")
+//        print("Found device \(response)")
         retrieveDeviceInfo(response: response)
     }
     
