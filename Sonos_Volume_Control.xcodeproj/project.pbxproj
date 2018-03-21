@@ -389,6 +389,7 @@
 				);
 				INFOPLIST_FILE = Sonos_Volume_Control/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.sn0wfreeze.Sonos-Volume-Control";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sonos_Volume_Control/Sonos_Volume_Control-Bridging-Header.h";
@@ -413,6 +414,7 @@
 				);
 				INFOPLIST_FILE = Sonos_Volume_Control/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.sn0wfreeze.Sonos-Volume-Control";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sonos_Volume_Control/Sonos_Volume_Control-Bridging-Header.h";
