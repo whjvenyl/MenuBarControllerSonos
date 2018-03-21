@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1116E9D32040C015009D940F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116E9D22040C015009D940F /* AppDelegate.swift */; };
-		1116E9D52040C015009D940F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116E9D42040C015009D940F /* ViewController.swift */; };
 		1116E9D72040C015009D940F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1116E9D62040C015009D940F /* Assets.xcassets */; };
 		1116E9DA2040C015009D940F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1116E9D82040C015009D940F /* Main.storyboard */; };
 		1116E9E32040CDA9009D940F /* SampleAudio_0.4mb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1116E9E22040CDA8009D940F /* SampleAudio_0.4mb.mp3 */; };
@@ -17,6 +16,7 @@
 		1168D986205138E60091E784 /* SonosCommandController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168D985205138E60091E784 /* SonosCommandController.swift */; };
 		11C13476204F4DE600AC3581 /* VolumeControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C13475204F4DE600AC3581 /* VolumeControlVC.swift */; };
 		11C67D7B2051F01C002777D4 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C67D7A2051F01C002777D4 /* EventMonitor.swift */; };
+		11CF320520629C6B00A79D9A /* CustomScrolllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF320420629C6B00A79D9A /* CustomScrolllView.swift */; };
 		11F64BE720509F08005ED2E3 /* SSDPSearchTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BDF20509F07005ED2E3 /* SSDPSearchTarget.swift */; };
 		11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BE020509F07005ED2E3 /* SSDPUPnP.swift */; };
 		11F64BE920509F08005ED2E3 /* SSDPDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BE120509F07005ED2E3 /* SSDPDiscovery.swift */; };
@@ -52,7 +52,6 @@
 /* Begin PBXFileReference section */
 		1116E9CF2040C015009D940F /* Menu Bar Controller for Sonos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Menu Bar Controller for Sonos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1116E9D22040C015009D940F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1116E9D42040C015009D940F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1116E9D62040C015009D940F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1116E9D92040C015009D940F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1116E9DB2040C015009D940F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		11C13477204F5C7A00AC3581 /* Sonos_Volume_Control-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sonos_Volume_Control-Bridging-Header.h"; sourceTree = "<group>"; };
 		11C67D7A2051F01C002777D4 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		11CF3203205C2DA400A79D9A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		11CF320420629C6B00A79D9A /* CustomScrolllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrolllView.swift; sourceTree = "<group>"; };
 		11F64BDF20509F07005ED2E3 /* SSDPSearchTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPSearchTarget.swift; sourceTree = "<group>"; };
 		11F64BE020509F07005ED2E3 /* SSDPUPnP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPUPnP.swift; sourceTree = "<group>"; };
 		11F64BE120509F07005ED2E3 /* SSDPDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPDiscovery.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				115BA13A20599E29004CC5C2 /* SonosDevice.swift */,
 				115232CA205B1B420048E130 /* PlayState.swift */,
 				11C67D7A2051F01C002777D4 /* EventMonitor.swift */,
-				1116E9D42040C015009D940F /* ViewController.swift */,
+				11CF320420629C6B00A79D9A /* CustomScrolllView.swift */,
 				1116E9D62040C015009D940F /* Assets.xcassets */,
 				1116E9D82040C015009D940F /* Main.storyboard */,
 				1116E9DB2040C015009D940F /* Info.plist */,
@@ -238,7 +238,7 @@
 				11C13476204F4DE600AC3581 /* VolumeControlVC.swift in Sources */,
 				11F64BE720509F08005ED2E3 /* SSDPSearchTarget.swift in Sources */,
 				115BA13B20599E29004CC5C2 /* SonosDevice.swift in Sources */,
-				1116E9D52040C015009D940F /* ViewController.swift in Sources */,
+				11CF320520629C6B00A79D9A /* CustomScrolllView.swift in Sources */,
 				11F64BEE20509F08005ED2E3 /* SSDPMSearchResponse.swift in Sources */,
 				11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */,
 				11F64BE920509F08005ED2E3 /* SSDPDiscovery.swift in Sources */,

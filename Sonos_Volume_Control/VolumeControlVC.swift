@@ -11,11 +11,16 @@ import SWXMLHash
 
 class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
 
+    //MARK: Properties
     @IBOutlet weak var sonosStack: NSStackView!
     @IBOutlet weak var sonosSlider: NSSlider!
     @IBOutlet weak var errorMessageLabel: NSTextField!
     @IBOutlet weak var controlsView: NSView!
     @IBOutlet weak var pauseButton: NSButton!
+    @IBOutlet weak var sonosScrollContainer: CustomScrolllView!
+    let defaultHeight: CGFloat = 143.0
+    let defaultWidth:CGFloat = 228.0
+    let maxHeight: CGFloat = 215.0
     
     private let discovery: SSDPDiscovery = SSDPDiscovery.defaultDiscovery
     fileprivate var session: SSDPDiscoverySession?
@@ -23,6 +28,7 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     var sonosSystems = [SonosController]()
     var devicesFoundCurrentSearch = 0
     
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -33,18 +39,27 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     }
     
     override func viewWillAppear() {
+        super.viewWillAppear()
         searchForDevices()
         updateState()
-//        self.addTest()
+        self.addTest()
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        self.scrollToTop()
     }
     
     func addTest() {
-                let testSonos = SonosController(roomName: "Bedroom", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.99")!, ip: "192.168.178.99", udn: "some-udn")
-                testSonos.playState = .playing
-                self.addDeviceToList(sonos: testSonos)
-                self.controlsView.isHidden = false
+        for i in 0..<7 {
+            let testSonos = SonosController(roomName: "Room\(i)", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.9\(i)")!, ip: "192.168.178.9\(i)", udn: "some-udn-\(i)")
+            testSonos.playState = .playing
+            self.addDeviceToList(sonos: testSonos)
+            self.controlsView.isHidden = false
+        }
     }
     
+    //MARK: - Sonos Discovery
     func searchForDevices() {
         print("Searching devices")
         // Create the request for Sonos ZonePlayer devices
@@ -77,6 +92,7 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         }.resume()
     }
     
+    //MARK: - Updating Sonos Players
     /**
      Add a device to the list of devices
      
@@ -103,6 +119,9 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
             self.updateState()
         }
         
+        if self.sonosSystems.count > 4 {
+            self.scrollToTop()
+        }
     }
     
     /**
@@ -122,6 +141,14 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         }
     }
     
+    func scrollToTop() {
+        self.sonosScrollContainer.verticalScroller?.floatValue = 0.0
+        self.sonosScrollContainer.contentView.scroll(to: NSPoint(x: 0.0, y: self.sonosScrollContainer.documentView!.frame.maxY - self.sonosScrollContainer.contentView.bounds.height))
+        
+        self.sonosScrollContainer.isScrollingEnabled = self.sonosSystems.count > 4
+    }
+    
+    //MARK: - Interactions
     @IBAction func setVolume(_ sender: NSSlider) {
         for sonos in sonosSystems {
             guard sonos.active else {continue}
@@ -204,6 +231,8 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
             self.controlsView.isHidden = true
         }
     }
+    
+   
     
     func discoveredService(response: SSDPMSearchResponse, session: SSDPDiscoverySession) {
         print("Found service \(response)")
