@@ -42,7 +42,7 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         super.viewWillAppear()
         searchForDevices()
         updateState()
-        self.addTest()
+//        self.addTest()
     }
     
     override func viewDidAppear() {
