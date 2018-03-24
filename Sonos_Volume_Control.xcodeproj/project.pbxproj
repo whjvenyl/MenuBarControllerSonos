@@ -31,6 +31,9 @@
 		11F64C112050A2AE005ED2E3 /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11F64C0D2050A2AE005ED2E3 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11F64C132050B1A1005ED2E3 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11F64C122050B1A0005ED2E3 /* SWXMLHash.framework */; };
 		11F64C142050B1A1005ED2E3 /* SWXMLHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11F64C122050B1A0005ED2E3 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11F796BE2066860900E4FBE9 /* SonosGroupState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F796BD2066860900E4FBE9 /* SonosGroupState.swift */; };
+		11F796C02066ED5600E4FBE9 /* SonosSpeakerGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F796BF2066ED5600E4FBE9 /* SonosSpeakerGroup.swift */; };
+		11F796C22066F18700E4FBE9 /* SonosDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F796C12066F18700E4FBE9 /* SonosDeviceInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +79,9 @@
 		11F64C0C2050A2AE005ED2E3 /* Weak.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Weak.framework; path = Carthage/Build/Mac/Weak.framework; sourceTree = "<group>"; };
 		11F64C0D2050A2AE005ED2E3 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/Mac/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		11F64C122050B1A0005ED2E3 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/Mac/SWXMLHash.framework; sourceTree = "<group>"; };
+		11F796BD2066860900E4FBE9 /* SonosGroupState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosGroupState.swift; sourceTree = "<group>"; };
+		11F796BF2066ED5600E4FBE9 /* SonosSpeakerGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosSpeakerGroup.swift; sourceTree = "<group>"; };
+		11F796C12066F18700E4FBE9 /* SonosDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosDeviceInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +126,9 @@
 				11C13475204F4DE600AC3581 /* VolumeControlVC.swift */,
 				1168D985205138E60091E784 /* SonosCommandController.swift */,
 				115BA13A20599E29004CC5C2 /* SonosDevice.swift */,
+				11F796BD2066860900E4FBE9 /* SonosGroupState.swift */,
+				11F796BF2066ED5600E4FBE9 /* SonosSpeakerGroup.swift */,
+				11F796C12066F18700E4FBE9 /* SonosDeviceInfo.swift */,
 				115232CA205B1B420048E130 /* PlayState.swift */,
 				11C67D7A2051F01C002777D4 /* EventMonitor.swift */,
 				11CF320420629C6B00A79D9A /* CustomScrolllView.swift */,
@@ -235,14 +244,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11F796BE2066860900E4FBE9 /* SonosGroupState.swift in Sources */,
 				11C13476204F4DE600AC3581 /* VolumeControlVC.swift in Sources */,
 				11F64BE720509F08005ED2E3 /* SSDPSearchTarget.swift in Sources */,
 				115BA13B20599E29004CC5C2 /* SonosDevice.swift in Sources */,
 				11CF320520629C6B00A79D9A /* CustomScrolllView.swift in Sources */,
+				11F796C02066ED5600E4FBE9 /* SonosSpeakerGroup.swift in Sources */,
 				11F64BEE20509F08005ED2E3 /* SSDPMSearchResponse.swift in Sources */,
 				11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */,
 				11F64BE920509F08005ED2E3 /* SSDPDiscovery.swift in Sources */,
 				1168D986205138E60091E784 /* SonosCommandController.swift in Sources */,
+				11F796C22066F18700E4FBE9 /* SonosDeviceInfo.swift in Sources */,
 				11F64BEC20509F08005ED2E3 /* SSDPCommon.swift in Sources */,
 				11F64BEB20509F08005ED2E3 /* SSDPMSearchRequest.swift in Sources */,
 				11F64BED20509F08005ED2E3 /* SSDPDiscoverySession.swift in Sources */,

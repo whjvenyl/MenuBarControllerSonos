@@ -26,6 +26,7 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     fileprivate var session: SSDPDiscoverySession?
     
     var sonosSystems = [SonosController]()
+    var sonosGroups: [String : SonosSpeakerGroup] = [:]
     var devicesFoundCurrentSearch = 0
     
     //MARK: - View Lifecycle
@@ -84,7 +85,9 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         URLSession.init(configuration: URLSessionConfiguration.default).dataTask(with: response.location) { (data, resp, err) in
             if let data = data {
                 let xml =  SWXMLHash.parse(data)
-                let sonosDevice = SonosController(xml: xml, url: response.location)
+                let sonosDevice = SonosController(xml: xml, url: response.location, { (sonos) in
+                    self.updateGroups(sonos: sonos)
+                })
                 DispatchQueue.main.async {
                     self.addDeviceToList(sonos: sonosDevice)
                 }
@@ -122,6 +125,25 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         if self.sonosSystems.count > 4 {
             self.scrollToTop()
         }
+    }
+    
+    /**
+     Update the groups controllers
+     
+     - Parameters:
+     - sonos: The Sonos speaker which should be added to the group
+     */
+    func updateGroups(sonos: SonosController) {
+        guard let gId = sonos.groupState?.groupID else {return}
+        
+        if var group = self.sonosGroups[gId] {
+            group.speakers.insert(sonos)
+        }else {
+            var group = SonosSpeakerGroup(groupID: gId)
+            group.speakers.insert(sonos)
+        }
+        
+        //TODO:  Update the groups view
     }
     
     /**

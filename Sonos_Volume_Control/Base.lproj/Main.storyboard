@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -782,8 +783,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="198" height="99"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <view ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ub7-dU-bHm">
-                                            <rect key="frame" x="0.0" y="-4" width="0.0" height="0.0"/>
+                                        <view translatesAutoresizingMaskIntoConstraints="NO" id="Ub7-dU-bHm">
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n4a-Gx-V86"/>
                                             </subviews>
@@ -795,6 +795,10 @@
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Ub7-dU-bHm" firstAttribute="leading" secondItem="hjZ-YT-IUj" secondAttribute="leading" id="BOa-Yy-VpK"/>
+                                        <constraint firstItem="Ub7-dU-bHm" firstAttribute="top" secondItem="hjZ-YT-IUj" secondAttribute="top" constant="99" id="tmS-c6-xDp"/>
+                                    </constraints>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="82C-y0-YTB">
                                     <rect key="frame" x="-100" y="-100" width="170" height="16"/>

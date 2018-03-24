@@ -13,7 +13,9 @@ protocol SonosControllerDelegate {
     func didUpdateActiveState(forSonos sonos: SonosController, isActive: Bool)
 }
 
-class SonosController: Equatable {
+class SonosController: Equatable, Hashable {
+    //   MARK:  Properties
+    
     /// Name of the room
     var roomName: String
     /// Name of the device
@@ -28,9 +30,21 @@ class SonosController: Equatable {
     var currentVolume = 0
     var playState = PlayState.notSet
     
+    /// The speakers current group state
+    var groupState: SonosGroupState?
+    
+    /// Speakers device info
+    var deviceInfo: SonosDeviceInfo?
+    
     var delegate: SonosControllerDelegate?
     
-    init(xml: XMLIndexer, url: URL) {
+    var readableName:String {
+        return "\(roomName) - \(deviceName)"
+    }
+    
+    //   MARK: - Init
+    
+    init(xml: XMLIndexer, url: URL,_ completion: @escaping(_ sonos: SonosController)->Void) {
         let device = xml["root"]["device"]
         let displayName = device["displayName"].element?.text
         let roomName = device["roomName"].element?.text
@@ -39,9 +53,9 @@ class SonosController: Equatable {
         self.url = url
         self.ip = url.host ?? "127.0.0.0"
         self.descriptionXML = xml
-        self.udn = device["UDN"].element?.text ?? "no-id"
-        self.updateCurrentVolume()
-        self.getPlayState()
+        self.udn = device["UDN"].element?.text ?? "no-udn"
+        
+        self.updateAll({ completion(self) })
     }
     
     init(roomName:String, deviceName:String, url:URL, ip: String, udn: String) {
@@ -52,9 +66,7 @@ class SonosController: Equatable {
         self.udn = udn
     }
     
-    var readableName:String {
-        return "\(roomName) - \(deviceName)"
-    }
+    //    MARK: - Interactions
     
     /**
      Set the volume of the Sonos device
@@ -70,6 +82,85 @@ class SonosController: Equatable {
         command.execute(sonos: self)
     }
     
+    func play() {
+        let command = SonosCommand(endpoint: .transport_endpoint, action: .play, service: .transport_service)
+        command.put(key: "InstanceID", value: "0")
+        command.put(key: "Speed", value: "1")
+        command.execute(sonos: self)
+        self.playState = .playing
+    }
+    
+    /**
+     Pause the current song
+    */
+    func pause() {
+        let command = SonosCommand(endpoint: .transport_endpoint, action: .pause, service: .transport_service)
+        command.put(key: "InstanceID", value: "0")
+        command.put(key: "Speed", value: "1")
+        command.execute(sonos: self)
+        self.playState = .paused
+    }
+    
+    /**
+     Play the next song
+    */
+    func next() {
+        let command = SonosCommand(endpoint: .transport_endpoint, action: .next, service: .transport_service)
+        command.put(key: "InstanceID", value: "0")
+        command.put(key: "Speed", value: "1")
+        command.execute(sonos: self)
+    }
+    
+    /**
+     Play the previous song
+    */
+    func previous() {
+        let command = SonosCommand(endpoint: .transport_endpoint, action: .prev, service: .transport_service)
+        command.put(key: "InstanceID", value: "0")
+        command.put(key: "Speed", value: "1")
+        command.execute(sonos: self)
+    }
+    
+    func isGroupCoordinator() -> Bool {
+        return self.groupState?.groupID == self.deviceInfo?.localUID
+    }
+    
+    //  MARK: - Updates
+    
+    func updateAll(_ completion: @escaping ()->Void) {
+        //      Update the speakers state
+        self.updateCurrentVolume()
+        self.getPlayState()
+        
+        //      Get the device info and update the group state
+        SonosCommand.downloadSpeakerInfo(sonos: self) { (data) in
+            guard let xml = self.parseXml(data: data) else {return}
+            self.deviceInfo = SonosDeviceInfo(xml: xml)
+            self.updateZoneGroupState({
+                completion()
+            })
+        }
+    }
+    
+    /**
+     Update the speakers group state
+     */
+    func updateZoneGroupState(_ completion: @escaping ()->Void) {
+        let command = SonosCommand(endpoint: .zone_group_endpoint, action: .getZoneAttributes, service: .zone_group_service)
+        command.execute(sonos: self, { (data) in
+            guard let xml = self.parseXml(data: data) else {return}
+            self.groupState = SonosGroupState(xml: xml)
+            completion()
+        })
+    }
+    
+    func updateCurrentVolume() {
+        getVolume { (volume) in }
+    }
+    
+    /**
+     Get the speakers current volume
+    */
     func getVolume(_ completion:@escaping (_ volume: Int)->Void) {
         let command = SonosCommand(endpoint: .rendering_endpoint, action: .getVolume, service: .rendering_service)
         command.put(key: "InstanceID", value: "0")
@@ -87,6 +178,9 @@ class SonosController: Equatable {
         })
     }
     
+    /**
+     Get speakers the play state
+    */
     func getPlayState(_ completion: ((_ state: PlayState)->Void)? = nil) {
         let command = SonosCommand(endpoint: .transport_endpoint, action: .getTransportInfo, service: .transport_service)
         command.put(key: "InstanceID", value: "0")
@@ -96,45 +190,13 @@ class SonosController: Equatable {
             guard let playStateString = xml["s:Envelope"]["s:Body"]["u:GetTransportInfoResponse"]["CurrentTransportState"].element?.text else {return}
             self.playState = PlayState(rawValue: playStateString) ?? .notSet
             DispatchQueue.main.async {
-              completion?(self.playState)
+                completion?(self.playState)
             }
         }
     }
     
-    func play() {
-        let command = SonosCommand(endpoint: .transport_endpoint, action: .play, service: .transport_service)
-        command.put(key: "InstanceID", value: "0")
-        command.put(key: "Speed", value: "1")
-        command.execute(sonos: self)
-        self.playState = .playing
-    }
     
-    func pause() {
-        let command = SonosCommand(endpoint: .transport_endpoint, action: .pause, service: .transport_service)
-        command.put(key: "InstanceID", value: "0")
-        command.put(key: "Speed", value: "1")
-        command.execute(sonos: self)
-        self.playState = .paused
-    }
-    
-    func next() {
-        let command = SonosCommand(endpoint: .transport_endpoint, action: .next, service: .transport_service)
-        command.put(key: "InstanceID", value: "0")
-        command.put(key: "Speed", value: "1")
-        command.execute(sonos: self)
-    }
-    
-    func previous() {
-        let command = SonosCommand(endpoint: .transport_endpoint, action: .prev, service: .transport_service)
-        command.put(key: "InstanceID", value: "0")
-        command.put(key: "Speed", value: "1")
-        command.execute(sonos: self)
-    }
-    
-    func updateCurrentVolume() {
-        getVolume { (volume) in }
-    }
-    
+    //   MARK: - Interactions
     @objc func activateDeactivate(button: NSButton) {
         if button.state == .on {
             self.active = true
@@ -145,7 +207,17 @@ class SonosController: Equatable {
         self.delegate?.didUpdateActiveState(forSonos: self, isActive: self.active)
     }
     
+    func parseXml(data: Data?) -> XMLIndexer? {
+        guard let data = data else {return nil}
+        let xml = SWXMLHash.parse(data)
+        return xml
+    }
+    
     static func ==(l:SonosController, r:SonosController) -> Bool {
         return l.udn == r.udn
+    }
+    
+    var hashValue: Int {
+        return self.deviceInfo?.localUID.hashValue ?? "no-id".hashValue
     }
 }
