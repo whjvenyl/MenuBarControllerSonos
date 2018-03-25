@@ -29,6 +29,7 @@ class SonosController: Equatable, Hashable {
     var active: Bool = true
     var currentVolume = 0
     var playState = PlayState.notSet
+    var muted = false
     
     /// The speakers current group state
     var groupState: SonosGroupState?
@@ -80,6 +81,27 @@ class SonosController: Equatable, Hashable {
         command.put(key: "Channel", value: "Master")
         command.put(key: "DesiredVolume", value: String(volume))
         command.execute(sonos: self)
+        self.currentVolume = volume
+        
+        if self.muted && volume > 0 {
+            //Unmute speaker
+            self.setMute(muted: false)
+        }
+    }
+    
+    /**
+     Set the speaker to be muted or not
+     
+     - Parameters:
+     - muted: If true the speaker will be muted
+     */
+    func setMute(muted: Bool) {
+        //TODO: Test this !
+        let command =  SonosCommand(endpoint: .rendering_endpoint, action: .setMute, service: .rendering_service)
+        command.put(key: "InstanceID", value: "0")
+        command.put(key: "Channel", value: "Master")
+        command.put(key: "DesiredMute", value: muted ? "1" : "0")
+        command.execute(sonos: self)
     }
     
     func play() {
@@ -130,10 +152,13 @@ class SonosController: Equatable, Hashable {
     func updateAll(_ completion: @escaping ()->Void) {
         //      Update the speakers state
         self.updateCurrentVolume()
+        self.updateMute()
         self.getPlayState()
+        
         
         //      Get the device info and update the group state
         SonosCommand.downloadSpeakerInfo(sonos: self) { (data) in
+            //TODO: Test this! 
             guard let xml = self.parseXml(data: data) else {return}
             self.deviceInfo = SonosDeviceInfo(xml: xml)
             self.updateZoneGroupState({
@@ -146,6 +171,7 @@ class SonosController: Equatable, Hashable {
      Update the speakers group state
      */
     func updateZoneGroupState(_ completion: @escaping ()->Void) {
+        //TODO: Test this !
         let command = SonosCommand(endpoint: .zone_group_endpoint, action: .getZoneAttributes, service: .zone_group_service)
         command.execute(sonos: self, { (data) in
             guard let xml = self.parseXml(data: data) else {return}
@@ -156,6 +182,20 @@ class SonosController: Equatable, Hashable {
     
     func updateCurrentVolume() {
         getVolume { (volume) in }
+    }
+    
+    
+    func updateMute() {
+        //TODO: Test this
+        let command = SonosCommand(endpoint: .rendering_endpoint, action: .getMute, service: .rendering_service)
+        command.put(key: "InstanceID", value: "0")
+        command.put(key: "Channel", value: "Master")
+        command.execute(sonos: self) { (data) in
+            guard let xml = self.parseXml(data: data),
+             let muteText = xml["s:Envelope"]["s:Body"]["u:GetMuteResponse"]["CurrentMute"].element?.text else {return}
+            
+            self.muted = muteText == "1"
+        }
     }
     
     /**

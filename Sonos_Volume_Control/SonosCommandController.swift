@@ -113,6 +113,8 @@ enum SonosActions: String {
     case prev = "Previous"
     case getTransportInfo = "GetTransportInfo"
     case getZoneAttributes = "GetZoneGroupAttributes"
+    case setMute = "SetMute"
+    case getMute = "GetMute"
 }
 
 

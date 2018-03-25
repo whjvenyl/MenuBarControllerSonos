@@ -13,7 +13,14 @@ struct SonosSpeakerGroup {
     let groupID: String
     var speakers: Set<SonosController> = Set()
     
+    /// Get the group's controller
+    var mainSpeaker: SonosController? {
+        return speakers.first(where: {groupID == $0.deviceInfo?.localUID})
+    }
+    
     init(groupID: String) {
         self.groupID = groupID
     }
+    
+    
 }

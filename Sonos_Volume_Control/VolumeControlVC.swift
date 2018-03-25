@@ -62,6 +62,7 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     
     //MARK: - Sonos Discovery
     func searchForDevices() {
+        self.devicesFoundCurrentSearch = 0
         print("Searching devices")
         // Create the request for Sonos ZonePlayer devices
         let zonePlayerTarget = SSDPSearchTarget.deviceType(schema: SSDPSearchTarget.upnpOrgSchema, deviceType: "ZonePlayer", version: 1)
@@ -95,6 +96,20 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         }.resume()
     }
     
+    func sortSpeakers() {
+        //Sort the sonos systems
+        self.sonosSystems.sort { (lhs, rhs) -> Bool in
+            if lhs.active && !rhs.active {
+                return true
+            }
+            if rhs.active && !lhs.active {
+                return false
+            }
+            
+            return lhs.active == rhs.active && lhs.readableName < rhs.readableName
+        }
+    }
+    
     //MARK: - Updating Sonos Players
     /**
      Add a device to the list of devices
@@ -112,11 +127,9 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         //New sonos system. Add it to the list
         sonos.delegate = self
         self.sonosSystems.append(sonos)
-        let button = NSButton(checkboxWithTitle: sonos.readableName, target: sonos, action: #selector(SonosController.activateDeactivate(button:)))
-        button.state = .on
-        self.sonosStack.addArrangedSubview(button)
         devicesFoundCurrentSearch += 1
-        self.errorMessageLabel.isHidden = true
+        
+        self.updateSonosDeviceList()
         
         if self.sonosSystems.count == 1 {
             self.updateState()
@@ -124,6 +137,25 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         
         if self.sonosSystems.count > 4 {
             self.scrollToTop()
+        }
+    }
+    
+    func updateSonosDeviceList() {
+        //Remove error label
+        if self.sonosSystems.count > 0 {
+            self.errorMessageLabel.isHidden = true
+        }
+        
+        //Remove all buttons
+        for view in self.sonosStack.subviews {
+            self.sonosStack.removeView(view)
+        }
+        
+        //Add all sonos buttons
+        for sonos in sonosSystems {
+            let button = NSButton(checkboxWithTitle: sonos.readableName, target: sonos, action: #selector(SonosController.activateDeactivate(button:)))
+            button.state = sonos.active ? .on : .off
+            self.sonosStack.addArrangedSubview(button)
         }
     }
     
@@ -168,6 +200,30 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         self.sonosScrollContainer.contentView.scroll(to: NSPoint(x: 0.0, y: self.sonosScrollContainer.documentView!.frame.maxY - self.sonosScrollContainer.contentView.bounds.height))
         
         self.sonosScrollContainer.isScrollingEnabled = self.sonosSystems.count > 4
+    }
+    
+    func updateState() {
+        let firstSonos = sonosSystems.first(where: {$0.active})
+        firstSonos?.getVolume({ (volume) in
+            self.sonosSlider.integerValue = volume
+        })
+        
+        firstSonos?.getPlayState({ (state) in
+            self.updatePlayButton(forState: state)
+        })
+    }
+    
+    func updatePlayButton(forState state: PlayState) {
+        switch (state) {
+        case .playing:
+            self.pauseButton.image = #imageLiteral(resourceName: "ic_pause")
+            self.controlsView.isHidden = false
+        case .paused:
+            self.pauseButton.image = #imageLiteral(resourceName: "ic_play_arrow")
+            self.controlsView.isHidden = false
+        default:
+            self.controlsView.isHidden = true
+        }
     }
     
     //MARK: - Interactions
@@ -228,33 +284,6 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     @objc func openLicenses() {
         NSWorkspace.shared.open(URL(string:"http://sn0wfreeze.de/?p=525")!)
     }
-    
-    
-    func updateState() {
-        let firstSonos = sonosSystems.first(where: {$0.active})
-        firstSonos?.getVolume({ (volume) in
-            self.sonosSlider.integerValue = volume
-        })
-        
-        firstSonos?.getPlayState({ (state) in
-          self.updatePlayButton(forState: state)
-        })
-    }
-    
-    func updatePlayButton(forState state: PlayState) {
-        switch (state) {
-        case .playing:
-            self.pauseButton.image = #imageLiteral(resourceName: "ic_pause")
-            self.controlsView.isHidden = false
-        case .paused:
-            self.pauseButton.image = #imageLiteral(resourceName: "ic_play_arrow")
-            self.controlsView.isHidden = false
-        default:
-            self.controlsView.isHidden = true
-        }
-    }
-    
-   
     
     func discoveredService(response: SSDPMSearchResponse, session: SSDPDiscoverySession) {
         print("Found service \(response)")
