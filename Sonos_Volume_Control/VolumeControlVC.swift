@@ -231,6 +231,7 @@ class VolumeControlVC: NSViewController {
     
     @IBAction func showMenu(_ sender: NSView) {
         let appMenu = NSMenu()
+        appMenu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
         appMenu.addItem(withTitle: "Show Imprint", action: #selector(openImprint), keyEquivalent: "")
         appMenu.addItem(withTitle: "Software licenses", action: #selector(openLicenses), keyEquivalent: "")
         appMenu.addItem(withTitle: "Quit", action: #selector(quitApp), keyEquivalent: "")
@@ -250,6 +251,10 @@ class VolumeControlVC: NSViewController {
     
     @objc func openLicenses() {
         NSWorkspace.shared.open(URL(string:"http://sn0wfreeze.de/?p=525")!)
+    }
+    
+    @objc func sendFeedback() {
+        NSWorkspace.shared.open(URL(string:"mailto:sonos-controller@sn0wfreeze.de")!)
     }
     
 }

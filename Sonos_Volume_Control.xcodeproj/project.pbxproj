@@ -104,9 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				11CF3203205C2DA400A79D9A /* README.md */,
-				11F64C122050B1A0005ED2E3 /* SWXMLHash.framework */,
-				11F64C0D2050A2AE005ED2E3 /* CocoaAsyncSocket.framework */,
-				11F64C0C2050A2AE005ED2E3 /* Weak.framework */,
 				1116E9D12040C015009D940F /* Sonos_Volume_Control */,
 				1116E9D02040C015009D940F /* Products */,
 				11F64BF920509F91005ED2E3 /* Frameworks */,
@@ -164,6 +161,9 @@
 		11F64BF920509F91005ED2E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				11F64C122050B1A0005ED2E3 /* SWXMLHash.framework */,
+				11F64C0D2050A2AE005ED2E3 /* CocoaAsyncSocket.framework */,
+				11F64C0C2050A2AE005ED2E3 /* Weak.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

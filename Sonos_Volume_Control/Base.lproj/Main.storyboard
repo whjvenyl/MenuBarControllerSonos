@@ -708,10 +708,10 @@
                                 </textFieldCell>
                             </textField>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euI-Bt-dbz">
-                                <rect key="frame" x="8" y="25" width="179" height="24"/>
+                                <rect key="frame" x="8" y="25" width="171" height="24"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5">
-                                        <rect key="frame" x="78" y="-2" width="24" height="24"/>
+                                        <rect key="frame" x="74" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="5cq-Fn-c7h"/>
                                             <constraint firstAttribute="width" constant="24" id="IRh-8q-zCk"/>
@@ -725,7 +725,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aUg-Gc-k5u">
-                                        <rect key="frame" x="123" y="-2" width="24" height="24"/>
+                                        <rect key="frame" x="119" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="vEO-vv-8KR"/>
                                             <constraint firstAttribute="height" constant="21" id="z0D-om-227"/>
@@ -739,7 +739,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kdr-P3-YGY">
-                                        <rect key="frame" x="33" y="-2" width="24" height="24"/>
+                                        <rect key="frame" x="29" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="2lF-eN-O5w"/>
                                             <constraint firstAttribute="width" constant="24" id="CmW-BF-0vV"/>
@@ -810,7 +810,7 @@
                                 </scroller>
                             </scrollView>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G4u-lf-saW">
-                                <rect key="frame" x="6" y="2" width="183" height="19"/>
+                                <rect key="frame" x="6" y="2" width="175" height="19"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="BNO-bg-Prd"/>
                                 <connections>
                                     <action selector="setVolume:" target="UOE-Qu-9Vt" id="mLM-g8-p8d"/>
@@ -828,7 +828,7 @@
                             <constraint firstAttribute="trailing" secondItem="V79-m7-Tey" secondAttribute="trailing" constant="20" id="an4-kd-nvP"/>
                             <constraint firstItem="V79-m7-Tey" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="dQw-kM-1v8"/>
                             <constraint firstAttribute="trailing" secondItem="zTj-kC-HZv" secondAttribute="trailing" constant="20" id="hiy-MS-qaJ"/>
-                            <constraint firstItem="o0R-YJ-mAi" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="trailing" constant="4" id="kG6-Qx-KXS"/>
+                            <constraint firstItem="o0R-YJ-mAi" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="trailing" constant="12" id="kG6-Qx-KXS"/>
                             <constraint firstItem="G4u-lf-saW" firstAttribute="top" secondItem="V79-m7-Tey" secondAttribute="bottom" constant="6" id="lww-RE-uow"/>
                             <constraint firstItem="540-Ck-pnu" firstAttribute="top" secondItem="zTj-kC-HZv" secondAttribute="bottom" constant="4" id="oct-gb-bRe"/>
                             <constraint firstItem="zTj-kC-HZv" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="rME-8y-fml"/>
