@@ -43,11 +43,11 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         super.viewWillAppear()
         searchForDevices()
         updateState()
-//        self.addTest()
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
+        self.addTest()
         self.scrollToTop()
     }
     
@@ -134,10 +134,6 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
         if self.sonosSystems.count == 1 {
             self.updateState()
         }
-        
-        if self.sonosSystems.count > 4 {
-            self.scrollToTop()
-        }
     }
     
     func updateSonosDeviceList() {
@@ -157,6 +153,8 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
             button.state = sonos.active ? .on : .off
             self.sonosStack.addArrangedSubview(button)
         }
+        
+        self.scrollToTop()
     }
     
     /**
@@ -196,10 +194,8 @@ class VolumeControlVC: NSViewController, SSDPDiscoveryDelegate {
     }
     
     func scrollToTop() {
-        self.sonosScrollContainer.verticalScroller?.floatValue = 0.0
-        self.sonosScrollContainer.contentView.scroll(to: NSPoint(x: 0.0, y: self.sonosScrollContainer.documentView!.frame.maxY - self.sonosScrollContainer.contentView.bounds.height))
-        
-        self.sonosScrollContainer.isScrollingEnabled = self.sonosSystems.count > 4
+       self.sonosScrollContainer.scrollToTop()
+       self.sonosScrollContainer.isScrollingEnabled = self.sonosSystems.count > 4
     }
     
     func updateState() {

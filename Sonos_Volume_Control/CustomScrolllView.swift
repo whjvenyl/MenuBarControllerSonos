@@ -29,4 +29,20 @@ class CustomScrolllView: NSScrollView {
         }
         //Scrolling disabled if false
     }
+    
+    override var isFlipped: Bool {
+        return false
+    }
+    
+    func scrollToTop() {
+//        self.verticalScroller?.floatValue = 0.0
+//        if self.contentView.isFlipped {
+//            self.contentView.scroll(to: NSPoint(x: 0.0, y: 0.0))
+//        }else {
+//            self.contentView.scroll(to: NSPoint(x: 0.0, y: self.documentView!.frame.maxY - self.contentView.bounds.height))
+//        }
+        
+        
+        
+    }
 }

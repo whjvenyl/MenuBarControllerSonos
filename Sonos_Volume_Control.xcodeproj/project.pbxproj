@@ -34,6 +34,7 @@
 		11F796BE2066860900E4FBE9 /* SonosGroupState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F796BD2066860900E4FBE9 /* SonosGroupState.swift */; };
 		11F796C02066ED5600E4FBE9 /* SonosSpeakerGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F796BF2066ED5600E4FBE9 /* SonosSpeakerGroup.swift */; };
 		11F796C22066F18700E4FBE9 /* SonosDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F796C12066F18700E4FBE9 /* SonosDeviceInfo.swift */; };
+		11F796CD206903B000E4FBE9 /* CustomScrollClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F796CC206903B000E4FBE9 /* CustomScrollClipView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,6 +83,7 @@
 		11F796BD2066860900E4FBE9 /* SonosGroupState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosGroupState.swift; sourceTree = "<group>"; };
 		11F796BF2066ED5600E4FBE9 /* SonosSpeakerGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosSpeakerGroup.swift; sourceTree = "<group>"; };
 		11F796C12066F18700E4FBE9 /* SonosDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosDeviceInfo.swift; sourceTree = "<group>"; };
+		11F796CC206903B000E4FBE9 /* CustomScrollClipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollClipView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				115232CA205B1B420048E130 /* PlayState.swift */,
 				11C67D7A2051F01C002777D4 /* EventMonitor.swift */,
 				11CF320420629C6B00A79D9A /* CustomScrolllView.swift */,
+				11F796CC206903B000E4FBE9 /* CustomScrollClipView.swift */,
 				1116E9D62040C015009D940F /* Assets.xcassets */,
 				1116E9D82040C015009D940F /* Main.storyboard */,
 				1116E9DB2040C015009D940F /* Info.plist */,
@@ -253,6 +256,7 @@
 				11F64BEE20509F08005ED2E3 /* SSDPMSearchResponse.swift in Sources */,
 				11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */,
 				11F64BE920509F08005ED2E3 /* SSDPDiscovery.swift in Sources */,
+				11F796CD206903B000E4FBE9 /* CustomScrollClipView.swift in Sources */,
 				1168D986205138E60091E784 /* SonosCommandController.swift in Sources */,
 				11F796C22066F18700E4FBE9 /* SonosDeviceInfo.swift in Sources */,
 				11F64BEC20509F08005ED2E3 /* SSDPCommon.swift in Sources */,

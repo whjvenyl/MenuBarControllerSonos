@@ -779,7 +779,7 @@
                             </button>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="540-Ck-pnu" customClass="CustomScrolllView" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
                                 <rect key="frame" x="8" y="52" width="198" height="99"/>
-                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hjZ-YT-IUj">
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hjZ-YT-IUj" customClass="CustomScrollClipView" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="198" height="99"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
