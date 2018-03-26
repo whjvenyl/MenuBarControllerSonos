@@ -843,8 +843,8 @@
                         <outlet property="errorMessageLabel" destination="V79-m7-Tey" id="NVk-fz-QO8"/>
                         <outlet property="pauseButton" destination="KtY-82-ql5" id="mQH-iA-1XV"/>
                         <outlet property="sonosScrollContainer" destination="540-Ck-pnu" id="o1N-tF-7ob"/>
-                        <outlet property="sonosSlider" destination="G4u-lf-saW" id="1Bf-aR-hRO"/>
                         <outlet property="sonosStack" destination="n4a-Gx-V86" id="TgX-MU-ta8"/>
+                        <outlet property="volumeSlider" destination="G4u-lf-saW" id="1Bf-aR-hRO"/>
                     </connections>
                 </viewController>
                 <customObject id="Upz-cR-1rt" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

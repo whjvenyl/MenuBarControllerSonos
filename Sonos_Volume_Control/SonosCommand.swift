@@ -39,9 +39,9 @@ class SonosCommand {
             }
             completion(data)
             
-//            if let data = data {
-//                print(String.init(data:data, encoding: .utf8) ?? "No response")
-//            }
+            if let data = data {
+                print(String.init(data:data, encoding: .utf8) ?? "No response")
+            }
         }.resume()
     }
     

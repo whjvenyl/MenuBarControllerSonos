@@ -22,9 +22,15 @@ class SonosController: Equatable, Hashable {
     var deviceName: String
     /// URL where to find it
     var url: URL
+    /// IP address of the device
     var ip: String
+    /// Port to address the speaker
     var port: Int = 1400
+    /// UDN contains an id
     var udn:String
+    /// The type description of the device
+    var lastDiscoveryDate: Date = Date()
+    var deviceType: String
     var descriptionXML: XMLIndexer?
     var active: Bool = true
     var currentVolume = 0
@@ -51,6 +57,7 @@ class SonosController: Equatable, Hashable {
         let roomName = device["roomName"].element?.text
         self.roomName = roomName ?? "unknown"
         self.deviceName = displayName ?? "unknown"
+        self.deviceType = device["deviceType"].element?.text ?? "unknown"
         self.url = url
         self.ip = url.host ?? "127.0.0.0"
         self.descriptionXML = xml
@@ -65,6 +72,21 @@ class SonosController: Equatable, Hashable {
         self.url = url
         self.ip = ip
         self.udn = udn
+        self.deviceType = "unknown"
+    }
+    
+    //MARK: - General Info
+    
+    var isGroupCoordinator: Bool {
+        return self.groupState?.groupID == self.deviceInfo?.localUID
+    }
+    
+    var isSpeaker: Bool {
+        return self.deviceType.contains("Player")
+    }
+    
+    var canSetVolume: Bool {
+        return self.deviceType.contains("Player")
     }
     
     //    MARK: - Interactions
@@ -96,7 +118,6 @@ class SonosController: Equatable, Hashable {
      - muted: If true the speaker will be muted
      */
     func setMute(muted: Bool) {
-        //TODO: Test this !
         let command =  SonosCommand(endpoint: .rendering_endpoint, action: .setMute, service: .rendering_service)
         command.put(key: "InstanceID", value: "0")
         command.put(key: "Channel", value: "Master")
@@ -143,22 +164,42 @@ class SonosController: Equatable, Hashable {
         command.execute(sonos: self)
     }
     
-    func isGroupCoordinator() -> Bool {
-        return self.groupState?.groupID == self.deviceInfo?.localUID
+    @objc func activateDeactivate(button: NSButton) {
+        if button.state == .on {
+            self.active = true
+        }else if button.state == .off {
+            self.active = false
+        }
+        
+        self.delegate?.didUpdateActiveState(forSonos: self, isActive: self.active)
     }
     
     //  MARK: - Updates
     
+    func update(withXML xml: XMLIndexer, url: URL) {
+        let device = xml["root"]["device"]
+        let displayName = device["displayName"].element?.text
+        let roomName = device["roomName"].element?.text
+        self.roomName = roomName ?? "unknown"
+        self.deviceName = displayName ?? "unknown"
+        self.deviceType = device["deviceType"].element?.text ?? "unknown"
+        self.url = url
+        self.ip = url.host ?? "127.0.0.0"
+        self.descriptionXML = xml
+        self.udn = device["UDN"].element?.text ?? "no-udn"
+        self.lastDiscoveryDate = Date()
+        
+        self.updateAll({})
+    }
+    
     func updateAll(_ completion: @escaping ()->Void) {
         //      Update the speakers state
         self.updateCurrentVolume()
-        self.updateMute()
         self.getPlayState()
         
         
         //      Get the device info and update the group state
         SonosCommand.downloadSpeakerInfo(sonos: self) { (data) in
-            //TODO: Test this! 
             guard let xml = self.parseXml(data: data) else {return}
             self.deviceInfo = SonosDeviceInfo(xml: xml)
             self.updateZoneGroupState({
@@ -171,7 +212,6 @@ class SonosController: Equatable, Hashable {
      Update the speakers group state
      */
     func updateZoneGroupState(_ completion: @escaping ()->Void) {
-        //TODO: Test this !
         let command = SonosCommand(endpoint: .zone_group_endpoint, action: .getZoneAttributes, service: .zone_group_service)
         command.execute(sonos: self, { (data) in
             guard let xml = self.parseXml(data: data) else {return}
@@ -186,7 +226,6 @@ class SonosController: Equatable, Hashable {
     
     
     func updateMute() {
-        //TODO: Test this
         let command = SonosCommand(endpoint: .rendering_endpoint, action: .getMute, service: .rendering_service)
         command.put(key: "InstanceID", value: "0")
         command.put(key: "Channel", value: "Master")
@@ -202,6 +241,9 @@ class SonosController: Equatable, Hashable {
      Get the speakers current volume
     */
     func getVolume(_ completion:@escaping (_ volume: Int)->Void) {
+        //Update the mute state, too
+        self.updateMute()
+        
         let command = SonosCommand(endpoint: .rendering_endpoint, action: .getVolume, service: .rendering_service)
         command.put(key: "InstanceID", value: "0")
         command.put(key: "Channel", value: "Master")
@@ -233,18 +275,6 @@ class SonosController: Equatable, Hashable {
                 completion?(self.playState)
             }
         }
-    }
-    
-    
-    //   MARK: - Interactions
-    @objc func activateDeactivate(button: NSButton) {
-        if button.state == .on {
-            self.active = true
-        }else if button.state == .off {
-            self.active = false
-        }
-        
-        self.delegate?.didUpdateActiveState(forSonos: self, isActive: self.active)
     }
     
     func parseXml(data: Data?) -> XMLIndexer? {
