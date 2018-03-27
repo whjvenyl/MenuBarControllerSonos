@@ -1,5 +1,7 @@
 Export/
 Screenshots/
+PressKits/
+no-github/
 *.sketch
 
 # Created by https://www.gitignore.io/api/xcode,swift,macos

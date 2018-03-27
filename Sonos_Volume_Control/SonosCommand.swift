@@ -27,6 +27,24 @@ class SonosCommand {
         self.service = service
     }
     
+    static func downloadSpeakerInfo(sonos: SonosController,_ completion:@escaping ((_ data: Data?)->Void) ) {
+        let uri = "http://" + sonos.ip + ":" + String(sonos.port) +  "/status/zp"
+        var request = URLRequest(url: URL(string: uri)!)
+        request.httpMethod = "GET"
+        request.addValue("text/xml", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.init(configuration: .default).dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("An error occurred ", error)
+            }
+            completion(data)
+            
+            if let data = data {
+                print(String.init(data:data, encoding: .utf8) ?? "No response")
+            }
+        }.resume()
+    }
+    
     func execute(sonos: SonosController,_ completion: ((_ data: Data?)->Void)?=nil ) {
         
         let uri = "http://" + sonos.ip + ":" + String(sonos.port) + self.endpoint.rawValue;
@@ -77,11 +95,13 @@ class SonosCommand {
 enum SonosEndpoint:String {
     case rendering_endpoint = "/MediaRenderer/RenderingControl/Control"
     case transport_endpoint = "/MediaRenderer/AVTransport/Control"
+    case zone_group_endpoint = "/ZoneGroupTopology/Control"
 }
 
 enum SononsService:String {
     case rendering_service = "urn:schemas-upnp-org:service:RenderingControl:1"
     case transport_service = "urn:schemas-upnp-org:service:AVTransport:1"
+    case zone_group_service = "urn:upnp-org:serviceId:ZoneGroupTopology"
 }
 
 enum SonosActions: String {
@@ -92,6 +112,9 @@ enum SonosActions: String {
     case next = "Next"
     case prev = "Previous"
     case getTransportInfo = "GetTransportInfo"
+    case getZoneAttributes = "GetZoneGroupAttributes"
+    case setMute = "SetMute"
+    case getMute = "GetMute"
 }
 
 

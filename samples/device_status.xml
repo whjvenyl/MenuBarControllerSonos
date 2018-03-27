@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet type="text/xsl" href="/xml/review.xsl"?>
+<ZPSupportInfo>
+    <ZPInfo>
+        <ZoneName>Soverom</ZoneName>
+        <ZoneIcon>x-rincon-roomicon:bedroom</ZoneIcon>
+        <Configuration>1</Configuration>
+        <LocalUID>RINCON_5CAAFD5DC7C801400</LocalUID>
+        <SerialNumber>5C-AA-FD-5D-C7-C8:E</SerialNumber>
+        <SoftwareVersion>41.3-50131</SoftwareVersion>
+        <SoftwareDate>2018-02-13 15:15:48.549536</SoftwareDate>
+        <SoftwareScm>378083</SoftwareScm>
+        <MinCompatibleVersion>40.0-00000</MinCompatibleVersion>
+        <LegacyCompatibleVersion>25.2-00000</LegacyCompatibleVersion>
+        <HardwareVersion>1.8.1.3-2</HardwareVersion>
+        <DspVersion>0.25.3</DspVersion>
+        <HwFlags>0x14</HwFlags>
+        <HwFeatures>0x60</HwFeatures>
+        <Variant>2</Variant>
+        <GeneralFlags>0x0</GeneralFlags>
+        <IPAddress>192.168.0.171</IPAddress>
+        <MACAddress>5C:AA:FD:5D:C7:C8</MACAddress>
+        <Copyright>© 2003-2017, Sonos, Inc. All rights reserved.</Copyright>
+        <ExtraInfo>OTP: </ExtraInfo>
+        <HTAudioInCode>0</HTAudioInCode>
+        <IdxTrk></IdxTrk>
+        <MDP2Ver>4</MDP2Ver>
+        <MDP3Ver>0</MDP3Ver>
+        <RegState>3</RegState>
+        <CustomerID>119705202</CustomerID>
+        <HouseholdControlID>Sonos_yjswndSdk0GByHG8csXFs2rkgl.G-HdJNFcUpZGdQsxeov9</HouseholdControlID>
+        <HouseholdLocationID>3m6yveQOaHRPovehzAdf/w==</HouseholdLocationID>
+        <DHCPServerMac>38437D341652</DHCPServerMac>
+        <NetworkIPAddress>192.168.0.0</NetworkIPAddress>
+        <NetworkMask>255.255.255.0</NetworkMask>
+        <UptimeSeconds>1242811</UptimeSeconds>
+    </ZPInfo>
+</ZPSupportInfo>
