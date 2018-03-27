@@ -9,7 +9,7 @@
 import Cocoa
 import SWXMLHash
 
-class VolumeControlVC: NSViewController {
+class ControlVC: NSViewController {
 
     //MARK: Properties
     @IBOutlet weak var sonosStack: NSStackView!
@@ -18,6 +18,8 @@ class VolumeControlVC: NSViewController {
     @IBOutlet weak var controlsView: NSView!
     @IBOutlet weak var pauseButton: NSButton!
     @IBOutlet weak var sonosScrollContainer: CustomScrolllView!
+    @IBOutlet weak var speakerGroupSelector: NSSegmentedControl!
+    
     let defaultHeight: CGFloat = 143.0
     let defaultWidth:CGFloat = 228.0
     let maxHeight: CGFloat = 215.0
@@ -30,6 +32,14 @@ class VolumeControlVC: NSViewController {
     var speakerButtons: [SonosController: NSButton] = [:]
     var lastDiscoveryDeviceList = [SonosController]()
     var devicesFoundCurrentSearch = 0
+    
+    var groupButtons: [SonosSpeakerGroup: NSButton] = [:]
+    
+    var activeGroup: SonosSpeakerGroup? {
+        return self.sonosGroups.values.first(where: {$0.isActive})
+    }
+    
+    var showState = ShowState.speakers
     
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -50,6 +60,7 @@ class VolumeControlVC: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
 //        self.addTest()
+//        self.showDemo()
         self.setupScrollView()
     }
     
@@ -60,6 +71,22 @@ class VolumeControlVC: NSViewController {
             self.addDeviceToList(sonos: testSonos)
             self.controlsView.isHidden = false
         }
+    }
+    
+    func showDemo() {
+        self.stopDiscovery()
+        let t1 = SonosController(roomName: "Bedroom", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1")
+        t1.playState = .playing
+        self.addDeviceToList(sonos: t1)
+        
+        let t2 = SonosController(roomName: "Bedroom", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.92")!, ip: "192.168.178.92", udn: "some-udn-2")
+        t2.playState = .playing
+        self.addDeviceToList(sonos: t2)
+        
+        let t3 = SonosController(roomName: "Kitchen", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.93")!, ip: "192.168.178.93", udn: "some-udn-3")
+        t3.playState = .paused
+        self.addDeviceToList(sonos: t3)
+        self.controlsView.isHidden = false
     }
     
     //MARK: - Updating Sonos Players
@@ -76,14 +103,17 @@ class VolumeControlVC: NSViewController {
         sonos.delegate = self
         self.sonosSystems.append(sonos)
         
-        self.updateSonosDeviceList()
-        
-        if self.sonosSystems.count == 1 {
-            self.updateState()
+        if self.showState == .speakers {
+            self.updateSonosDeviceList()
+            
+            if self.sonosSystems.count == 1 {
+                self.updateState()
+            }
         }
     }
     
     func updateSonosDeviceList() {
+        guard self.showState == .speakers else {return}
         //Remove error label
         if self.sonosSystems.count > 0 {
             self.errorMessageLabel.isHidden = true
@@ -135,14 +165,49 @@ class VolumeControlVC: NSViewController {
         guard let gId = sonos.groupState?.groupID else {return}
         
         if var group = self.sonosGroups[gId] {
-            group.speakers.insert(sonos)
+            group.addSpeaker(sonos)
         }else {
-            var group = SonosSpeakerGroup(groupID: gId)
-            group.speakers.insert(sonos)
+            let group = SonosSpeakerGroup(groupID: gId,firstSpeaker: sonos)
             self.sonosGroups[gId] = group
         }
         
-        //TODO:  Update the groups view
+        if self.showState == .groups {
+            self.updateGroupsList()
+            
+            self.updateState()
+        }
+        
+    }
+    
+    func updateGroupsList() {
+        guard self.showState == .groups else {return}
+        //Remove error label or show it if necessary
+        if self.sonosSystems.count > 0 {
+            self.errorMessageLabel.isHidden = true
+        }else {
+            self.errorMessageLabel.isHidden = false
+        }
+        
+        //Remove all buttons
+        for view in self.sonosStack.subviews {
+            self.sonosStack.removeView(view)
+        }
+        
+        var sonosGroupArray = Array(self.sonosGroups.values)
+        
+        sonosGroupArray.sort { (lhs, rhs) -> Bool in
+            return  lhs.name < rhs.name
+        }
+        
+        //Add all sonos buttons
+        for group in sonosGroupArray {
+            let button = NSButton(radioButtonWithTitle: group.name, target: group, action: #selector(SonosSpeakerGroup.activateDeactivate(button:)))
+            button.state = group.isActive ? .on : .off
+            self.sonosStack.addArrangedSubview(button)
+            self.groupButtons[group] = button
+        }
+        
+        self.setupScrollView()
     }
     
     /**
@@ -196,37 +261,82 @@ class VolumeControlVC: NSViewController {
     }
     
     //MARK: - Interactions
-    @IBAction func setVolume(_ sender: NSSlider) {
-        for sonos in sonosSystems {
-            guard sonos.active else {continue}
-            sonos.setVolume(volume: sender.integerValue)
+    
+    @IBAction func switchSpeakerGroups(_ sender: Any) {
+        let selected = self.speakerGroupSelector.indexOfSelectedItem
+        if (selected == 0) {
+            //Show speakers
+            self.showState = .speakers
+            self.updateSonosDeviceList()
+        }else {
+            //Show groups
+            self.showState = .groups
+            self.updateGroupsList()
         }
+    }
+    
+    @IBAction func setVolume(_ sender: NSSlider) {
+        switch self.showState {
+        case .speakers:
+            for sonos in sonosSystems {
+                guard sonos.active else {continue}
+                sonos.setVolume(volume: sender.integerValue)
+            }
+        case .groups:
+            self.activeGroup?.setVolume(volume: sender.integerValue)
+        }
+        
     }
     
     @IBAction func playPause(_ sender: Any) {
-        for sonos in sonosSystems {
-            guard sonos.active else {continue}
-            if sonos.playState != .playing {
-                sonos.play()
-                self.updatePlayButton(forState: sonos.playState)
-            }else if sonos.playState == .playing {
-                sonos.pause()
-                self.updatePlayButton(forState: sonos.playState)
+        switch self.showState {
+        case .speakers:
+            for sonos in sonosSystems {
+               self.playPause(forSonos: sonos)
+            }
+        case .groups:
+            if let sonos = self.activeGroup?.mainSpeaker {
+                self.playPause(forSonos: sonos)
             }
         }
+        
     }
-    @IBAction func nextTrack(_ sender: Any) {
-        for sonos in sonosSystems {
-            guard sonos.active else {continue}
-            sonos.next()
+    
+    private func playPause(forSonos sonos: SonosController) {
+        guard sonos.active else {return}
+        if sonos.playState != .playing {
+            sonos.play()
+            self.updatePlayButton(forState: sonos.playState)
+        }else if sonos.playState == .playing {
+            sonos.pause()
+            self.updatePlayButton(forState: sonos.playState)
         }
     }
     
-    @IBAction func prevTrack(_ sender: Any) {
-        for sonos in sonosSystems {
-            guard sonos.active else {continue}
-            sonos.previous()
+    @IBAction func nextTrack(_ sender: Any) {
+        switch self.showState {
+        case .speakers:
+            for sonos in sonosSystems {
+                guard sonos.active else {continue}
+                sonos.next()
+            }
+        case .groups:
+            self.activeGroup?.next()
         }
+        
+    }
+    
+    @IBAction func prevTrack(_ sender: Any) {
+        switch self.showState {
+        case .speakers:
+            for sonos in sonosSystems {
+                guard sonos.active else {continue}
+                sonos.previous()
+            }
+        case .groups:
+            self.activeGroup?.previous()
+        }
+        
     }
     
     @IBAction func showMenu(_ sender: NSView) {
@@ -261,7 +371,7 @@ class VolumeControlVC: NSViewController {
 
 //MARK: - Sonos Discovery
 
-extension VolumeControlVC: SSDPDiscoveryDelegate {
+extension ControlVC: SSDPDiscoveryDelegate {
     
     func searchForDevices() {
         self.stopDiscovery()
@@ -329,17 +439,22 @@ extension VolumeControlVC: SSDPDiscoveryDelegate {
         
         self.removeOldDevices()
     }
+    
+    enum ShowState {
+        case groups
+        case speakers
+    }
 }
 
-extension VolumeControlVC {
+extension ControlVC {
     // MARK: Storyboard instantiation
-    static func freshController() -> VolumeControlVC {
+    static func freshController() -> ControlVC {
         //1.
         let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
         //2.
         let identifier = NSStoryboard.SceneIdentifier(rawValue: "VolumeControlVC")
         //3.
-        guard let viewcontroller = storyboard.instantiateController(withIdentifier: identifier) as? VolumeControlVC else {
+        guard let viewcontroller = storyboard.instantiateController(withIdentifier: identifier) as? ControlVC else {
             fatalError("Why cant i find QuotesViewController? - Check Main.storyboard")
         }
         return viewcontroller
@@ -347,7 +462,7 @@ extension VolumeControlVC {
 }
 
 //MARK: Sonos Delegate
-extension VolumeControlVC: SonosControllerDelegate {
+extension ControlVC: SonosControllerDelegate {
     func didUpdateActiveState(forSonos sonos: SonosController, isActive: Bool) {
         self.updateState()
     }

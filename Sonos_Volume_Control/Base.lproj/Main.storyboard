@@ -683,17 +683,17 @@
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Volume ControlVC-->
+        <!--ControlVC-->
         <scene sceneID="94k-eK-MxV">
             <objects>
-                <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="VolumeControlVC" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="ControlVC" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Nqb-gx-wcn">
-                        <rect key="frame" x="0.0" y="0.0" width="210" height="180"/>
+                        <rect key="frame" x="0.0" y="0.0" width="210" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zTj-kC-HZv">
-                                <rect key="frame" x="6" y="155" width="186" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select Sonos to control" id="zoy-Fv-o7x">
+                                <rect key="frame" x="6" y="175" width="202" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Select Sonos to control" id="zoy-Fv-o7x">
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -778,12 +778,13 @@
                                 </connections>
                             </button>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="540-Ck-pnu" customClass="CustomScrolllView" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
-                                <rect key="frame" x="8" y="52" width="198" height="99"/>
+                                <rect key="frame" x="8" y="52" width="198" height="89"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hjZ-YT-IUj" customClass="CustomScrollClipView" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="198" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="198" height="89"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="Ub7-dU-bHm">
+                                            <rect key="frame" x="0.0" y="-10" width="0.0" height="0.0"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n4a-Gx-V86"/>
                                             </subviews>
@@ -805,7 +806,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="5cu-DK-cBN">
-                                    <rect key="frame" x="182" y="0.0" width="16" height="99"/>
+                                    <rect key="frame" x="182" y="0.0" width="16" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -816,21 +817,36 @@
                                     <action selector="setVolume:" target="UOE-Qu-9Vt" id="mLM-g8-p8d"/>
                                 </connections>
                             </slider>
+                            <segmentedControl verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0BW-ZK-BjM">
+                                <rect key="frame" x="34" y="147" width="143" height="21"/>
+                                <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="B1G-5z-Li2">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <segments>
+                                        <segment label="Speakers" width="68" selected="YES"/>
+                                        <segment label="Groups" toolTip="Select this to control your Sonos groups" width="68" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="switchSpeakerGroups:" target="UOE-Qu-9Vt" id="2om-eE-AzZ"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="0BW-ZK-BjM" firstAttribute="top" secondItem="zTj-kC-HZv" secondAttribute="bottom" constant="8" id="76r-oO-U3b"/>
                             <constraint firstItem="zTj-kC-HZv" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="leading" id="8yL-gx-3gE"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="EW2-Qh-7lS"/>
+                            <constraint firstItem="0BW-ZK-BjM" firstAttribute="centerX" secondItem="Nqb-gx-wcn" secondAttribute="centerX" id="H42-K7-RsS"/>
                             <constraint firstItem="G4u-lf-saW" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="KwY-FC-pJJ"/>
                             <constraint firstAttribute="trailing" secondItem="o0R-YJ-mAi" secondAttribute="trailing" constant="4" id="S2k-iZ-mZn"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="trailing" secondItem="G4u-lf-saW" secondAttribute="trailing" id="Usq-ll-FvD"/>
                             <constraint firstItem="540-Ck-pnu" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="W5w-Tq-bp9"/>
                             <constraint firstAttribute="bottom" secondItem="o0R-YJ-mAi" secondAttribute="bottom" constant="4" id="Zzl-vz-OvL"/>
                             <constraint firstAttribute="trailing" secondItem="V79-m7-Tey" secondAttribute="trailing" constant="20" id="an4-kd-nvP"/>
+                            <constraint firstItem="540-Ck-pnu" firstAttribute="top" secondItem="0BW-ZK-BjM" secondAttribute="bottom" constant="8" id="bnz-Ll-jZO"/>
                             <constraint firstItem="V79-m7-Tey" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="dQw-kM-1v8"/>
-                            <constraint firstAttribute="trailing" secondItem="zTj-kC-HZv" secondAttribute="trailing" constant="20" id="hiy-MS-qaJ"/>
+                            <constraint firstAttribute="trailing" secondItem="zTj-kC-HZv" secondAttribute="trailing" constant="4" id="hiy-MS-qaJ"/>
                             <constraint firstItem="o0R-YJ-mAi" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="trailing" constant="12" id="kG6-Qx-KXS"/>
                             <constraint firstItem="G4u-lf-saW" firstAttribute="top" secondItem="V79-m7-Tey" secondAttribute="bottom" constant="6" id="lww-RE-uow"/>
-                            <constraint firstItem="540-Ck-pnu" firstAttribute="top" secondItem="zTj-kC-HZv" secondAttribute="bottom" constant="4" id="oct-gb-bRe"/>
                             <constraint firstItem="zTj-kC-HZv" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="rME-8y-fml"/>
                             <constraint firstAttribute="trailing" secondItem="540-Ck-pnu" secondAttribute="trailing" constant="4" id="u25-ov-y83"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="bottom" secondItem="V79-m7-Tey" secondAttribute="bottom" id="uoH-cO-g95"/>
@@ -844,6 +860,7 @@
                         <outlet property="pauseButton" destination="KtY-82-ql5" id="mQH-iA-1XV"/>
                         <outlet property="sonosScrollContainer" destination="540-Ck-pnu" id="o1N-tF-7ob"/>
                         <outlet property="sonosStack" destination="n4a-Gx-V86" id="TgX-MU-ta8"/>
+                        <outlet property="speakerGroupSelector" destination="0BW-ZK-BjM" id="vC3-GF-6sm"/>
                         <outlet property="volumeSlider" destination="G4u-lf-saW" id="1Bf-aR-hRO"/>
                     </connections>
                 </viewController>

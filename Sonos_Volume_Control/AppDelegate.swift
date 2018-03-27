@@ -26,7 +26,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.button?.image = icon
         statusItem.button?.action = #selector(togglePopover(_:))
         
-        popover.contentViewController = VolumeControlVC.freshController()
+        popover.contentViewController = ControlVC.freshController()
+//        popover.behavior = .transient
+        popover.animates = true
         
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
             if let strongSelf = self, strongSelf.popover.isShown {
@@ -46,12 +48,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func showPopover(sender: Any?) {
         if let button = statusItem.button {
+            NSApplication.shared.activate(ignoringOtherApps: true)
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
         }
     }
     
-    func closePopover(sender: Any?) {
-        popover.performClose(sender)
+    func closePopover(sender: Any?) { 
+        self.statusItem.button?.isHighlighted = false
+        popover.close()
     }
     
 
