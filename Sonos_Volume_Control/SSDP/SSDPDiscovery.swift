@@ -279,8 +279,8 @@ extension SSDPDiscovery: GCDAsyncUdpSocketDelegate {
     }
     
     public func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
-        print("M-SEARCH response handled")
-        print(String(data: data, encoding: .utf8)!)
+//        print("M-SEARCH response handled")
+//        print(String(data: data, encoding: .utf8)!)
         
         // Ensure we have parsable data
         guard let messageString = String(data: data, encoding: .utf8) else {

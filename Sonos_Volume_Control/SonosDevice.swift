@@ -78,7 +78,7 @@ class SonosController: Equatable, Hashable {
     //MARK: - General Info
     
     var isGroupCoordinator: Bool {
-        return self.groupState?.groupID == self.deviceInfo?.localUID
+        return self.groupState?.deviceIds.first == self.deviceInfo?.localUID
     }
     
     var isSpeaker: Bool {
@@ -98,12 +98,20 @@ class SonosController: Equatable, Hashable {
      - volume: between 0 and 100
      */
     func setVolume(volume: Int){
+        var updateVolume = volume
+        
+        if updateVolume < 0 {
+            updateVolume = 0
+        }else if updateVolume > 100 {
+            updateVolume = 100
+        }
+    
         let command = SonosCommand(endpoint: .rendering_endpoint, action: .setVolume, service: .rendering_service)
         command.put(key: "InstanceID", value: "0")
         command.put(key: "Channel", value: "Master")
-        command.put(key: "DesiredVolume", value: String(volume))
+        command.put(key: "DesiredVolume", value: String(updateVolume))
         command.execute(sonos: self)
-        self.currentVolume = volume
+        self.currentVolume = updateVolume
         
         if self.muted && volume > 0 {
             //Unmute speaker
@@ -203,7 +211,7 @@ class SonosController: Equatable, Hashable {
             guard let xml = self.parseXml(data: data) else {return}
             self.deviceInfo = SonosDeviceInfo(xml: xml)
             self.updateZoneGroupState({
-                completion()
+                DispatchQueue.main.async {completion()}
             })
         }
     }

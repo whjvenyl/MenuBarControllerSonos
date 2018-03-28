@@ -710,7 +710,7 @@
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euI-Bt-dbz">
                                 <rect key="frame" x="8" y="25" width="171" height="24"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5">
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5" customClass="PlayPauseButton" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
                                         <rect key="frame" x="74" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="5cq-Fn-c7h"/>

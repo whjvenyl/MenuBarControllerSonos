@@ -9,30 +9,70 @@
 import Cocoa
 import SWXMLHash
 
+protocol SonosSpeakerGroupDelegate {
+    func didChangeActiveState(group: SonosSpeakerGroup)
+}
+
 //TODO: Add delegate
 class SonosSpeakerGroup: Hashable {
-    var name: String!
+    var name: String
     let groupID: String
-    private var speakers: Set<SonosController> = Set()
+    private (set) var speakers: Set<SonosController> = Set()
+    private var speakerOrder: [String]
+    public var delegate: SonosSpeakerGroupDelegate?
     
     var isActive: Bool = false
     
-    /// Get the group's controller
-    var mainSpeaker: SonosController? {
-        return speakers.first(where: {groupID.hasPrefix($0.deviceInfo?.localUID ?? "000")})
-    }
-    
     init(groupID: String, firstSpeaker: SonosController) {
         self.groupID = groupID
+        self.speakerOrder = firstSpeaker.groupState?.deviceIds ?? []
+        self.name = firstSpeaker.groupState?.name ?? ""
         self.addSpeaker(firstSpeaker)
+    }
+    
+    /// Get the group's controller
+    private var mainSpeaker: SonosController? {
+        if let main = speakers.first(where: {speakerOrder.first == $0.deviceInfo?.localUID}) {
+            return main
+        }
+        return self.speakers.first
+    }
+    
+    private var groupVolume: Int {
+        guard speakers.count > 0 else {return 1}
+        
+        var volume = 0
+        for sonos in speakers {
+            volume += sonos.currentVolume
+        }
+        volume = volume / speakers.count
+        
+        return volume > 0 ? volume : 1
+    }
+    
+    func getGroupVolume(_ completion:@escaping (_ vol: Int)->Void ) {
+        var count = speakers.count
+        for sonos in speakers {
+            sonos.getVolume({ (_) in
+                count -= 1
+                if count == 0 {
+                    completion(self.groupVolume)
+                }
+            })
+        }
     }
     
     func addSpeaker(_ sonos: SonosController) {
         guard sonos.groupState?.groupID == self.groupID else {return}
         self.speakers.insert(sonos)
-        if let groupName = sonos.groupState?.name {
+        if let groupName = sonos.groupState?.name, !groupName.isEmpty {
             self.name = groupName
         }
+    }
+    
+    func removeSpeaker(_ sonos: SonosController) {
+        guard sonos.groupState?.groupID != self.groupID else {return}
+        self.speakers.remove(sonos)
     }
     
     @objc func activateDeactivate(button: NSButton) {
@@ -42,31 +82,62 @@ class SonosSpeakerGroup: Hashable {
             self.isActive = false
         }
         
-        //Update delegate
+        self.delegate?.didChangeActiveState(group: self)
     }
     
     func setVolume(volume: Int){
-        self.mainSpeaker?.setVolume(volume: volume)
+        let groupVolume = self.groupVolume
+        let increaseVol = volume - groupVolume
+        for sonos in speakers {
+            let currentVolume = sonos.currentVolume > 0 ? sonos.currentVolume : 1
+            let updatedVolume = currentVolume + increaseVol
+            sonos.setVolume(volume: updatedVolume)
+        }
     }
-    
+
     func setMute(muted: Bool) {
-        self.mainSpeaker?.setMute(muted: muted)
+        for sonos in speakers {
+            sonos.setMute(muted: muted)
+        }
     }
     
     func play() {
-        self.mainSpeaker?.play()
+        if let main = self.mainSpeaker {
+            main.play()
+        }else {
+            self.speakers.forEach({$0.play()})
+        }
     }
     
     func pause() {
-        self.mainSpeaker?.pause()
+        if let main = self.mainSpeaker {
+            main.pause()
+        }else {
+            self.speakers.forEach({$0.pause()})
+        }
     }
     
     func next() {
-        self.mainSpeaker?.next()
+        if let main = self.mainSpeaker {
+            main.next()
+        }else {
+            self.speakers.forEach({$0.next()})
+        }
     }
     
     func previous() {
-        self.mainSpeaker?.previous()
+        if let main = self.mainSpeaker {
+            main.previous()
+        }else {
+            self.speakers.forEach({$0.previous()})
+        }
+    }
+    
+    /**
+     Get groups the play state
+     */
+    func getPlayState(_ completion: ((_ state: PlayState)->Void)? = nil) {
+        mainSpeaker?.getPlayState(completion)
     }
     
     
