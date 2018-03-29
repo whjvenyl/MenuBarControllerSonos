@@ -677,7 +677,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="DemoTestTarget" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -686,7 +686,7 @@
         <!--ControlVC-->
         <scene sceneID="94k-eK-MxV">
             <objects>
-                <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="ControlVC" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="ControlVC" customModule="DemoTestTarget" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Nqb-gx-wcn">
                         <rect key="frame" x="0.0" y="0.0" width="210" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -710,7 +710,7 @@
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euI-Bt-dbz">
                                 <rect key="frame" x="8" y="25" width="171" height="24"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5" customClass="PlayPauseButton" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5" customClass="PlayPauseButton" customModule="DemoTestTarget" customModuleProvider="target">
                                         <rect key="frame" x="74" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="5cq-Fn-c7h"/>
@@ -720,6 +720,7 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <accessibility description="Pause"/>
                                         <connections>
                                             <action selector="playPause:" target="UOE-Qu-9Vt" id="9L3-0T-4fk"/>
                                         </connections>
@@ -734,6 +735,7 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <accessibility description="Next song"/>
                                         <connections>
                                             <action selector="nextTrack:" target="UOE-Qu-9Vt" id="BHm-CG-1o6"/>
                                         </connections>
@@ -748,6 +750,7 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <accessibility description="Previous song"/>
                                         <connections>
                                             <action selector="prevTrack:" target="UOE-Qu-9Vt" id="ohV-BB-KS0"/>
                                         </connections>
@@ -773,13 +776,14 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <accessibility description="Settings button"/>
                                 <connections>
                                     <action selector="showMenu:" target="UOE-Qu-9Vt" id="eHJ-cs-1ek"/>
                                 </connections>
                             </button>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="540-Ck-pnu" customClass="CustomScrolllView" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="540-Ck-pnu" customClass="CustomScrolllView" customModule="DemoTestTarget" customModuleProvider="target">
                                 <rect key="frame" x="8" y="52" width="198" height="89"/>
-                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hjZ-YT-IUj" customClass="CustomScrollClipView" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hjZ-YT-IUj" customClass="CustomScrollClipView" customModule="DemoTestTarget" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="198" height="89"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -809,10 +813,12 @@
                                     <rect key="frame" x="182" y="0.0" width="16" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
+                                <accessibility description="Scroll Area contains all speakers or groups"/>
                             </scrollView>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G4u-lf-saW">
                                 <rect key="frame" x="6" y="2" width="175" height="19"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="BNO-bg-Prd"/>
+                                <accessibility description="Volume slider"/>
                                 <connections>
                                     <action selector="setVolume:" target="UOE-Qu-9Vt" id="mLM-g8-p8d"/>
                                 </connections>
@@ -825,7 +831,9 @@
                                         <segment label="Speakers" width="68" selected="YES"/>
                                         <segment label="Groups" toolTip="Select this to control your Sonos groups" width="68" tag="1"/>
                                     </segments>
+                                    <accessibility description="Select &quot;Speakers&quot; to control individual speakers. Select &quot;Groups&quot; to control groups of speakers"/>
                                 </segmentedCell>
+                                <accessibility description="Select &quot;Speakers&quot; to control individual speakers. Select &quot;Groups&quot; to control groups of speakers"/>
                                 <connections>
                                     <action selector="switchSpeakerGroups:" target="UOE-Qu-9Vt" id="2om-eE-AzZ"/>
                                 </connections>
