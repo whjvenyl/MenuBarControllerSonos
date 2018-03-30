@@ -204,7 +204,7 @@ class SonosController: Equatable, Hashable {
         //      Update the speakers state
         self.updateCurrentVolume()
         self.getPlayState()
-        
+        self.updateCurrentTrack()
         
         //      Get the device info and update the group state
         SonosCommand.downloadSpeakerInfo(sonos: self) { (data) in
@@ -284,6 +284,37 @@ class SonosController: Equatable, Hashable {
             }
         }
     }
+    
+    func updateCurrentTrack(_ completion: ((_ trackInfo: SonosTrackInfo)->Void)?=nil) {
+        let command = SonosCommand(endpoint: .transport_endpoint, action: .get_position_info, service: .transport_service)
+        command.put(key:"InstanceID",value: "0")
+        command.put(key:"Channel",value: "Master")
+        command.execute(sonos: self) { (data) in
+            guard let xml = self.parseXml(data: data),
+            let metaDataText = xml["s:Envelope"]["s:Body"]["u:GetPositionInfoResponse"]["TrackMetaData"].element?.text,
+            metaDataText != "NOT_IMPLEMENTED" else {return}
+            let metadataXML = SWXMLHash.parse(metaDataText)
+            let trackInfo = SonosTrackInfo(xml: metadataXML["DIDL-Lite"]["item"])
+            
+            DispatchQueue.main.async {
+                completion?(trackInfo)
+            }
+        }
+        
+    }
+    
+//    func getQueue(start: Int, count: Int) {
+//        let command = SonosCommand(endpoint: .content_directory_endpoint, action: .browse, service: .content_directory_service)
+//        command.put(key:"ObjectID",value: "Q:0")
+//        command.put(key:"BrowseFlag",value: "BrowseDirectChildren")
+//        command.put(key:"Filter",value: "dc:title,res,dc:creator,upnp:artist,upnp:album,upnp:albumArtURI")
+//        command.put(key:"StartingIndex",value: String(start))
+//        command.put(key:"RequestedCount",value: String(count))
+//        command.put(key:"SortCriteria",value: "")
+//        command.execute(sonos: self) { (data) in
+//            guard let xml = self.parseXml(data: data) else {return}
+//        }
+//    }
     
     func parseXml(data: Data?) -> XMLIndexer? {
         guard let data = data else {return nil}

@@ -19,6 +19,8 @@ class ControlVC: NSViewController {
     @IBOutlet weak var pauseButton: PlayPauseButton!
     @IBOutlet weak var sonosScrollContainer: CustomScrolllView!
     @IBOutlet weak var speakerGroupSelector: NSSegmentedControl!
+    @IBOutlet weak var currentTrackLabel: NSTextField!
+    @IBOutlet weak var trackLabelLeading: NSLayoutConstraint!
     
     let defaultHeight: CGFloat = 143.0
     let defaultWidth:CGFloat = 228.0
@@ -40,6 +42,8 @@ class ControlVC: NSViewController {
     }
     
     var showState = ShowState.speakers
+    
+    var isAnimating = false
     
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -65,6 +69,12 @@ class ControlVC: NSViewController {
             self.showDemo()
         }
         self.setupScrollView()
+    }
+    
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        
+        self.stopAnimations()
     }
     
     func addTest() {
@@ -298,15 +308,59 @@ class ControlVC: NSViewController {
             coordinator.getPlayState({ (state) in
                 self.updatePlayButton(forState: state)
             })
+            
+            coordinator.updateCurrentTrack({ (trackInfo) in
+                self.updateTrackLabel(withTrack: trackInfo.trackText())
+            })
         }else {
             //Hide buttons
             self.controlsView.isHidden = true
         }
     }
     
+    func updateTrackLabel(withTrack track: String) {
+        self.stopAnimations()
+        self.currentTrackLabel.stringValue = track
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.animateTrackLabel()
+        }
+
+    }
+    
+    func animateTrackLabel() {
+        guard self.currentTrackLabel.frame.width > self.view.frame.width, isAnimating == false else {return}
+        
+        self.isAnimating = true
+        self.trackLabelLeading.constant = 8
+        NSAnimationContext.runAnimationGroup({ (context) in
+            context.duration = 10.0
+            self.trackLabelLeading.animator().constant = -self.currentTrackLabel.frame.width
+        }) {
+            guard self.isAnimating else {return}
+            self.trackLabelLeading.constant = self.currentTrackLabel.frame.width
+            //Completed one way
+            NSAnimationContext.runAnimationGroup({ (context) in
+                context.duration = 10.0
+                self.trackLabelLeading.animator().constant = 8
+            }, completionHandler: {
+                self.isAnimating = false
+            })
+        }
+    }
+    
+    func stopAnimations() {
+        self.isAnimating = false
+        
+        NSAnimationContext.runAnimationGroup({ (context) in
+            context.duration = 0.1
+            self.trackLabelLeading.animator().constant = 8
+        }, completionHandler: nil)
+    }
+    
     func updatePlayButton(forState state: PlayState) {
         switch (state) {
-        case .playing:
+        case .playing, .transitioning:
             self.pauseButton.currentState = .pause
             self.controlsView.isHidden = false
         case .paused, .stopped:
@@ -399,6 +453,10 @@ class ControlVC: NSViewController {
             self.activeGroup?.next()
         }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.updateState()
+        }
+        
     }
     
     @IBAction func prevTrack(_ sender: Any) {
@@ -412,6 +470,9 @@ class ControlVC: NSViewController {
             self.activeGroup?.previous()
         }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.updateState()
+        }
     }
     
     @IBAction func showMenu(_ sender: NSView) {

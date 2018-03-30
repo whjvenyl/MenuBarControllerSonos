@@ -43,6 +43,8 @@
 		11453573206BBEF5008C8FC6 /* Weak.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11F64C0C2050A2AE005ED2E3 /* Weak.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11453574206BBEF5008C8FC6 /* SWXMLHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11F64C122050B1A0005ED2E3 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11489604206AEE1E003A02C0 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11489603206AEE1E003A02C0 /* PlayPauseButton.swift */; };
+		1151CDBD206E39FC001150F7 /* SonosTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */; };
+		1151CDBE206E39FC001150F7 /* SonosTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */; };
 		115232CB205B1B420048E130 /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115232CA205B1B420048E130 /* PlayState.swift */; };
 		115BA13B20599E29004CC5C2 /* SonosDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115BA13A20599E29004CC5C2 /* SonosDevice.swift */; };
 		1168D986205138E60091E784 /* SonosCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168D985205138E60091E784 /* SonosCommand.swift */; };
@@ -110,6 +112,7 @@
 		11453578206BBEF5008C8FC6 /* DemoTestTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoTestTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11453579206BBEF5008C8FC6 /* Menu Bar Controller for Sonos copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Menu Bar Controller for Sonos copy-Info.plist"; path = "/Users/AlexSFD/Sn0wfreeze-Dev/Frameworks/github/Sonos_Volume_Control/Menu Bar Controller for Sonos copy-Info.plist"; sourceTree = "<absolute>"; };
 		11489603206AEE1E003A02C0 /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
+		1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosTrackInfo.swift; sourceTree = "<group>"; };
 		115232CA205B1B420048E130 /* PlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
 		115BA13A20599E29004CC5C2 /* SonosDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosDevice.swift; sourceTree = "<group>"; };
 		1168D985205138E60091E784 /* SonosCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosCommand.swift; sourceTree = "<group>"; };
@@ -189,6 +192,7 @@
 				11F796BD2066860900E4FBE9 /* SonosGroupState.swift */,
 				11F796BF2066ED5600E4FBE9 /* SonosSpeakerGroup.swift */,
 				11F796C12066F18700E4FBE9 /* SonosDeviceInfo.swift */,
+				1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */,
 				115232CA205B1B420048E130 /* PlayState.swift */,
 				11C67D7A2051F01C002777D4 /* EventMonitor.swift */,
 				11CF320420629C6B00A79D9A /* CustomScrolllView.swift */,
@@ -368,6 +372,7 @@
 				11F64BEB20509F08005ED2E3 /* SSDPMSearchRequest.swift in Sources */,
 				11F64BED20509F08005ED2E3 /* SSDPDiscoverySession.swift in Sources */,
 				11C67D7B2051F01C002777D4 /* EventMonitor.swift in Sources */,
+				1151CDBD206E39FC001150F7 /* SonosTrackInfo.swift in Sources */,
 				11F64BEA20509F08005ED2E3 /* SSDPResponse.swift in Sources */,
 				1116E9D32040C015009D940F /* AppDelegate.swift in Sources */,
 				115232CB205B1B420048E130 /* PlayState.swift in Sources */,
@@ -396,6 +401,7 @@
 				11453563206BBEF5008C8FC6 /* SSDPMSearchRequest.swift in Sources */,
 				11453564206BBEF5008C8FC6 /* SSDPDiscoverySession.swift in Sources */,
 				11453565206BBEF5008C8FC6 /* EventMonitor.swift in Sources */,
+				1151CDBE206E39FC001150F7 /* SonosTrackInfo.swift in Sources */,
 				11453566206BBEF5008C8FC6 /* SSDPResponse.swift in Sources */,
 				11453567206BBEF5008C8FC6 /* AppDelegate.swift in Sources */,
 				11453568206BBEF5008C8FC6 /* PlayState.swift in Sources */,

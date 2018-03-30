@@ -691,16 +691,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="210" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zTj-kC-HZv">
-                                <rect key="frame" x="6" y="175" width="202" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Select Sonos to control" id="zoy-Fv-o7x">
-                                    <font key="font" metaFont="systemMedium" size="13"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03R-pu-8p0">
+                                <rect key="frame" x="6" y="175" width="146" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="Select Sonos to control" usesSingleLineMode="YES" id="9Va-bp-bbK">
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V79-m7-Tey">
-                                <rect key="frame" x="6" y="25" width="186" height="17"/>
+                                <rect key="frame" x="89" y="25" width="103" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="No Sonos found" id="CHc-IY-xoI">
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -758,6 +758,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="KtY-82-ql5" firstAttribute="leading" secondItem="Kdr-P3-YGY" secondAttribute="trailing" constant="21" id="8Q3-Ko-34n"/>
+                                    <constraint firstAttribute="width" constant="171" id="A2J-el-uJV"/>
                                     <constraint firstItem="KtY-82-ql5" firstAttribute="centerX" secondItem="euI-Bt-dbz" secondAttribute="centerX" id="B78-Nl-gvJ"/>
                                     <constraint firstAttribute="bottom" secondItem="KtY-82-ql5" secondAttribute="bottom" id="b3I-Lc-i5g"/>
                                     <constraint firstAttribute="bottom" secondItem="Kdr-P3-YGY" secondAttribute="bottom" id="byq-lK-f58"/>
@@ -813,7 +814,7 @@
                                     <rect key="frame" x="182" y="0.0" width="16" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <accessibility description="Scroll Area contains all speakers or groups"/>
+                                <accessibility description="Scroll Area with speakers or groups" help="The Scroll Area contains all your speakers with check boxes or all your groups with radio buttons"/>
                             </scrollView>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G4u-lf-saW">
                                 <rect key="frame" x="6" y="2" width="175" height="19"/>
@@ -833,29 +834,28 @@
                                     </segments>
                                     <accessibility description="Select &quot;Speakers&quot; to control individual speakers. Select &quot;Groups&quot; to control groups of speakers"/>
                                 </segmentedCell>
-                                <accessibility description="Select &quot;Speakers&quot; to control individual speakers. Select &quot;Groups&quot; to control groups of speakers"/>
+                                <accessibility description="Speakers or group selector" help="Select &quot;Speakers&quot; to control individual speakers. Select &quot;Groups&quot; to control groups of speakers"/>
                                 <connections>
                                     <action selector="switchSpeakerGroups:" target="UOE-Qu-9Vt" id="2om-eE-AzZ"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="0BW-ZK-BjM" firstAttribute="top" secondItem="zTj-kC-HZv" secondAttribute="bottom" constant="8" id="76r-oO-U3b"/>
-                            <constraint firstItem="zTj-kC-HZv" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="leading" id="8yL-gx-3gE"/>
-                            <constraint firstItem="euI-Bt-dbz" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="EW2-Qh-7lS"/>
+                            <constraint firstItem="03R-pu-8p0" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="51o-eU-yoz"/>
                             <constraint firstItem="0BW-ZK-BjM" firstAttribute="centerX" secondItem="Nqb-gx-wcn" secondAttribute="centerX" id="H42-K7-RsS"/>
+                            <constraint firstItem="euI-Bt-dbz" firstAttribute="top" secondItem="hjZ-YT-IUj" secondAttribute="bottom" constant="3" id="K8q-Br-rUx"/>
                             <constraint firstItem="G4u-lf-saW" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="KwY-FC-pJJ"/>
+                            <constraint firstAttribute="trailing" secondItem="540-Ck-pnu" secondAttribute="trailing" constant="4" id="Ovz-AQ-IR1"/>
+                            <constraint firstItem="03R-pu-8p0" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="QCb-Yf-xps"/>
+                            <constraint firstItem="0BW-ZK-BjM" firstAttribute="top" secondItem="03R-pu-8p0" secondAttribute="bottom" constant="8" id="RRh-p2-Gat"/>
                             <constraint firstAttribute="trailing" secondItem="o0R-YJ-mAi" secondAttribute="trailing" constant="4" id="S2k-iZ-mZn"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="trailing" secondItem="G4u-lf-saW" secondAttribute="trailing" id="Usq-ll-FvD"/>
-                            <constraint firstItem="540-Ck-pnu" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="W5w-Tq-bp9"/>
                             <constraint firstAttribute="bottom" secondItem="o0R-YJ-mAi" secondAttribute="bottom" constant="4" id="Zzl-vz-OvL"/>
                             <constraint firstAttribute="trailing" secondItem="V79-m7-Tey" secondAttribute="trailing" constant="20" id="an4-kd-nvP"/>
                             <constraint firstItem="540-Ck-pnu" firstAttribute="top" secondItem="0BW-ZK-BjM" secondAttribute="bottom" constant="8" id="bnz-Ll-jZO"/>
-                            <constraint firstItem="V79-m7-Tey" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="dQw-kM-1v8"/>
-                            <constraint firstAttribute="trailing" secondItem="zTj-kC-HZv" secondAttribute="trailing" constant="4" id="hiy-MS-qaJ"/>
+                            <constraint firstItem="540-Ck-pnu" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="faH-L5-rGc"/>
                             <constraint firstItem="o0R-YJ-mAi" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="trailing" constant="12" id="kG6-Qx-KXS"/>
                             <constraint firstItem="G4u-lf-saW" firstAttribute="top" secondItem="V79-m7-Tey" secondAttribute="bottom" constant="6" id="lww-RE-uow"/>
-                            <constraint firstItem="zTj-kC-HZv" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="rME-8y-fml"/>
                             <constraint firstAttribute="trailing" secondItem="540-Ck-pnu" secondAttribute="trailing" constant="4" id="u25-ov-y83"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="bottom" secondItem="V79-m7-Tey" secondAttribute="bottom" id="uoH-cO-g95"/>
                             <constraint firstAttribute="bottom" secondItem="G4u-lf-saW" secondAttribute="bottom" constant="4" id="wOi-DR-5Nw"/>
@@ -864,11 +864,13 @@
                     </view>
                     <connections>
                         <outlet property="controlsView" destination="euI-Bt-dbz" id="XvB-Xr-Tqk"/>
+                        <outlet property="currentTrackLabel" destination="03R-pu-8p0" id="wDC-hB-DOB"/>
                         <outlet property="errorMessageLabel" destination="V79-m7-Tey" id="NVk-fz-QO8"/>
                         <outlet property="pauseButton" destination="KtY-82-ql5" id="mQH-iA-1XV"/>
                         <outlet property="sonosScrollContainer" destination="540-Ck-pnu" id="o1N-tF-7ob"/>
                         <outlet property="sonosStack" destination="n4a-Gx-V86" id="TgX-MU-ta8"/>
                         <outlet property="speakerGroupSelector" destination="0BW-ZK-BjM" id="vC3-GF-6sm"/>
+                        <outlet property="trackLabelLeading" destination="51o-eU-yoz" id="dAO-35-tkI"/>
                         <outlet property="volumeSlider" destination="G4u-lf-saW" id="1Bf-aR-hRO"/>
                     </connections>
                 </viewController>
@@ -878,9 +880,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_pause" width="48" height="48"/>
+        <image name="ic_pause" width="24" height="24"/>
         <image name="ic_settings" width="15" height="15"/>
-        <image name="ic_skip_next" width="48" height="48"/>
-        <image name="ic_skip_previous" width="48" height="48"/>
+        <image name="ic_skip_next" width="24" height="24"/>
+        <image name="ic_skip_previous" width="24" height="24"/>
     </resources>
 </document>
