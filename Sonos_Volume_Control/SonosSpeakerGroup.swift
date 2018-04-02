@@ -140,6 +140,16 @@ class SonosSpeakerGroup: Hashable {
         mainSpeaker?.getPlayState(completion)
     }
     
+    /**
+     Update the current track and return it in the completion handler
+     
+     - Parameters:
+     - completion: Callback contains TrackInfo
+     */
+    func updateCurrentTrack(_ completion: ((_ trackInfo: SonosTrackInfo)->Void)?=nil) {
+        self.mainSpeaker?.updateCurrentTrack(completion)
+    }
+    
     
     var hashValue: Int {
         return self.groupID.hashValue

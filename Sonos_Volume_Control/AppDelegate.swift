@@ -36,6 +36,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         eventMonitor?.start()
+        
+        checkIfLaunchedAutomatically()
+    }
+    
+    func checkIfLaunchedAutomatically() {
+        let helperAppId = "de.sn0wfreeze.Sonos-Volume-Control-Launcher"
+        let isHelperRunning = !NSWorkspace.shared.runningApplications.filter({$0.bundleIdentifier == helperAppId}).isEmpty
+        if isHelperRunning {
+            //Inform helper app to kill itself
+            DistributedNotificationCenter.default().post(name: .killLauncher, object: Bundle.main.bundleIdentifier ?? "")
+        }else {
+            //Show window on start
+            self.togglePopover(self)
+        }
+        
     }
     
     @objc func togglePopover(_ sender: Any?) {
@@ -63,5 +78,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
+}
+
+extension Notification.Name {
+    static let killLauncher = Notification.Name("killLauncher-Menu-Bar-Controller")
 }
 

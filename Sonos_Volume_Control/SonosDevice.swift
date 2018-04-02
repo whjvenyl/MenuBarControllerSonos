@@ -285,6 +285,12 @@ class SonosController: Equatable, Hashable {
         }
     }
     
+    /**
+     Update the current track and return it in the completion handler
+     
+     - Parameters:
+     - completion: Callback contains TrackInfo
+     */
     func updateCurrentTrack(_ completion: ((_ trackInfo: SonosTrackInfo)->Void)?=nil) {
         let command = SonosCommand(endpoint: .transport_endpoint, action: .get_position_info, service: .transport_service)
         command.put(key:"InstanceID",value: "0")

@@ -45,6 +45,12 @@
 		11489604206AEE1E003A02C0 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11489603206AEE1E003A02C0 /* PlayPauseButton.swift */; };
 		1151CDBD206E39FC001150F7 /* SonosTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */; };
 		1151CDBE206E39FC001150F7 /* SonosTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */; };
+		1151CDE12072A5C5001150F7 /* Launcher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1151CDDE2072A57E001150F7 /* Launcher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1151CDE32072A624001150F7 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1151CDE22072A624001150F7 /* ServiceManagement.framework */; };
+		1151CDE52072A6DF001150F7 /* MenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151CDE42072A6DF001150F7 /* MenuHandler.swift */; };
+		1151CDE62072A6DF001150F7 /* MenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151CDE42072A6DF001150F7 /* MenuHandler.swift */; };
+		1151CDE82072AA49001150F7 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151CDE72072AA49001150F7 /* UserDefaultsExtension.swift */; };
+		1151CDE92072AA49001150F7 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151CDE72072AA49001150F7 /* UserDefaultsExtension.swift */; };
 		115232CB205B1B420048E130 /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115232CA205B1B420048E130 /* PlayState.swift */; };
 		115BA13B20599E29004CC5C2 /* SonosDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115BA13A20599E29004CC5C2 /* SonosDevice.swift */; };
 		1168D986205138E60091E784 /* SonosCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168D985205138E60091E784 /* SonosCommand.swift */; };
@@ -71,6 +77,16 @@
 		11F796CD206903B000E4FBE9 /* CustomScrollClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F796CC206903B000E4FBE9 /* CustomScrollClipView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1151CDDD2072A57E001150F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1151CDD92072A57D001150F7 /* Launcher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1151CDC82072A57D001150F7;
+			remoteInfo = Launcher;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		11453571206BBEF5008C8FC6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -83,6 +99,16 @@
 				11453574206BBEF5008C8FC6 /* SWXMLHash.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1151CDE02072A5BD001150F7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				1151CDE12072A5C5001150F7 /* Launcher.app in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		11F64C0B2050A22D005ED2E3 /* Embed Frameworks */ = {
@@ -113,6 +139,10 @@
 		11453579206BBEF5008C8FC6 /* Menu Bar Controller for Sonos copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Menu Bar Controller for Sonos copy-Info.plist"; path = "/Users/AlexSFD/Sn0wfreeze-Dev/Frameworks/github/Sonos_Volume_Control/Menu Bar Controller for Sonos copy-Info.plist"; sourceTree = "<absolute>"; };
 		11489603206AEE1E003A02C0 /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosTrackInfo.swift; sourceTree = "<group>"; };
+		1151CDD92072A57D001150F7 /* Launcher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Launcher.xcodeproj; path = Launcher/Launcher.xcodeproj; sourceTree = "<group>"; };
+		1151CDE22072A624001150F7 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		1151CDE42072A6DF001150F7 /* MenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHandler.swift; sourceTree = "<group>"; };
+		1151CDE72072AA49001150F7 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		115232CA205B1B420048E130 /* PlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
 		115BA13A20599E29004CC5C2 /* SonosDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosDevice.swift; sourceTree = "<group>"; };
 		1168D985205138E60091E784 /* SonosCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosCommand.swift; sourceTree = "<group>"; };
@@ -143,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1151CDE32072A624001150F7 /* ServiceManagement.framework in Frameworks */,
 				11F64C102050A2AE005ED2E3 /* CocoaAsyncSocket.framework in Frameworks */,
 				11F64C0E2050A2AE005ED2E3 /* Weak.framework in Frameworks */,
 				11F64C132050B1A1005ED2E3 /* SWXMLHash.framework in Frameworks */,
@@ -165,6 +196,7 @@
 		1116E9C62040C015009D940F = {
 			isa = PBXGroup;
 			children = (
+				1151CDD92072A57D001150F7 /* Launcher.xcodeproj */,
 				11CF3203205C2DA400A79D9A /* README.md */,
 				1116E9D12040C015009D940F /* Sonos_Volume_Control */,
 				1116E9D02040C015009D940F /* Products */,
@@ -187,6 +219,7 @@
 			children = (
 				1116E9D22040C015009D940F /* AppDelegate.swift */,
 				11C13475204F4DE600AC3581 /* ControlVC.swift */,
+				1151CDE42072A6DF001150F7 /* MenuHandler.swift */,
 				1168D985205138E60091E784 /* SonosCommand.swift */,
 				115BA13A20599E29004CC5C2 /* SonosDevice.swift */,
 				11F796BD2066860900E4FBE9 /* SonosGroupState.swift */,
@@ -195,6 +228,7 @@
 				1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */,
 				115232CA205B1B420048E130 /* PlayState.swift */,
 				11C67D7A2051F01C002777D4 /* EventMonitor.swift */,
+				1151CDE72072AA49001150F7 /* UserDefaultsExtension.swift */,
 				11CF320420629C6B00A79D9A /* CustomScrolllView.swift */,
 				11F796CC206903B000E4FBE9 /* CustomScrollClipView.swift */,
 				11489603206AEE1E003A02C0 /* PlayPauseButton.swift */,
@@ -218,6 +252,14 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
+		1151CDDA2072A57D001150F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1151CDDE2072A57E001150F7 /* Launcher.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		11F64BDE20509EEB005ED2E3 /* SSDP */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +278,7 @@
 		11F64BF920509F91005ED2E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1151CDE22072A624001150F7 /* ServiceManagement.framework */,
 				11F64C122050B1A0005ED2E3 /* SWXMLHash.framework */,
 				11F64C0D2050A2AE005ED2E3 /* CocoaAsyncSocket.framework */,
 				11F64C0C2050A2AE005ED2E3 /* Weak.framework */,
@@ -254,6 +297,7 @@
 				1116E9CC2040C015009D940F /* Frameworks */,
 				1116E9CD2040C015009D940F /* Resources */,
 				11F64C0B2050A22D005ED2E3 /* Embed Frameworks */,
+				1151CDE02072A5BD001150F7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -318,6 +362,12 @@
 			mainGroup = 1116E9C62040C015009D940F;
 			productRefGroup = 1116E9D02040C015009D940F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1151CDDA2072A57D001150F7 /* Products */;
+					ProjectRef = 1151CDD92072A57D001150F7 /* Launcher.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1116E9CE2040C015009D940F /* Menu Bar Controller for Sonos */,
@@ -325,6 +375,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1151CDDE2072A57E001150F7 /* Launcher.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Launcher.app;
+			remoteRef = 1151CDDD2072A57E001150F7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1116E9CD2040C015009D940F /* Resources */ = {
@@ -364,6 +424,7 @@
 				11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */,
 				11F64BE920509F08005ED2E3 /* SSDPDiscovery.swift in Sources */,
 				11F796CD206903B000E4FBE9 /* CustomScrollClipView.swift in Sources */,
+				1151CDE82072AA49001150F7 /* UserDefaultsExtension.swift in Sources */,
 				11453551206BBE3F008C8FC6 /* TestExtensions.swift in Sources */,
 				11489604206AEE1E003A02C0 /* PlayPauseButton.swift in Sources */,
 				1168D986205138E60091E784 /* SonosCommand.swift in Sources */,
@@ -371,6 +432,7 @@
 				11F64BEC20509F08005ED2E3 /* SSDPCommon.swift in Sources */,
 				11F64BEB20509F08005ED2E3 /* SSDPMSearchRequest.swift in Sources */,
 				11F64BED20509F08005ED2E3 /* SSDPDiscoverySession.swift in Sources */,
+				1151CDE52072A6DF001150F7 /* MenuHandler.swift in Sources */,
 				11C67D7B2051F01C002777D4 /* EventMonitor.swift in Sources */,
 				1151CDBD206E39FC001150F7 /* SonosTrackInfo.swift in Sources */,
 				11F64BEA20509F08005ED2E3 /* SSDPResponse.swift in Sources */,
@@ -393,6 +455,7 @@
 				1145355B206BBEF5008C8FC6 /* SSDPUPnP.swift in Sources */,
 				1145355C206BBEF5008C8FC6 /* SSDPDiscovery.swift in Sources */,
 				1145355D206BBEF5008C8FC6 /* CustomScrollClipView.swift in Sources */,
+				1151CDE92072AA49001150F7 /* UserDefaultsExtension.swift in Sources */,
 				1145355E206BBEF5008C8FC6 /* TestExtensions.swift in Sources */,
 				1145355F206BBEF5008C8FC6 /* PlayPauseButton.swift in Sources */,
 				11453560206BBEF5008C8FC6 /* SonosCommand.swift in Sources */,
@@ -400,6 +463,7 @@
 				11453562206BBEF5008C8FC6 /* SSDPCommon.swift in Sources */,
 				11453563206BBEF5008C8FC6 /* SSDPMSearchRequest.swift in Sources */,
 				11453564206BBEF5008C8FC6 /* SSDPDiscoverySession.swift in Sources */,
+				1151CDE62072A6DF001150F7 /* MenuHandler.swift in Sources */,
 				11453565206BBEF5008C8FC6 /* EventMonitor.swift in Sources */,
 				1151CDBE206E39FC001150F7 /* SonosTrackInfo.swift in Sources */,
 				11453566206BBEF5008C8FC6 /* SSDPResponse.swift in Sources */,

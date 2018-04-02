@@ -53,6 +53,7 @@ class ControlVC: NSViewController {
         if sonosSystems.count == 0 {
             errorMessageLabel.isHidden = false
         }
+        
     }
     
     override func viewWillAppear() {
@@ -288,6 +289,10 @@ class ControlVC: NSViewController {
         self.activeGroup?.getPlayState({ (state) in
             self.updatePlayButton(forState: state)
         })
+        
+        self.activeGroup?.updateCurrentTrack({ (trackInfo) in
+            self.updateTrackLabel(withTrack: trackInfo.trackText())
+        })
     }
     
     func updateStateForSpeakerMode() {
@@ -477,9 +482,18 @@ class ControlVC: NSViewController {
     
     @IBAction func showMenu(_ sender: NSView) {
         let appMenu = NSMenu()
+        if UserDefaults.standard.isLaunchAtLoginEnabled {
+            appMenu.addItem(withTitle: NSLocalizedString("Stop launching App on startup", comment: ""), action: #selector(launchAppOnLogin), keyEquivalent: "")
+        }else {
+            appMenu.addItem(withTitle: NSLocalizedString("Launch App on startup", comment: ""), action: #selector(launchAppOnLogin), keyEquivalent: "")
+        }
+        
+        appMenu.addItem(withTitle: NSLocalizedString("Write a review", comment: ""), action: #selector(writeAReview), keyEquivalent: "")
         appMenu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
+        appMenu.addItem(NSMenuItem.separator())
         appMenu.addItem(withTitle: "Show Imprint", action: #selector(openImprint), keyEquivalent: "")
         appMenu.addItem(withTitle: "Software licenses", action: #selector(openLicenses), keyEquivalent: "")
+        appMenu.addItem(NSMenuItem.separator())
         appMenu.addItem(withTitle: "Quit", action: #selector(quitApp), keyEquivalent: "")
         
         
@@ -487,21 +501,7 @@ class ControlVC: NSViewController {
         appMenu.popUp(positioning: nil, at: p, in: sender.superview)
     }
     
-    @objc func quitApp() {
-        NSApp.terminate(self)
-    }
-    
-    @objc func openImprint() {
-        NSWorkspace.shared.open(URL(string:"http://sn0wfreeze.de/?p=522")!)
-    }
-    
-    @objc func openLicenses() {
-        NSWorkspace.shared.open(URL(string:"http://sn0wfreeze.de/?p=525")!)
-    }
-    
-    @objc func sendFeedback() {
-        NSWorkspace.shared.open(URL(string:"mailto:sonos-controller@sn0wfreeze.de")!)
-    }
+
     
 }
 
