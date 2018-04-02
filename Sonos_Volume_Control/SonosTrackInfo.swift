@@ -13,6 +13,7 @@ struct SonosTrackInfo {
     let title: String
     let album: String
     let artist: String
+    let streamContent: String?
     var playMedium: String?
     
     public private(set) var containsErrors = false
@@ -21,6 +22,7 @@ struct SonosTrackInfo {
         title = xml["dc:title"].element?.text ?? "Unknown Title"
         album = xml["upnp:album"].element?.text ?? "Unknown Album"
         artist = xml["dc:creator"].element?.text ?? "Unkown Artist"
+        streamContent = xml["r:streamContent"].element?.text
         
         if title == "Unknown Title" || album == "Unknown Album" || artist == "Unkown Artist" {
             containsErrors = true
@@ -28,10 +30,14 @@ struct SonosTrackInfo {
     }
     
     func trackText() -> String {
+        if containsErrors,
+            let streamContent = self.streamContent {
+            return streamContent
+        }
         return "\(title) - \(artist)"
     }
     
     var description: String {
-        return "\(title) - \(artist) - \(album)"
+        return "\(title) - \(artist) - \(album) - \(streamContent ?? "No stream content")"
     }
 }

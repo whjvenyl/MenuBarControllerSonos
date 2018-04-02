@@ -45,6 +45,9 @@ class SonosController: Equatable, Hashable {
     
     var delegate: SonosControllerDelegate?
     
+    /// A timer which waits a short time before the volume will be updated
+    var volumeTimer: Timer?
+    
     var readableName:String {
         return "\(roomName) - \(deviceName)"
     }
@@ -105,15 +108,21 @@ class SonosController: Equatable, Hashable {
         }else if updateVolume > 100 {
             updateVolume = 100
         }
+        
+        self.currentVolume = updateVolume
+//        self.volumeTimer?.invalidate()
+//        self.volumeTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false, block: self.setVolume(fromTimer:))
+        self.setVolume(fromTimer: nil)
+    }
     
+    fileprivate func setVolume(fromTimer timer: Timer?) {
         let command = SonosCommand(endpoint: .rendering_endpoint, action: .setVolume, service: .rendering_service)
         command.put(key: "InstanceID", value: "0")
         command.put(key: "Channel", value: "Master")
-        command.put(key: "DesiredVolume", value: String(updateVolume))
+        command.put(key: "DesiredVolume", value: String(self.currentVolume))
         command.execute(sonos: self)
-        self.currentVolume = updateVolume
         
-        if self.muted && volume > 0 {
+        if self.muted && self.currentVolume > 0 {
             //Unmute speaker
             self.setMute(muted: false)
         }

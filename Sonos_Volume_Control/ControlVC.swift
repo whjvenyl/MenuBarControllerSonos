@@ -89,16 +89,16 @@ class ControlVC: NSViewController {
     
     func showDemo() {
         self.stopDiscovery()
-        let t1 = SonosController(roomName: "Bedroom", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1")
+        let t1 = SonosController(roomName: "Bedroom_3", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1")
         t1.playState = .playing
-        t1.deviceInfo = SonosDeviceInfo(zoneName: "Bedroom", localUID: "01")
+        t1.deviceInfo = SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "01")
         t1.groupState = SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"])
         self.addDeviceToList(sonos: t1)
         self.updateGroups(sonos: t1)
         
-        let t2 = SonosController(roomName: "Bedroom", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.92")!, ip: "192.168.178.92", udn: "some-udn-2")
+        let t2 = SonosController(roomName: "Bedroom_1", deviceName: "One", url: URL(string:"http://192.168.178.92")!, ip: "192.168.178.92", udn: "some-udn-2")
         t2.playState = .playing
-        t2.deviceInfo = SonosDeviceInfo(zoneName: "Bedroom", localUID: "02")
+        t2.deviceInfo = SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "02")
         t2.groupState = SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"])
         self.addDeviceToList(sonos: t2)
         self.updateGroups(sonos: t2)
@@ -110,7 +110,16 @@ class ControlVC: NSViewController {
         self.addDeviceToList(sonos: t3)
         self.updateGroups(sonos: t3)
         
+        let t4 = SonosController(roomName: "Living room", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.94")!, ip: "192.168.178.94", udn: "some-udn-4")
+        t4.playState = .paused
+        t4.deviceInfo = SonosDeviceInfo(zoneName: "Living room", localUID: "04")
+        t4.groupState = SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"])
+        self.addDeviceToList(sonos: t4)
+        self.updateGroups(sonos: t4)
+        
         self.controlsView.isHidden = false
+        
+        self.currentTrackLabel.stringValue = "Current Track - Artist"
     }
     
     //MARK: - Updating Sonos Players
@@ -154,6 +163,7 @@ class ControlVC: NSViewController {
         for sonos in sonosSystems {
             let button = NSButton(checkboxWithTitle: sonos.readableName, target: sonos, action: #selector(SonosController.activateDeactivate(button:)))
             button.state = sonos.active ? .on : .off
+            button.font = NSFont.systemFont(ofSize: 12.5)
             self.sonosStack.addArrangedSubview(button)
             self.speakerButtons[sonos] = button
         }

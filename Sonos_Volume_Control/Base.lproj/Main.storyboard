@@ -688,7 +688,7 @@
             <objects>
                 <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="ControlVC" customModule="DemoTestTarget" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Nqb-gx-wcn">
-                        <rect key="frame" x="0.0" y="0.0" width="210" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="218" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03R-pu-8p0">
@@ -700,7 +700,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V79-m7-Tey">
-                                <rect key="frame" x="89" y="25" width="103" height="17"/>
+                                <rect key="frame" x="97" y="25" width="103" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="No Sonos found" id="CHc-IY-xoI">
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -708,10 +708,10 @@
                                 </textFieldCell>
                             </textField>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euI-Bt-dbz">
-                                <rect key="frame" x="8" y="25" width="198" height="24"/>
+                                <rect key="frame" x="8" y="25" width="206" height="24"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5" customClass="PlayPauseButton" customModule="DemoTestTarget" customModuleProvider="target">
-                                        <rect key="frame" x="87" y="-2" width="24" height="24"/>
+                                        <rect key="frame" x="91" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="5cq-Fn-c7h"/>
                                             <constraint firstAttribute="width" constant="24" id="IRh-8q-zCk"/>
@@ -726,7 +726,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aUg-Gc-k5u">
-                                        <rect key="frame" x="132" y="-2" width="24" height="24"/>
+                                        <rect key="frame" x="136" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="vEO-vv-8KR"/>
                                             <constraint firstAttribute="height" constant="21" id="z0D-om-227"/>
@@ -741,7 +741,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kdr-P3-YGY">
-                                        <rect key="frame" x="42" y="-2" width="24" height="24"/>
+                                        <rect key="frame" x="46" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="2lF-eN-O5w"/>
                                             <constraint firstAttribute="width" constant="24" id="CmW-BF-0vV"/>
@@ -767,9 +767,9 @@
                                 </constraints>
                             </customView>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="540-Ck-pnu" customClass="CustomScrolllView" customModule="DemoTestTarget" customModuleProvider="target">
-                                <rect key="frame" x="8" y="78" width="198" height="88"/>
+                                <rect key="frame" x="8" y="78" width="206" height="88"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hjZ-YT-IUj" customClass="CustomScrollClipView" customModule="DemoTestTarget" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="198" height="88"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="206" height="88"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="Ub7-dU-bHm">
@@ -790,18 +790,21 @@
                                         <constraint firstItem="Ub7-dU-bHm" firstAttribute="top" secondItem="hjZ-YT-IUj" secondAttribute="top" constant="99" id="tmS-c6-xDp"/>
                                     </constraints>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="BPG-PD-VrG"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="82C-y0-YTB">
                                     <rect key="frame" x="-100" y="-100" width="170" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="5cu-DK-cBN">
-                                    <rect key="frame" x="182" y="0.0" width="16" height="88"/>
+                                    <rect key="frame" x="190" y="0.0" width="16" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <accessibility description="Scroll Area with speakers or groups" help="The Scroll Area contains all your speakers with check boxes or all your groups with radio buttons"/>
                             </scrollView>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G4u-lf-saW">
-                                <rect key="frame" x="30" y="2" width="151" height="19"/>
+                                <rect key="frame" x="30" y="2" width="159" height="19"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="BNO-bg-Prd"/>
                                 <accessibility description="Volume slider"/>
                                 <connections>
@@ -809,7 +812,7 @@
                                 </connections>
                             </slider>
                             <segmentedControl verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0BW-ZK-BjM">
-                                <rect key="frame" x="34" y="172" width="143" height="21"/>
+                                <rect key="frame" x="38" y="172" width="143" height="21"/>
                                 <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="B1G-5z-Li2">
                                     <font key="font" metaFont="smallSystem"/>
                                     <segments>
@@ -832,7 +835,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_volume_up" id="hvp-k1-Nr5"/>
                             </imageView>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="LXT-xb-3K8">
-                                <rect key="frame" x="191" y="3" width="15" height="18"/>
+                                <rect key="frame" x="199" y="3" width="15" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="9AP-Zb-2ye"/>
                                     <constraint firstAttribute="height" constant="18" id="iD6-XM-cCp"/>
@@ -845,12 +848,16 @@
                                     <action selector="showMenu:" target="UOE-Qu-9Vt" id="A59-1p-K7h"/>
                                 </connections>
                             </button>
-                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="GcA-95-OLA">
-                                <rect key="frame" x="4" y="72" width="202" height="5"/>
-                            </box>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ded-pl-ylz">
+                                <rect key="frame" x="4" y="74" width="210" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="G73-in-EBT"/>
+                                    <constraint firstAttribute="width" constant="210" id="sfD-YD-Ib3"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="horizontal_line" id="K09-cg-QY7"/>
+                            </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="GcA-95-OLA" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="4" id="08Q-FJ-Le7"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="trailing" secondItem="LXT-xb-3K8" secondAttribute="trailing" id="0cA-PD-fCv"/>
                             <constraint firstItem="0BW-ZK-BjM" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="BvF-hw-EZe"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="leading" secondItem="JEn-om-eYu" secondAttribute="leading" id="FAZ-Am-F4l"/>
@@ -860,12 +867,13 @@
                             <constraint firstItem="LXT-xb-3K8" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="trailing" constant="12" id="KMP-Cy-fP4"/>
                             <constraint firstItem="03R-pu-8p0" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="O4K-nD-OCN"/>
                             <constraint firstAttribute="trailing" secondItem="540-Ck-pnu" secondAttribute="trailing" constant="4" id="Ovz-AQ-IR1"/>
-                            <constraint firstItem="03R-pu-8p0" firstAttribute="top" secondItem="GcA-95-OLA" secondAttribute="bottom" constant="4" id="Yit-pk-L94"/>
+                            <constraint firstItem="03R-pu-8p0" firstAttribute="top" secondItem="Ded-pl-ylz" secondAttribute="bottom" constant="4" id="Twg-oA-Ldl"/>
+                            <constraint firstAttribute="trailing" secondItem="Ded-pl-ylz" secondAttribute="trailing" constant="4" id="V4J-GZ-Jgm"/>
                             <constraint firstAttribute="trailing" secondItem="V79-m7-Tey" secondAttribute="trailing" constant="20" id="an4-kd-nvP"/>
                             <constraint firstItem="540-Ck-pnu" firstAttribute="top" secondItem="0BW-ZK-BjM" secondAttribute="bottom" constant="8" id="bnz-Ll-jZO"/>
                             <constraint firstItem="540-Ck-pnu" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="faH-L5-rGc"/>
                             <constraint firstItem="G4u-lf-saW" firstAttribute="top" secondItem="V79-m7-Tey" secondAttribute="bottom" constant="6" id="lww-RE-uow"/>
-                            <constraint firstAttribute="trailing" secondItem="GcA-95-OLA" secondAttribute="trailing" constant="4" id="pK3-IY-UPH"/>
+                            <constraint firstItem="Ded-pl-ylz" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="4" id="mgW-Y5-ybO"/>
                             <constraint firstAttribute="trailing" secondItem="LXT-xb-3K8" secondAttribute="trailing" constant="4" id="q31-RH-hX3"/>
                             <constraint firstItem="G4u-lf-saW" firstAttribute="leading" secondItem="JEn-om-eYu" secondAttribute="trailing" constant="4" id="sE4-be-G40"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="top" secondItem="03R-pu-8p0" secondAttribute="bottom" constant="4" id="sKr-f1-u4u"/>
@@ -894,6 +902,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="horizontal_line" width="220" height="1"/>
         <image name="ic_pause" width="24" height="24"/>
         <image name="ic_settings" width="15" height="15"/>
         <image name="ic_skip_next" width="24" height="24"/>
