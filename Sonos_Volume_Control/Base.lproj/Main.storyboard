@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
@@ -677,30 +677,30 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="DemoTestTarget" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Volume ControlVC-->
+        <!--ControlVC-->
         <scene sceneID="94k-eK-MxV">
             <objects>
-                <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="VolumeControlVC" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VolumeControlVC" id="UOE-Qu-9Vt" customClass="ControlVC" customModule="DemoTestTarget" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Nqb-gx-wcn">
-                        <rect key="frame" x="0.0" y="0.0" width="210" height="180"/>
+                        <rect key="frame" x="0.0" y="0.0" width="218" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zTj-kC-HZv">
-                                <rect key="frame" x="6" y="155" width="186" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select Sonos to control" id="zoy-Fv-o7x">
-                                    <font key="font" metaFont="systemMedium" size="13"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03R-pu-8p0">
+                                <rect key="frame" x="6" y="53" width="146" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="Select Sonos to control" usesSingleLineMode="YES" id="9Va-bp-bbK">
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V79-m7-Tey">
-                                <rect key="frame" x="6" y="25" width="186" height="17"/>
+                                <rect key="frame" x="97" y="25" width="103" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="No Sonos found" id="CHc-IY-xoI">
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -708,10 +708,10 @@
                                 </textFieldCell>
                             </textField>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euI-Bt-dbz">
-                                <rect key="frame" x="8" y="25" width="171" height="24"/>
+                                <rect key="frame" x="8" y="25" width="206" height="24"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5">
-                                        <rect key="frame" x="74" y="-2" width="24" height="24"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-82-ql5" customClass="PlayPauseButton" customModule="DemoTestTarget" customModuleProvider="target">
+                                        <rect key="frame" x="91" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="5cq-Fn-c7h"/>
                                             <constraint firstAttribute="width" constant="24" id="IRh-8q-zCk"/>
@@ -720,12 +720,13 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <accessibility description="Pause"/>
                                         <connections>
                                             <action selector="playPause:" target="UOE-Qu-9Vt" id="9L3-0T-4fk"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aUg-Gc-k5u">
-                                        <rect key="frame" x="119" y="-2" width="24" height="24"/>
+                                        <rect key="frame" x="136" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="vEO-vv-8KR"/>
                                             <constraint firstAttribute="height" constant="21" id="z0D-om-227"/>
@@ -734,12 +735,13 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <accessibility description="Next song"/>
                                         <connections>
                                             <action selector="nextTrack:" target="UOE-Qu-9Vt" id="BHm-CG-1o6"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kdr-P3-YGY">
-                                        <rect key="frame" x="29" y="-2" width="24" height="24"/>
+                                        <rect key="frame" x="46" y="-2" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="2lF-eN-O5w"/>
                                             <constraint firstAttribute="width" constant="24" id="CmW-BF-0vV"/>
@@ -748,6 +750,7 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <accessibility description="Previous song"/>
                                         <connections>
                                             <action selector="prevTrack:" target="UOE-Qu-9Vt" id="ohV-BB-KS0"/>
                                         </connections>
@@ -763,27 +766,14 @@
                                     <constraint firstAttribute="height" constant="24" id="tcz-LD-liR"/>
                                 </constraints>
                             </customView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o0R-YJ-mAi">
-                                <rect key="frame" x="191" y="4" width="15" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="15" id="0Ks-2D-AyY"/>
-                                    <constraint firstAttribute="height" constant="15" id="KKD-YJ-JNO"/>
-                                </constraints>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="ic_settings" imagePosition="only" alignment="center" state="on" inset="2" id="7fP-Ak-t63">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="showMenu:" target="UOE-Qu-9Vt" id="eHJ-cs-1ek"/>
-                                </connections>
-                            </button>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="540-Ck-pnu" customClass="CustomScrolllView" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
-                                <rect key="frame" x="8" y="52" width="198" height="99"/>
-                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hjZ-YT-IUj" customClass="CustomScrollClipView" customModule="Menu_Bar_Controller_for_Sonos" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="198" height="99"/>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="540-Ck-pnu" customClass="CustomScrolllView" customModule="DemoTestTarget" customModuleProvider="target">
+                                <rect key="frame" x="8" y="78" width="206" height="88"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hjZ-YT-IUj" customClass="CustomScrollClipView" customModule="DemoTestTarget" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="206" height="88"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="Ub7-dU-bHm">
+                                            <rect key="frame" x="0.0" y="-11" width="0.0" height="0.0"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n4a-Gx-V86"/>
                                             </subviews>
@@ -800,50 +790,109 @@
                                         <constraint firstItem="Ub7-dU-bHm" firstAttribute="top" secondItem="hjZ-YT-IUj" secondAttribute="top" constant="99" id="tmS-c6-xDp"/>
                                     </constraints>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="BPG-PD-VrG"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="82C-y0-YTB">
                                     <rect key="frame" x="-100" y="-100" width="170" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="5cu-DK-cBN">
-                                    <rect key="frame" x="182" y="0.0" width="16" height="99"/>
+                                    <rect key="frame" x="190" y="0.0" width="16" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
+                                <accessibility description="Scroll Area with speakers or groups" help="The Scroll Area contains all your speakers with check boxes or all your groups with radio buttons"/>
                             </scrollView>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G4u-lf-saW">
-                                <rect key="frame" x="6" y="2" width="175" height="19"/>
+                                <rect key="frame" x="30" y="2" width="159" height="19"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="BNO-bg-Prd"/>
+                                <accessibility description="Volume slider"/>
                                 <connections>
                                     <action selector="setVolume:" target="UOE-Qu-9Vt" id="mLM-g8-p8d"/>
                                 </connections>
                             </slider>
+                            <segmentedControl verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0BW-ZK-BjM">
+                                <rect key="frame" x="38" y="172" width="143" height="21"/>
+                                <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="B1G-5z-Li2">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <segments>
+                                        <segment label="Speakers" width="68" selected="YES"/>
+                                        <segment label="Groups" toolTip="Select this to control your Sonos groups" width="68" tag="1"/>
+                                    </segments>
+                                    <accessibility description="Select &quot;Speakers&quot; to control individual speakers. Select &quot;Groups&quot; to control groups of speakers"/>
+                                </segmentedCell>
+                                <accessibility description="Speakers or group selector" help="Select &quot;Speakers&quot; to control individual speakers. Select &quot;Groups&quot; to control groups of speakers"/>
+                                <connections>
+                                    <action selector="switchSpeakerGroups:" target="UOE-Qu-9Vt" id="2om-eE-AzZ"/>
+                                </connections>
+                            </segmentedControl>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JEn-om-eYu">
+                                <rect key="frame" x="8" y="2" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="trB-2C-gC0"/>
+                                    <constraint firstAttribute="width" constant="20" id="wJ5-aM-iwl"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_volume_up" id="hvp-k1-Nr5"/>
+                            </imageView>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="LXT-xb-3K8">
+                                <rect key="frame" x="199" y="3" width="15" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="9AP-Zb-2ye"/>
+                                    <constraint firstAttribute="height" constant="18" id="iD6-XM-cCp"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_settings" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="7M9-iX-wML">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showMenu:" target="UOE-Qu-9Vt" id="A59-1p-K7h"/>
+                                </connections>
+                            </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ded-pl-ylz">
+                                <rect key="frame" x="4" y="74" width="210" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="G73-in-EBT"/>
+                                    <constraint firstAttribute="width" constant="210" id="sfD-YD-Ib3"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="horizontal_line" id="K09-cg-QY7"/>
+                            </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="zTj-kC-HZv" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="leading" id="8yL-gx-3gE"/>
-                            <constraint firstItem="euI-Bt-dbz" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="EW2-Qh-7lS"/>
-                            <constraint firstItem="G4u-lf-saW" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="KwY-FC-pJJ"/>
-                            <constraint firstAttribute="trailing" secondItem="o0R-YJ-mAi" secondAttribute="trailing" constant="4" id="S2k-iZ-mZn"/>
-                            <constraint firstItem="euI-Bt-dbz" firstAttribute="trailing" secondItem="G4u-lf-saW" secondAttribute="trailing" id="Usq-ll-FvD"/>
-                            <constraint firstItem="540-Ck-pnu" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="W5w-Tq-bp9"/>
-                            <constraint firstAttribute="bottom" secondItem="o0R-YJ-mAi" secondAttribute="bottom" constant="4" id="Zzl-vz-OvL"/>
+                            <constraint firstItem="euI-Bt-dbz" firstAttribute="trailing" secondItem="LXT-xb-3K8" secondAttribute="trailing" id="0cA-PD-fCv"/>
+                            <constraint firstItem="0BW-ZK-BjM" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="BvF-hw-EZe"/>
+                            <constraint firstItem="euI-Bt-dbz" firstAttribute="leading" secondItem="JEn-om-eYu" secondAttribute="leading" id="FAZ-Am-F4l"/>
+                            <constraint firstItem="0BW-ZK-BjM" firstAttribute="centerX" secondItem="Nqb-gx-wcn" secondAttribute="centerX" id="H42-K7-RsS"/>
+                            <constraint firstItem="JEn-om-eYu" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="IyV-S9-5ug"/>
+                            <constraint firstItem="03R-pu-8p0" firstAttribute="top" secondItem="540-Ck-pnu" secondAttribute="bottom" constant="8" id="JKr-im-D2p"/>
+                            <constraint firstItem="LXT-xb-3K8" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="trailing" constant="12" id="KMP-Cy-fP4"/>
+                            <constraint firstItem="03R-pu-8p0" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="O4K-nD-OCN"/>
+                            <constraint firstAttribute="trailing" secondItem="540-Ck-pnu" secondAttribute="trailing" constant="4" id="Ovz-AQ-IR1"/>
+                            <constraint firstItem="03R-pu-8p0" firstAttribute="top" secondItem="Ded-pl-ylz" secondAttribute="bottom" constant="4" id="Twg-oA-Ldl"/>
+                            <constraint firstAttribute="trailing" secondItem="Ded-pl-ylz" secondAttribute="trailing" constant="4" id="V4J-GZ-Jgm"/>
                             <constraint firstAttribute="trailing" secondItem="V79-m7-Tey" secondAttribute="trailing" constant="20" id="an4-kd-nvP"/>
-                            <constraint firstItem="V79-m7-Tey" firstAttribute="leading" secondItem="zTj-kC-HZv" secondAttribute="leading" id="dQw-kM-1v8"/>
-                            <constraint firstAttribute="trailing" secondItem="zTj-kC-HZv" secondAttribute="trailing" constant="20" id="hiy-MS-qaJ"/>
-                            <constraint firstItem="o0R-YJ-mAi" firstAttribute="leading" secondItem="G4u-lf-saW" secondAttribute="trailing" constant="12" id="kG6-Qx-KXS"/>
+                            <constraint firstItem="540-Ck-pnu" firstAttribute="top" secondItem="0BW-ZK-BjM" secondAttribute="bottom" constant="8" id="bnz-Ll-jZO"/>
+                            <constraint firstItem="540-Ck-pnu" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="8" id="faH-L5-rGc"/>
                             <constraint firstItem="G4u-lf-saW" firstAttribute="top" secondItem="V79-m7-Tey" secondAttribute="bottom" constant="6" id="lww-RE-uow"/>
-                            <constraint firstItem="540-Ck-pnu" firstAttribute="top" secondItem="zTj-kC-HZv" secondAttribute="bottom" constant="4" id="oct-gb-bRe"/>
-                            <constraint firstItem="zTj-kC-HZv" firstAttribute="top" secondItem="Nqb-gx-wcn" secondAttribute="top" constant="8" id="rME-8y-fml"/>
+                            <constraint firstItem="Ded-pl-ylz" firstAttribute="leading" secondItem="Nqb-gx-wcn" secondAttribute="leading" constant="4" id="mgW-Y5-ybO"/>
+                            <constraint firstAttribute="trailing" secondItem="LXT-xb-3K8" secondAttribute="trailing" constant="4" id="q31-RH-hX3"/>
+                            <constraint firstItem="G4u-lf-saW" firstAttribute="leading" secondItem="JEn-om-eYu" secondAttribute="trailing" constant="4" id="sE4-be-G40"/>
+                            <constraint firstItem="euI-Bt-dbz" firstAttribute="top" secondItem="03R-pu-8p0" secondAttribute="bottom" constant="4" id="sKr-f1-u4u"/>
                             <constraint firstAttribute="trailing" secondItem="540-Ck-pnu" secondAttribute="trailing" constant="4" id="u25-ov-y83"/>
                             <constraint firstItem="euI-Bt-dbz" firstAttribute="bottom" secondItem="V79-m7-Tey" secondAttribute="bottom" id="uoH-cO-g95"/>
+                            <constraint firstItem="LXT-xb-3K8" firstAttribute="centerY" secondItem="G4u-lf-saW" secondAttribute="centerY" id="vnf-XK-hzl"/>
                             <constraint firstAttribute="bottom" secondItem="G4u-lf-saW" secondAttribute="bottom" constant="4" id="wOi-DR-5Nw"/>
-                            <constraint firstItem="Kdr-P3-YGY" firstAttribute="top" secondItem="540-Ck-pnu" secondAttribute="bottom" constant="6" id="zNj-kv-kUD"/>
+                            <constraint firstItem="JEn-om-eYu" firstAttribute="centerY" secondItem="G4u-lf-saW" secondAttribute="centerY" id="xVz-lr-cfU"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="controlsView" destination="euI-Bt-dbz" id="XvB-Xr-Tqk"/>
+                        <outlet property="currentTrackLabel" destination="03R-pu-8p0" id="wDC-hB-DOB"/>
                         <outlet property="errorMessageLabel" destination="V79-m7-Tey" id="NVk-fz-QO8"/>
-                        <outlet property="pauseButton" destination="KtY-82-ql5" id="mQH-iA-1XV"/>
+                        <outlet property="pauseButton" destination="KtY-82-ql5" id="8Pc-cp-dE8"/>
                         <outlet property="sonosScrollContainer" destination="540-Ck-pnu" id="o1N-tF-7ob"/>
                         <outlet property="sonosStack" destination="n4a-Gx-V86" id="TgX-MU-ta8"/>
+                        <outlet property="speakerGroupSelector" destination="0BW-ZK-BjM" id="vC3-GF-6sm"/>
+                        <outlet property="trackLabelLeading" destination="O4K-nD-OCN" id="MGL-lN-bqS"/>
                         <outlet property="volumeSlider" destination="G4u-lf-saW" id="1Bf-aR-hRO"/>
                     </connections>
                 </viewController>
@@ -853,9 +902,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_pause" width="48" height="48"/>
+        <image name="horizontal_line" width="220" height="1"/>
+        <image name="ic_pause" width="24" height="24"/>
         <image name="ic_settings" width="15" height="15"/>
-        <image name="ic_skip_next" width="48" height="48"/>
-        <image name="ic_skip_previous" width="48" height="48"/>
+        <image name="ic_skip_next" width="24" height="24"/>
+        <image name="ic_skip_previous" width="24" height="24"/>
+        <image name="ic_volume_up" width="24" height="24"/>
     </resources>
 </document>

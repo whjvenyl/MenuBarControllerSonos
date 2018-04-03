@@ -70,11 +70,12 @@ class SonosCommand {
             if let error = error {
                 print("An error occurred ", error)
             }
-            completion?(data)
+            
             if let data = data {
                 print(String.init(data:data, encoding: .utf8) ?? "No response")
             }
             
+            completion?(data)
         }.resume()
     }
     
@@ -96,12 +97,14 @@ enum SonosEndpoint:String {
     case rendering_endpoint = "/MediaRenderer/RenderingControl/Control"
     case transport_endpoint = "/MediaRenderer/AVTransport/Control"
     case zone_group_endpoint = "/ZoneGroupTopology/Control"
+    case content_directory_endpoint = "/MediaServer/ContentDirectory/Control"
 }
 
 enum SononsService:String {
     case rendering_service = "urn:schemas-upnp-org:service:RenderingControl:1"
     case transport_service = "urn:schemas-upnp-org:service:AVTransport:1"
     case zone_group_service = "urn:upnp-org:serviceId:ZoneGroupTopology"
+    case content_directory_service = "urn:schemas-upnp-org:service:ContentDirectory:1"
 }
 
 enum SonosActions: String {
@@ -115,6 +118,9 @@ enum SonosActions: String {
     case getZoneAttributes = "GetZoneGroupAttributes"
     case setMute = "SetMute"
     case getMute = "GetMute"
+    case browse = "Browse"
+    case get_position_info = "GetPositionInfo"
+    case get_media_info = "GetMediaInfo"
 }
 
 

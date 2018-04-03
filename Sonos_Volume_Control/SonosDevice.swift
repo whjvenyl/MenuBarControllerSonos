@@ -45,6 +45,9 @@ class SonosController: Equatable, Hashable {
     
     var delegate: SonosControllerDelegate?
     
+    /// A timer which waits a short time before the volume will be updated
+    var volumeTimer: Timer?
+    
     var readableName:String {
         return "\(roomName) - \(deviceName)"
     }
@@ -78,7 +81,7 @@ class SonosController: Equatable, Hashable {
     //MARK: - General Info
     
     var isGroupCoordinator: Bool {
-        return self.groupState?.groupID == self.deviceInfo?.localUID
+        return self.groupState?.deviceIds.first == self.deviceInfo?.localUID
     }
     
     var isSpeaker: Bool {
@@ -98,14 +101,28 @@ class SonosController: Equatable, Hashable {
      - volume: between 0 and 100
      */
     func setVolume(volume: Int){
+        var updateVolume = volume
+        
+        if updateVolume < 0 {
+            updateVolume = 0
+        }else if updateVolume > 100 {
+            updateVolume = 100
+        }
+        
+        self.currentVolume = updateVolume
+//        self.volumeTimer?.invalidate()
+//        self.volumeTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false, block: self.setVolume(fromTimer:))
+        self.setVolume(fromTimer: nil)
+    }
+    
+    fileprivate func setVolume(fromTimer timer: Timer?) {
         let command = SonosCommand(endpoint: .rendering_endpoint, action: .setVolume, service: .rendering_service)
         command.put(key: "InstanceID", value: "0")
         command.put(key: "Channel", value: "Master")
-        command.put(key: "DesiredVolume", value: String(volume))
+        command.put(key: "DesiredVolume", value: String(self.currentVolume))
         command.execute(sonos: self)
-        self.currentVolume = volume
         
-        if self.muted && volume > 0 {
+        if self.muted && self.currentVolume > 0 {
             //Unmute speaker
             self.setMute(muted: false)
         }
@@ -196,14 +213,14 @@ class SonosController: Equatable, Hashable {
         //      Update the speakers state
         self.updateCurrentVolume()
         self.getPlayState()
-        
+        self.updateCurrentTrack()
         
         //      Get the device info and update the group state
         SonosCommand.downloadSpeakerInfo(sonos: self) { (data) in
             guard let xml = self.parseXml(data: data) else {return}
             self.deviceInfo = SonosDeviceInfo(xml: xml)
             self.updateZoneGroupState({
-                completion()
+                DispatchQueue.main.async {completion()}
             })
         }
     }
@@ -276,6 +293,43 @@ class SonosController: Equatable, Hashable {
             }
         }
     }
+    
+    /**
+     Update the current track and return it in the completion handler
+     
+     - Parameters:
+     - completion: Callback contains TrackInfo
+     */
+    func updateCurrentTrack(_ completion: ((_ trackInfo: SonosTrackInfo)->Void)?=nil) {
+        let command = SonosCommand(endpoint: .transport_endpoint, action: .get_position_info, service: .transport_service)
+        command.put(key:"InstanceID",value: "0")
+        command.put(key:"Channel",value: "Master")
+        command.execute(sonos: self) { (data) in
+            guard let xml = self.parseXml(data: data),
+            let metaDataText = xml["s:Envelope"]["s:Body"]["u:GetPositionInfoResponse"]["TrackMetaData"].element?.text,
+            metaDataText != "NOT_IMPLEMENTED" else {return}
+            let metadataXML = SWXMLHash.parse(metaDataText)
+            let trackInfo = SonosTrackInfo(xml: metadataXML["DIDL-Lite"]["item"])
+            
+            DispatchQueue.main.async {
+                completion?(trackInfo)
+            }
+        }
+        
+    }
+    
+//    func getQueue(start: Int, count: Int) {
+//        let command = SonosCommand(endpoint: .content_directory_endpoint, action: .browse, service: .content_directory_service)
+//        command.put(key:"ObjectID",value: "Q:0")
+//        command.put(key:"BrowseFlag",value: "BrowseDirectChildren")
+//        command.put(key:"Filter",value: "dc:title,res,dc:creator,upnp:artist,upnp:album,upnp:albumArtURI")
+//        command.put(key:"StartingIndex",value: String(start))
+//        command.put(key:"RequestedCount",value: String(count))
+//        command.put(key:"SortCriteria",value: "")
+//        command.execute(sonos: self) { (data) in
+//            guard let xml = self.parseXml(data: data) else {return}
+//        }
+//    }
     
     func parseXml(data: Data?) -> XMLIndexer? {
         guard let data = data else {return nil}
