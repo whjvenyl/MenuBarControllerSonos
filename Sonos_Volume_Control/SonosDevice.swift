@@ -17,39 +17,47 @@ class SonosController: Equatable, Hashable {
     //   MARK:  Properties
     
     /// Name of the room
-    var roomName: String
+    public private(set) var roomName: String
     /// Name of the device
-    var deviceName: String
+    public private(set) var deviceName: String
     /// URL where to find it
-    var url: URL
+    public private(set) var url: URL
     /// IP address of the device
-    var ip: String
+    public private(set) var ip: String
     /// Port to address the speaker
-    var port: Int = 1400
+    public private(set) var port: Int = 1400
     /// UDN contains an id
-    var udn:String
+    public private(set) var udn:String
     /// The type description of the device
-    var lastDiscoveryDate: Date = Date()
-    var deviceType: String
-    var descriptionXML: XMLIndexer?
-    var active: Bool = true
-    var currentVolume = 0
-    var playState = PlayState.notSet
-    var muted = false
+    public var lastDiscoveryDate: Date = Date()
+    /// Device Type string
+    public private(set) var deviceType: String
+    /// The description of the speaker stored as XML
+    public private(set) var descriptionXML: XMLIndexer?
+    /// If true the box is an active (controllable) speaker
+    public var active: Bool = true
+    /// The speakers current colume
+    public private(set) var currentVolume = 0
+    /// State if the device is playing or not
+    public private(set) var playState = PlayState.notSet
+    /// If true the speaker is muted
+    public private(set) var muted = false
+    /// Track info of the currently playing song / radio
     public private(set) var trackInfo: SonosTrackInfo?
     
     /// The speakers current group state
-    var groupState: SonosGroupState?
+    public private(set) var groupState: SonosGroupState?
     
     /// Speakers device info
-    var deviceInfo: SonosDeviceInfo?
+    public private(set) var deviceInfo: SonosDeviceInfo?
     
-    var delegate: SonosControllerDelegate?
+    public var delegate: SonosControllerDelegate?
     
     /// A timer which waits a short time before the volume will be updated
-    var volumeTimer: Timer?
+    private var volumeTimer: Timer?
     
-    var readableName:String {
+    /// String shown in the UI
+    public var readableName:String {
         return "\(roomName) - \(deviceName)"
     }
     

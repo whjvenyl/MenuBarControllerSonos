@@ -9,9 +9,9 @@
 import Foundation
 import SWXMLHash
 
-struct SonosDeviceInfo {
-    let zoneName: String
-    let localUID: String
+public struct SonosDeviceInfo {
+    public let zoneName: String
+    public let localUID: String
     
     init?(xml: XMLIndexer) {
         let zpInfo = xml["ZPSupportInfo"]["ZPInfo"]

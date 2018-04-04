@@ -9,10 +9,10 @@
 import Cocoa
 import SWXMLHash
 
-struct SonosGroupState {
-    let name: String
-    let groupID: String
-    let deviceIds: [String]
+public struct SonosGroupState {
+    public let name: String
+    public let groupID: String
+    public let deviceIds: [String]
     
     init?(xml: XMLIndexer) {
         let attributes = xml["s:Envelope"]["s:Body"]["u:GetZoneGroupAttributesResponse"]
