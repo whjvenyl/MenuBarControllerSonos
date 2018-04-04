@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1115C40F20751C57009494A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1115C40D20751C57009494A5 /* Localizable.strings */; };
 		1116E9D32040C015009D940F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116E9D22040C015009D940F /* AppDelegate.swift */; };
 		1116E9D72040C015009D940F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1116E9D62040C015009D940F /* Assets.xcassets */; };
 		1116E9DA2040C015009D940F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1116E9D82040C015009D940F /* Main.storyboard */; };
@@ -127,6 +128,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1115C40920751A87009494A5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		1115C40E20751C57009494A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1115C41020751C5E009494A5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1115C41120751C60009494A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1116E9CF2040C015009D940F /* Menu Bar Controller for Sonos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Menu Bar Controller for Sonos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1116E9D22040C015009D940F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1116E9D62040C015009D940F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -239,6 +244,7 @@
 				1116E9E22040CDA8009D940F /* SampleAudio_0.4mb.mp3 */,
 				1116E9DC2040C015009D940F /* Sonos_Volume_Control.entitlements */,
 				11C13477204F5C7A00AC3581 /* Sonos_Volume_Control-Bridging-Header.h */,
+				1115C40D20751C57009494A5 /* Localizable.strings */,
 				11F64BDE20509EEB005ED2E3 /* SSDP */,
 			);
 			path = Sonos_Volume_Control;
@@ -298,6 +304,7 @@
 				1116E9CD2040C015009D940F /* Resources */,
 				11F64C0B2050A22D005ED2E3 /* Embed Frameworks */,
 				1151CDE02072A5BD001150F7 /* CopyFiles */,
+				1115C40C20751C1C009494A5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -358,6 +365,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 1116E9C62040C015009D940F;
 			productRefGroup = 1116E9D02040C015009D940F /* Products */;
@@ -392,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1116E9D72040C015009D940F /* Assets.xcassets in Resources */,
+				1115C40F20751C57009494A5 /* Localizable.strings in Resources */,
 				1116E9DA2040C015009D940F /* Main.storyboard in Resources */,
 				1116E9E32040CDA9009D940F /* SampleAudio_0.4mb.mp3 in Resources */,
 			);
@@ -408,6 +417,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1115C40C20751C1C009494A5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\n# bartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR/Sonos_Volume_Control\" -l \"$PROJECT_DIR\" -a -k\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1116E9CB2040C015009D940F /* Sources */ = {
@@ -475,10 +500,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		1115C40D20751C57009494A5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1115C40E20751C57009494A5 /* Base */,
+				1115C41020751C5E009494A5 /* de */,
+				1115C41120751C60009494A5 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		1116E9D82040C015009D940F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				1116E9D92040C015009D940F /* Base */,
+				1115C40920751A87009494A5 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -490,6 +526,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -547,6 +584,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

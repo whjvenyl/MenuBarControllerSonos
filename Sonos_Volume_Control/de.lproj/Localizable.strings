@@ -1,0 +1,48 @@
+
+/* Error message text */
+"An error occurred" = "Ein Fehler ist aufgetreten";
+
+/* Error description text */
+"Could not add the app to launch automatically. You can do this manually by using the user settings in system preferences" = "Konnte die App nicht zum Autostart hinzufügen. Sie können das manuell erledigen, indem Sie die Einstellungen öffnen und dort in die Nutzer Einstellungen gehen";
+
+/* Error description text */
+"Could not stop the app from launching automatically. Check your user settings in System preferences" = "Die App konnte den Autostart nicht deaktivieren. Prüfen Sie die Einstellungen für Ihren Nutzer in den Systemeinstellungen";
+
+/* menu item */
+"Launch App on startup" = "Starte die App zum Systemstart";
+
+/* Confirm message text */
+"Launch at login activated" = "Autostart zum Systemstart aktiviert";
+
+/* Okay - Button title */
+"OK" = "OK";
+
+/* AccessibilityLabel */
+"Pause" = "Pausieren";
+
+/* AccessibilityLabel */
+"Play" = "Abspielen";
+
+/* menu item */
+"Quit" = "App Schließen";
+
+/* Send feedback menu item */
+"Send Feedback" = "Sende Feedback";
+
+/* menu item */
+"Show Imprint" = "Impresssum anzeigen";
+
+/* menu item */
+"Software licenses" = "Software Lizenzen";
+
+/* AccessibilityLabel */
+"Stop" = "Stop";
+
+/* menu item */
+"Stop launching App on startup" = "Deaktiviere den Autostart der App";
+
+/* Info text of launch confirmation */
+"When you restart the system it will show a pop up asking if you allow the Menu Controller to start. You only need to confirm this once." = "Wenn das System neu gestartet wird, so wird ein Fenster erscheinen, dass um erlaubnis fragt die App zu starten. Das muss nur einmalig bestätigt werden";
+
+/* menu item */
+"Write a review" = "Schreibe eine Rezension";

@@ -18,13 +18,13 @@ class PlayPauseButton: NSButton {
             switch currentState {
             case .play:
                 self.image = #imageLiteral(resourceName: "ic_play_arrow")
-                self.setAccessibilityLabel("Play")
+                self.setAccessibilityLabel(NSLocalizedString("Play", comment: "AccessibilityLabel"))
             case .pause:
                 self.image = #imageLiteral(resourceName: "ic_pause")
-                self.setAccessibilityLabel("Pause")
+                self.setAccessibilityLabel(NSLocalizedString("Pause", comment: "AccessibilityLabel"))
             case .stop:
                 self.image = #imageLiteral(resourceName: "ic_stop")
-                self.setAccessibilityLabel("Stop")
+                self.setAccessibilityLabel(NSLocalizedString("Stop", comment: "AccessibilityLabel"))
             }
         }
     }

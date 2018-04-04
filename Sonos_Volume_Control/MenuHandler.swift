@@ -74,7 +74,7 @@ extension ControlVC {
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("An error occurred", comment: "Error message text")
             alert.addButton(withTitle: NSLocalizedString("OK", comment: "Okay - Button title"))
-            alert.informativeText = "Could not stop the app from launching automatically. Check your user settings in System preferences"
+            alert.informativeText = NSLocalizedString("Could not stop the app from launching automatically. Check your user settings in System preferences", comment: "Error description text")
             alert.runModal()
         }else {
             UserDefaults.standard.isLaunchAtLoginEnabled = false

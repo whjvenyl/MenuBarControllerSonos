@@ -519,18 +519,18 @@ class ControlVC: NSViewController {
     @IBAction func showMenu(_ sender: NSView) {
         let appMenu = NSMenu()
         if UserDefaults.standard.isLaunchAtLoginEnabled {
-            appMenu.addItem(withTitle: NSLocalizedString("Stop launching App on startup", comment: ""), action: #selector(launchAppOnLogin), keyEquivalent: "")
+            appMenu.addItem(withTitle: NSLocalizedString("Stop launching App on startup", comment: "menu item"), action: #selector(launchAppOnLogin), keyEquivalent: "")
         }else {
-            appMenu.addItem(withTitle: NSLocalizedString("Launch App on startup", comment: ""), action: #selector(launchAppOnLogin), keyEquivalent: "")
+            appMenu.addItem(withTitle: NSLocalizedString("Launch App on startup", comment: "menu item"), action: #selector(launchAppOnLogin), keyEquivalent: "")
         }
         
-        appMenu.addItem(withTitle: NSLocalizedString("Write a review", comment: ""), action: #selector(writeAReview), keyEquivalent: "")
-        appMenu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
+        appMenu.addItem(withTitle: NSLocalizedString("Write a review", comment: "menu item"), action: #selector(writeAReview), keyEquivalent: "")
+        appMenu.addItem(withTitle: NSLocalizedString("Send Feedback", comment: "Send feedback menu item"), action: #selector(sendFeedback), keyEquivalent: "")
         appMenu.addItem(NSMenuItem.separator())
-        appMenu.addItem(withTitle: "Show Imprint", action: #selector(openImprint), keyEquivalent: "")
-        appMenu.addItem(withTitle: "Software licenses", action: #selector(openLicenses), keyEquivalent: "")
+        appMenu.addItem(withTitle: NSLocalizedString("Show Imprint", comment: "menu item"), action: #selector(openImprint), keyEquivalent: "")
+        appMenu.addItem(withTitle: NSLocalizedString("Software licenses", comment: "menu item"), action: #selector(openLicenses), keyEquivalent: "")
         appMenu.addItem(NSMenuItem.separator())
-        appMenu.addItem(withTitle: "Quit", action: #selector(quitApp), keyEquivalent: "")
+        appMenu.addItem(withTitle: NSLocalizedString("Quit", comment: "menu item"), action: #selector(quitApp), keyEquivalent: "")
         
         
         let p = NSPoint(x: sender.frame.origin.x, y: sender.frame.origin.y - (sender.frame.height / 2))

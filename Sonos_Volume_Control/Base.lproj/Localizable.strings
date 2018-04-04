@@ -1,0 +1,48 @@
+
+/* Error message text */
+"An error occurred" = "An error occurred";
+
+/* Error description text */
+"Could not add the app to launch automatically. You can do this manually by using the user settings in system preferences" = "Could not add the app to launch automatically. You can do this manually by using the user settings in system preferences";
+
+/* Error description text */
+"Could not stop the app from launching automatically. Check your user settings in System preferences" = "Could not stop the app from launching automatically. Check your user settings in System preferences";
+
+/* menu item */
+"Launch App on startup" = "Launch App on startup";
+
+/* Confirm message text */
+"Launch at login activated" = "Launch at login activated";
+
+/* Okay - Button title */
+"OK" = "OK";
+
+/* AccessibilityLabel */
+"Pause" = "Pause";
+
+/* AccessibilityLabel */
+"Play" = "Play";
+
+/* menu item */
+"Quit" = "Quit";
+
+/* Send feedback menu item */
+"Send Feedback" = "Send Feedback";
+
+/* menu item */
+"Show Imprint" = "Show Imprint";
+
+/* menu item */
+"Software licenses" = "Software licenses";
+
+/* AccessibilityLabel */
+"Stop" = "Stop";
+
+/* menu item */
+"Stop launching App on startup" = "Stop launching App on startup";
+
+/* Info text of launch confirmation */
+"When you restart the system it will show a pop up asking if you allow the Menu Controller to start. You only need to confirm this once." = "When you restart the system it will show a pop up asking if you allow the Menu Controller to start. You only need to confirm this once.";
+
+/* menu item */
+"Write a review" = "Write a review";
