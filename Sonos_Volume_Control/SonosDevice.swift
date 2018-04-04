@@ -39,7 +39,7 @@ class SonosController: Equatable, Hashable {
     /// The speakers current colume
     public private(set) var currentVolume = 0
     /// State if the device is playing or not
-    public private(set) var playState = PlayState.notSet
+    public var playState = PlayState.notSet
     /// If true the speaker is muted
     public private(set) var muted = false
     /// Track info of the currently playing song / radio
@@ -78,7 +78,7 @@ class SonosController: Equatable, Hashable {
         self.updateAll({ completion(self) })
     }
     
-    init(roomName:String, deviceName:String, url:URL, ip: String, udn: String) {
+    init(roomName:String, deviceName:String, url:URL, ip: String, udn: String, deviceInfo: SonosDeviceInfo, groupState: SonosGroupState) {
         self.roomName = roomName
         self.deviceName = deviceName
         self.url = url

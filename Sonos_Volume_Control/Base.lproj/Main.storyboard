@@ -698,6 +698,7 @@
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <accessibility description="Current Song Label"/>
                             </textField>
                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V79-m7-Tey">
                                 <rect key="frame" x="97" y="25" width="103" height="17"/>
@@ -844,6 +845,7 @@
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <accessibility description="Show Settings"/>
                                 <connections>
                                     <action selector="showMenu:" target="UOE-Qu-9Vt" id="A59-1p-K7h"/>
                                 </connections>

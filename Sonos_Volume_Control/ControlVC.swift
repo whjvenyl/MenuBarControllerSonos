@@ -80,51 +80,39 @@ class ControlVC: NSViewController {
         self.stopAnimations()
     }
     
-    func addTest() {
-        for i in 0..<2 {
-            let testSonos = SonosController(roomName: "Room\(i)", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.9\(i)")!, ip: "192.168.178.9\(i)", udn: "some-udn-\(i)")
-            testSonos.playState = .playing
-            self.addDeviceToList(sonos: testSonos)
-            self.controlsView.isHidden = false
-        }
-    }
-    
     func showDemo() {
         self.stopDiscovery()
-        let t1 = SonosController(roomName: "Bedroom_3", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1")
+
+        let t1 = SonosController(roomName: "Bedroom_3", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1", deviceInfo: SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "01"), groupState: SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"]))
         t1.playState = .playing
-        t1.deviceInfo = SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "01")
-        t1.groupState = SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"])
         self.addDeviceToList(sonos: t1)
         self.updateGroups(sonos: t1)
         
-        let t2 = SonosController(roomName: "Bedroom_1", deviceName: "One", url: URL(string:"http://192.168.178.92")!, ip: "192.168.178.92", udn: "some-udn-2")
+        let t2 = SonosController(roomName: "Bedroom_1", deviceName: "One", url: URL(string:"http://192.168.178.92")!, ip: "192.168.178.92", udn: "some-udn-2", deviceInfo:SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "02"), groupState:  SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"]))
         t2.playState = .playing
-        t2.deviceInfo = SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "02")
-        t2.groupState = SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"])
         self.addDeviceToList(sonos: t2)
         self.updateGroups(sonos: t2)
         
-        let t3 = SonosController(roomName: "Kitchen", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.93")!, ip: "192.168.178.93", udn: "some-udn-3")
-        t3.playState = .paused
-        t3.deviceInfo = SonosDeviceInfo(zoneName: "Kitchen", localUID: "03")
-        t3.groupState = SonosGroupState(name: "Kitchen", groupID: "03", deviceIds: ["03"])
-        self.addDeviceToList(sonos: t3)
-        self.updateGroups(sonos: t3)
-        
-        let t4 = SonosController(roomName: "Living room", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.94")!, ip: "192.168.178.94", udn: "some-udn-4")
-        t4.playState = .paused
-        t4.deviceInfo = SonosDeviceInfo(zoneName: "Living room", localUID: "04")
-        t4.groupState = SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"])
-        self.addDeviceToList(sonos: t4)
-        self.updateGroups(sonos: t4)
-        
-        let t5 = SonosController(roomName: "Living room_2", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.95")!, ip: "192.168.178.95", udn: "some-udn-5")
-        t5.playState = .paused
-        t5.deviceInfo = SonosDeviceInfo(zoneName: "Living room", localUID: "05")
-        t5.groupState = SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"])
-        self.addDeviceToList(sonos: t5)
-        self.updateGroups(sonos: t5)
+//        let t3 = SonosController(roomName: "Kitchen", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.93")!, ip: "192.168.178.93", udn: "some-udn-3")
+//        t3.playState = .paused
+//        t3.deviceInfo = SonosDeviceInfo(zoneName: "Kitchen", localUID: "03")
+//        t3.groupState = SonosGroupState(name: "Kitchen", groupID: "03", deviceIds: ["03"])
+//        self.addDeviceToList(sonos: t3)
+//        self.updateGroups(sonos: t3)
+//
+//        let t4 = SonosController(roomName: "Living room", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.94")!, ip: "192.168.178.94", udn: "some-udn-4")
+//        t4.playState = .paused
+//        t4.deviceInfo = SonosDeviceInfo(zoneName: "Living room", localUID: "04")
+//        t4.groupState = SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"])
+//        self.addDeviceToList(sonos: t4)
+//        self.updateGroups(sonos: t4)
+//
+//        let t5 = SonosController(roomName: "Living room_2", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.95")!, ip: "192.168.178.95", udn: "some-udn-5")
+//        t5.playState = .paused
+//        t5.deviceInfo = SonosDeviceInfo(zoneName: "Living room", localUID: "05")
+//        t5.groupState = SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"])
+//        self.addDeviceToList(sonos: t5)
+//        self.updateGroups(sonos: t5)
         
         self.controlsView.isHidden = false
         
@@ -547,6 +535,8 @@ class ControlVC: NSViewController {
         
         let p = NSPoint(x: sender.frame.origin.x, y: sender.frame.origin.y - (sender.frame.height / 2))
         appMenu.popUp(positioning: nil, at: p, in: sender.superview)
+        
+        
     }
     
 
