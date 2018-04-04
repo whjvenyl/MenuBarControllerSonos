@@ -23,10 +23,17 @@ class SonosSpeakerGroup: Hashable {
     
     var isActive: Bool = false
     
-    init(groupID: String, firstSpeaker: SonosController) {
+    var trackInfo: SonosTrackInfo? {
+        return self.mainSpeaker?.trackInfo
+    }
+    
+    init?(groupID: String, firstSpeaker: SonosController) {
+        guard let deviceIds = firstSpeaker.groupState?.deviceIds,
+            let name = firstSpeaker.groupState?.name else {return nil}
+        
         self.groupID = groupID
-        self.speakerOrder = firstSpeaker.groupState?.deviceIds ?? []
-        self.name = firstSpeaker.groupState?.name ?? ""
+        self.speakerOrder = deviceIds
+        self.name = name
         self.addSpeaker(firstSpeaker)
     }
     
@@ -64,14 +71,16 @@ class SonosSpeakerGroup: Hashable {
     
     func addSpeaker(_ sonos: SonosController) {
         guard sonos.groupState?.groupID == self.groupID else {return}
+        
         self.speakers.insert(sonos)
         if let groupName = sonos.groupState?.name, !groupName.isEmpty {
             self.name = groupName
         }
     }
     
-    func removeSpeaker(_ sonos: SonosController) {
+    func removeIfGroupChanged(_ sonos: SonosController) {
         guard sonos.groupState?.groupID != self.groupID else {return}
+        
         self.speakers.remove(sonos)
     }
     

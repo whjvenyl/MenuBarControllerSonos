@@ -10,7 +10,7 @@ import Cocoa
 
 class PlayPauseButton: NSButton {
     enum State {
-        case play, pause
+        case play, pause, stop
     }
     
     var currentState: State = .play {
@@ -22,6 +22,9 @@ class PlayPauseButton: NSButton {
             case .pause:
                 self.image = #imageLiteral(resourceName: "ic_pause")
                 self.setAccessibilityLabel("Pause")
+            case .stop:
+                self.image = #imageLiteral(resourceName: "ic_stop")
+                self.setAccessibilityLabel("Stop")
             }
         }
     }

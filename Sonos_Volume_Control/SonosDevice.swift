@@ -36,6 +36,7 @@ class SonosController: Equatable, Hashable {
     var currentVolume = 0
     var playState = PlayState.notSet
     var muted = false
+    public private(set) var trackInfo: SonosTrackInfo?
     
     /// The speakers current group state
     var groupState: SonosGroupState?
@@ -310,6 +311,7 @@ class SonosController: Equatable, Hashable {
             metaDataText != "NOT_IMPLEMENTED" else {return}
             let metadataXML = SWXMLHash.parse(metaDataText)
             let trackInfo = SonosTrackInfo(xml: metadataXML["DIDL-Lite"]["item"])
+            self.trackInfo = trackInfo
             
             DispatchQueue.main.async {
                 completion?(trackInfo)

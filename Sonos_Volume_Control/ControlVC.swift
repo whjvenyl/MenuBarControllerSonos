@@ -17,6 +17,8 @@ class ControlVC: NSViewController {
     @IBOutlet weak var errorMessageLabel: NSTextField!
     @IBOutlet weak var controlsView: NSView!
     @IBOutlet weak var pauseButton: PlayPauseButton!
+    @IBOutlet weak var previousButton: NSButton!
+    @IBOutlet weak var nextButton: NSButton!
     @IBOutlet weak var sonosScrollContainer: CustomScrolllView!
     @IBOutlet weak var speakerGroupSelector: NSSegmentedControl!
     @IBOutlet weak var currentTrackLabel: NSTextField!
@@ -117,6 +119,13 @@ class ControlVC: NSViewController {
         self.addDeviceToList(sonos: t4)
         self.updateGroups(sonos: t4)
         
+        let t5 = SonosController(roomName: "Living room_2", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.95")!, ip: "192.168.178.95", udn: "some-udn-5")
+        t5.playState = .paused
+        t5.deviceInfo = SonosDeviceInfo(zoneName: "Living room", localUID: "05")
+        t5.groupState = SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"])
+        self.addDeviceToList(sonos: t5)
+        self.updateGroups(sonos: t5)
+        
         self.controlsView.isHidden = false
         
         self.currentTrackLabel.stringValue = "Current Track - Artist"
@@ -200,8 +209,7 @@ class ControlVC: NSViewController {
         
         if let group = self.sonosGroups[gId] {
             group.addSpeaker(sonos)
-        }else {
-            let group = SonosSpeakerGroup(groupID: gId,firstSpeaker: sonos)
+        }else if let group = SonosSpeakerGroup(groupID: gId,firstSpeaker: sonos) {
             group.delegate = self
             self.sonosGroups[gId] = group
         }
@@ -210,7 +218,7 @@ class ControlVC: NSViewController {
         let containedInGroups = Array(self.sonosGroups.values.filter({$0.speakers.contains(sonos)}))
         for group in containedInGroups {
             //Check where speaker has moved to
-            group.removeSpeaker(sonos)
+            group.removeIfGroupChanged(sonos)
             if group.speakers.count == 0 {
                 //Remove group
                 self.sonosGroups.removeValue(forKey: group.groupID)
@@ -219,7 +227,6 @@ class ControlVC: NSViewController {
         
         if self.showState == .groups {
             self.updateGroupsList()
-            
             self.updateState()
         }
         
@@ -227,6 +234,9 @@ class ControlVC: NSViewController {
     
     func updateGroupsList() {
         guard self.showState == .groups else {return}
+        //Update the correct group
+        self.updateGroupSpeakers()
+        
         //Remove error label or show it if necessary
         if self.sonosSystems.count > 0 {
             self.errorMessageLabel.isHidden = true
@@ -247,6 +257,9 @@ class ControlVC: NSViewController {
         
         //Add all sonos buttons
         for (idx, group) in sonosGroupArray.enumerated() {
+            //Guard against empty name groups
+            guard !group.name.isEmpty  else {return}
+            
             if idx == 0 && self.activeGroup == nil {
                 group.isActive = true
             }
@@ -258,6 +271,20 @@ class ControlVC: NSViewController {
         }
         
         self.setupScrollView()
+    }
+    
+    
+    /// Update the groups so all speakers will be added to the correct group
+    func updateGroupSpeakers() {
+        //The systems will be iterated and added to the correct group
+        for sonos in self.sonosSystems {
+            guard let gId = sonos.groupState?.groupID,
+            let group = self.sonosGroups[gId] else {continue}
+            //Check if the group contains the speaker already
+            if group.speakers.contains(sonos) == false {
+                group.addSpeaker(sonos)
+            }
+        }
     }
     
     /**
@@ -296,12 +323,13 @@ class ControlVC: NSViewController {
             self.volumeSlider.integerValue = volume
         })
         
-        self.activeGroup?.getPlayState({ (state) in
-            self.updatePlayButton(forState: state)
-        })
-        
+        //Update track info
         self.activeGroup?.updateCurrentTrack({ (trackInfo) in
             self.updateTrackLabel(withTrack: trackInfo.trackText())
+            //Update buttons
+            self.activeGroup?.getPlayState({ (state) in
+                self.updatePlayButton(forState: state, isPlayingRadio: trackInfo.isPlayingRadio)
+            })
         })
     }
     
@@ -315,17 +343,14 @@ class ControlVC: NSViewController {
             }
         })
         
-        if firstSonos?.isGroupCoordinator == true {
-            firstSonos?.getPlayState({ (state) in
-                self.updatePlayButton(forState: state)
-            })
-        }else if let coordinator = sonosSystems.first(where: {$0.active && $0.isGroupCoordinator}) {
-            coordinator.getPlayState({ (state) in
-                self.updatePlayButton(forState: state)
-            })
-            
+        if let coordinator = sonosSystems.first(where: {$0.active && $0.isGroupCoordinator}) {
+            //Update track
             coordinator.updateCurrentTrack({ (trackInfo) in
                 self.updateTrackLabel(withTrack: trackInfo.trackText())
+                //Update buttons
+                coordinator.getPlayState({ (state) in
+                    self.updatePlayButton(forState: state, isPlayingRadio: trackInfo.isPlayingRadio)
+                })
             })
         }else {
             //Hide buttons
@@ -373,16 +398,29 @@ class ControlVC: NSViewController {
         }, completionHandler: nil)
     }
     
-    func updatePlayButton(forState state: PlayState) {
+    func updatePlayButton(forState state: PlayState, isPlayingRadio: Bool) {
         switch (state) {
         case .playing, .transitioning:
-            self.pauseButton.currentState = .pause
             self.controlsView.isHidden = false
+            
+            if isPlayingRadio {
+                self.pauseButton.currentState = .stop
+            }else {
+                self.pauseButton.currentState = .pause
+            }
         case .paused, .stopped:
             self.pauseButton.currentState = .play
             self.controlsView.isHidden = false
         default:
             self.controlsView.isHidden = true
+        }
+        
+        if isPlayingRadio {
+            self.nextButton.isHidden = true
+            self.previousButton.isHidden = true
+        }else {
+            self.nextButton.isHidden = false
+            self.previousButton.isHidden = false
         }
     }
     
@@ -429,10 +467,10 @@ class ControlVC: NSViewController {
             switch actionState {
             case .play:
                 self.activeGroup?.play()
-                self.updatePlayButton(forState: .playing)
-            case .pause:
+                self.updatePlayButton(forState: .playing, isPlayingRadio: self.activeGroup?.trackInfo?.isPlayingRadio ?? false)
+            case .pause, .stop:
                 self.activeGroup?.pause()
-                self.updatePlayButton(forState: .paused)
+                self.updatePlayButton(forState: .paused, isPlayingRadio: self.activeGroup?.trackInfo?.isPlayingRadio ?? false)
             }
         }
         
@@ -441,12 +479,12 @@ class ControlVC: NSViewController {
     private func playPause(forSonos sonos: SonosController, actionState: PlayPauseButton.State) {
         //Play or pause based on the button state
         switch actionState {
-        case .pause:
+        case .pause, .stop:
             sonos.pause()
         case .play:
             sonos.play()
         }
-        self.updatePlayButton(forState: sonos.playState)
+        self.updatePlayButton(forState: sonos.playState, isPlayingRadio: sonos.trackInfo?.isPlayingRadio ?? false)
     }
     
     private func pause(sonos: SonosController) {

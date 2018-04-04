@@ -888,7 +888,9 @@
                         <outlet property="controlsView" destination="euI-Bt-dbz" id="XvB-Xr-Tqk"/>
                         <outlet property="currentTrackLabel" destination="03R-pu-8p0" id="wDC-hB-DOB"/>
                         <outlet property="errorMessageLabel" destination="V79-m7-Tey" id="NVk-fz-QO8"/>
+                        <outlet property="nextButton" destination="aUg-Gc-k5u" id="mDB-1K-hU1"/>
                         <outlet property="pauseButton" destination="KtY-82-ql5" id="8Pc-cp-dE8"/>
+                        <outlet property="previousButton" destination="Kdr-P3-YGY" id="Cqs-MF-edJ"/>
                         <outlet property="sonosScrollContainer" destination="540-Ck-pnu" id="o1N-tF-7ob"/>
                         <outlet property="sonosStack" destination="n4a-Gx-V86" id="TgX-MU-ta8"/>
                         <outlet property="speakerGroupSelector" destination="0BW-ZK-BjM" id="vC3-GF-6sm"/>
@@ -903,10 +905,10 @@
     </scenes>
     <resources>
         <image name="horizontal_line" width="220" height="1"/>
-        <image name="ic_pause" width="24" height="24"/>
+        <image name="ic_pause" width="48" height="48"/>
         <image name="ic_settings" width="15" height="15"/>
-        <image name="ic_skip_next" width="24" height="24"/>
-        <image name="ic_skip_previous" width="24" height="24"/>
-        <image name="ic_volume_up" width="24" height="24"/>
+        <image name="ic_skip_next" width="48" height="48"/>
+        <image name="ic_skip_previous" width="48" height="48"/>
+        <image name="ic_volume_up" width="48" height="48"/>
     </resources>
 </document>

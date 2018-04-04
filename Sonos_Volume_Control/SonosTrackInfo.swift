@@ -9,12 +9,13 @@
 import Foundation
 import SWXMLHash
 
-struct SonosTrackInfo {
-    let title: String
-    let album: String
-    let artist: String
-    let streamContent: String?
-    var playMedium: String?
+ public struct SonosTrackInfo {
+    public let title: String
+    public let album: String
+    public let artist: String
+    public let streamContent: String?
+    public private(set) var playMedium: String?
+    public private(set) var isPlayingRadio = false
     
     public private(set) var containsErrors = false
     
@@ -27,13 +28,20 @@ struct SonosTrackInfo {
         if title == "Unknown Title" || album == "Unknown Album" || artist == "Unkown Artist" {
             containsErrors = true
         }
+        
+        if let protocolInfo = xml["res"].element?.attribute(by: "protocolInfo")?.text {
+            isPlayingRadio = protocolInfo.contains("radio") && streamContent != nil
+        }
     }
     
     func trackText() -> String {
         if containsErrors,
             let streamContent = self.streamContent {
             return streamContent
+        }else if containsErrors {
+            return ""
         }
+        
         return "\(title) - \(artist)"
     }
     
