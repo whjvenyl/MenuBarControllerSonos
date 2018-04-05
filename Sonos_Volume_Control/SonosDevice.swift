@@ -85,6 +85,9 @@ class SonosController: Equatable, Hashable {
         self.ip = ip
         self.udn = udn
         self.deviceType = "unknown"
+        
+        self.deviceInfo = deviceInfo
+        self.groupState = groupState
     }
     
     //MARK: - General Info

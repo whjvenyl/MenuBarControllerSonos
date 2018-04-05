@@ -84,6 +84,10 @@ class SonosSpeakerGroup: Hashable {
         self.speakers.remove(sonos)
     }
     
+    func remove(sonos: SonosController) {
+        self.speakers.remove(sonos)
+    }
+    
     @objc func activateDeactivate(button: NSButton) {
         if button.state == .on {
             self.isActive = true

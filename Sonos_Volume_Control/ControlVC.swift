@@ -81,7 +81,7 @@ class ControlVC: NSViewController {
     }
     
     func showDemo() {
-        self.stopDiscovery()
+//        self.stopDiscovery()
 
         let t1 = SonosController(roomName: "Bedroom_3", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1", deviceInfo: SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "01"), groupState: SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"]))
         t1.playState = .playing
@@ -93,20 +93,19 @@ class ControlVC: NSViewController {
         self.addDeviceToList(sonos: t2)
         self.updateGroups(sonos: t2)
         
-//        let t3 = SonosController(roomName: "Kitchen", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.93")!, ip: "192.168.178.93", udn: "some-udn-3")
-//        t3.playState = .paused
-//        t3.deviceInfo = SonosDeviceInfo(zoneName: "Kitchen", localUID: "03")
-//        t3.groupState = SonosGroupState(name: "Kitchen", groupID: "03", deviceIds: ["03"])
-//        self.addDeviceToList(sonos: t3)
-//        self.updateGroups(sonos: t3)
-//
-//        let t4 = SonosController(roomName: "Living room", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.94")!, ip: "192.168.178.94", udn: "some-udn-4")
-//        t4.playState = .paused
-//        t4.deviceInfo = SonosDeviceInfo(zoneName: "Living room", localUID: "04")
-//        t4.groupState = SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"])
-//        self.addDeviceToList(sonos: t4)
-//        self.updateGroups(sonos: t4)
-//
+        let t3 = SonosController(roomName: "Kitchen", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.93")!, ip: "192.168.178.93", udn: "some-udn-3",
+                                 deviceInfo: SonosDeviceInfo(zoneName: "Kitchen", localUID: "03"), groupState: SonosGroupState(name: "Kitchen", groupID: "03", deviceIds: ["03"]))
+        t3.playState = .paused
+        self.addDeviceToList(sonos: t3)
+        self.updateGroups(sonos: t3)
+
+        let t4 = SonosController(roomName: "Living room", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.94")!, ip: "192.168.178.94", udn: "some-udn-4",
+                                 deviceInfo: SonosDeviceInfo(zoneName: "Living room", localUID: "04"),
+                                 groupState: SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"]))
+        t4.playState = .paused
+        self.addDeviceToList(sonos: t4)
+        self.updateGroups(sonos: t4)
+
 //        let t5 = SonosController(roomName: "Living room_2", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.95")!, ip: "192.168.178.95", udn: "some-udn-5")
 //        t5.playState = .paused
 //        t5.deviceInfo = SonosDeviceInfo(zoneName: "Living room", localUID: "05")
@@ -147,6 +146,10 @@ class ControlVC: NSViewController {
         //Remove error label
         if self.sonosSystems.count > 0 {
             self.errorMessageLabel.isHidden = true
+            self.controlsView.isHidden = false
+        }else {
+            self.errorMessageLabel.isHidden = false
+            self.controlsView.isHidden = true
         }
         
         //Remove all buttons
@@ -169,21 +172,43 @@ class ControlVC: NSViewController {
     }
     
     /**
-     Remove old devices which have not been discovered for 10 minutes
+     Remove old devices which have not been discovered in the last discovery session
     */
     func removeOldDevices() {
         //Remove undiscovered devices
         //All devices which haven't been found on last discovery
         let undiscoveredDevices = self.sonosSystems.filter({self.lastDiscoveryDeviceList.contains($0) == false})
         for sonos in undiscoveredDevices {
-            guard let button = self.speakerButtons[sonos],
-                button.superview == self.sonosStack else {continue}
-            // Remove all buttons of speakers which have not been discovered
-            self.sonosStack.removeView(button)
-            self.speakerButtons[sonos] = nil
+            if let button = self.speakerButtons[sonos],
+                button.superview == self.sonosStack  {
+                
+                // Remove all buttons of speakers which have not been discovered
+                self.sonosStack.removeView(button)
+                self.speakerButtons[sonos] = nil
+            }
+            
+            //Remove speaker from group
+            if let gId  = sonos.groupState?.groupID {
+                let deviceGroup = self.sonosGroups[gId]
+                deviceGroup?.remove(sonos: sonos)
+            }
         }
         
-        self.sonosSystems = self.sonosSystems.filter({undiscoveredDevices.contains($0) == false})
+        self.sonosSystems = Array(self.lastDiscoveryDeviceList)
+        
+        for group in self.sonosGroups.values {
+            if group.speakers.count == 0 {
+                //Remove it
+                self.sonosGroups.removeValue(forKey: group.groupID)
+            }
+        }
+        
+        switch self.showState {
+        case .speakers:
+            self.updateSonosDeviceList()
+        case .groups:
+            self.updateGroupsList()
+        }
     }
     
     /**
@@ -226,10 +251,12 @@ class ControlVC: NSViewController {
         self.updateGroupSpeakers()
         
         //Remove error label or show it if necessary
-        if self.sonosSystems.count > 0 {
+        if self.sonosGroups.count > 0 {
             self.errorMessageLabel.isHidden = true
+            self.controlsView.isHidden = false
         }else {
             self.errorMessageLabel.isHidden = false
+            self.controlsView.isHidden = true
         }
         
         //Remove all buttons
