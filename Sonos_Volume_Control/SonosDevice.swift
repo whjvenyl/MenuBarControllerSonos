@@ -58,6 +58,9 @@ class SonosController: Equatable, Hashable {
     
     /// String shown in the UI
     public var readableName:String {
+        if let zoneName = self.deviceInfo?.zoneName {
+            return "\(zoneName) - \(deviceName)"
+        }
         return "\(roomName) - \(deviceName)"
     }
     

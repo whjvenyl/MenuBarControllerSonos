@@ -81,7 +81,7 @@ class ControlVC: NSViewController {
     }
     
     func showDemo() {
-//        self.stopDiscovery()
+        self.stopDiscovery()
 
         let t1 = SonosController(roomName: "Bedroom_3", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1", deviceInfo: SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "01"), groupState: SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"]))
         t1.playState = .playing

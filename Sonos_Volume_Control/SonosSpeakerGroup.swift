@@ -29,7 +29,9 @@ class SonosSpeakerGroup: Hashable {
     
     init?(groupID: String, firstSpeaker: SonosController) {
         guard let deviceIds = firstSpeaker.groupState?.deviceIds,
-            let name = firstSpeaker.groupState?.name else {return nil}
+            let name = firstSpeaker.groupState?.name,
+            groupID.isEmpty == false
+            else {return nil}
         
         self.groupID = groupID
         self.speakerOrder = deviceIds
