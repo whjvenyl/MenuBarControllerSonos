@@ -58,11 +58,17 @@ class SonosController: Equatable, Hashable {
     
     /// String shown in the UI
     public var readableName:String {
-        if let zoneName = self.deviceInfo?.zoneName {
-            return "\(zoneName) - \(deviceName)"
+//        if let zoneName = self.deviceInfo?.zoneName {
+//            return "\(zoneName) - \(deviceName)"
+//        }
+        var rName = "\(roomName) - \(deviceName)"
+        if isInStereoSetup {
+            rName += " \(NSLocalizedString("Stereo", comment: ""))"
         }
-        return "\(roomName) - \(deviceName)"
+        return rName
     }
+    
+    internal var isInStereoSetup = false
     
     //   MARK: - Init
     
@@ -105,6 +111,10 @@ class SonosController: Equatable, Hashable {
     
     var canSetVolume: Bool {
         return self.deviceType.contains("Player")
+    }
+    
+    func getNetworkTopology() {
+        
     }
     
     //    MARK: - Interactions

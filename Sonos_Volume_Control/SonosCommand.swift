@@ -28,7 +28,15 @@ class SonosCommand {
     }
     
     static func downloadSpeakerInfo(sonos: SonosController,_ completion:@escaping ((_ data: Data?)->Void) ) {
-        let uri = "http://" + sonos.ip + ":" + String(sonos.port) +  "/status/zp"
+        self.getFromSpeaker(sonos: sonos, path: "/status/zp", completion)
+    }
+    
+    static func downloadNetworkTopologyInfo(sonos: SonosController, _ completion: @escaping ((_ data: Data?)-> Void)) {
+        self.getFromSpeaker(sonos: sonos, path: "/topology", completion)
+    }
+    
+    static func getFromSpeaker(sonos: SonosController, path: String,_ completion: @escaping ((_ data: Data?)-> Void)) {
+        let uri = "http://" + sonos.ip + ":" + String(sonos.port) +  path
         var request = URLRequest(url: URL(string: uri)!)
         request.httpMethod = "GET"
         request.addValue("text/xml", forHTTPHeaderField: "Content-Type")
@@ -42,7 +50,7 @@ class SonosCommand {
             if let data = data {
                 print(String.init(data:data, encoding: .utf8) ?? "No response")
             }
-        }.resume()
+            }.resume()
     }
     
     func execute(sonos: SonosController,_ completion: ((_ data: Data?)->Void)?=nil ) {

@@ -34,9 +34,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             pComps.append("MacOS")
             pComps.append(appName)
             let newPath = NSString.path(withComponents: pComps)
-            let success = NSWorkspace.shared.launchApplication(newPath)
+            var success = NSWorkspace.shared.launchApplication(newPath)
             if !success {
-                NSWorkspace.shared.launchApplication("Menu Bar Controller for Sonos")
+                //Use Application path
+                success = NSWorkspace.shared.launchApplication("/Applications/Menu Bar Controller for Sonos.app")
+            }
+            if !success {
+                success = NSWorkspace.shared.launchApplication("Menu Bar Controller for Sonos")
             }
         }
     }

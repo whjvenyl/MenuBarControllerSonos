@@ -58,6 +58,8 @@
 		11C13476204F4DE600AC3581 /* ControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C13475204F4DE600AC3581 /* ControlVC.swift */; };
 		11C67D7B2051F01C002777D4 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C67D7A2051F01C002777D4 /* EventMonitor.swift */; };
 		11CF320520629C6B00A79D9A /* CustomScrolllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF320420629C6B00A79D9A /* CustomScrolllView.swift */; };
+		11E2B42C207A6EE300B08E09 /* SonosStereoPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2B42B207A6EE300B08E09 /* SonosStereoPair.swift */; };
+		11E2B42E207A6EE700B08E09 /* SonosStereoPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2B42B207A6EE300B08E09 /* SonosStereoPair.swift */; };
 		11F64BE720509F08005ED2E3 /* SSDPSearchTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BDF20509F07005ED2E3 /* SSDPSearchTarget.swift */; };
 		11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BE020509F07005ED2E3 /* SSDPUPnP.swift */; };
 		11F64BE920509F08005ED2E3 /* SSDPDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F64BE120509F07005ED2E3 /* SSDPDiscovery.swift */; };
@@ -156,6 +158,7 @@
 		11C67D7A2051F01C002777D4 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		11CF3203205C2DA400A79D9A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		11CF320420629C6B00A79D9A /* CustomScrolllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrolllView.swift; sourceTree = "<group>"; };
+		11E2B42B207A6EE300B08E09 /* SonosStereoPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosStereoPair.swift; sourceTree = "<group>"; };
 		11F64BDF20509F07005ED2E3 /* SSDPSearchTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPSearchTarget.swift; sourceTree = "<group>"; };
 		11F64BE020509F07005ED2E3 /* SSDPUPnP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPUPnP.swift; sourceTree = "<group>"; };
 		11F64BE120509F07005ED2E3 /* SSDPDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPDiscovery.swift; sourceTree = "<group>"; };
@@ -231,6 +234,7 @@
 				11F796BF2066ED5600E4FBE9 /* SonosSpeakerGroup.swift */,
 				11F796C12066F18700E4FBE9 /* SonosDeviceInfo.swift */,
 				1151CDBC206E39FC001150F7 /* SonosTrackInfo.swift */,
+				11E2B42B207A6EE300B08E09 /* SonosStereoPair.swift */,
 				115232CA205B1B420048E130 /* PlayState.swift */,
 				11C67D7A2051F01C002777D4 /* EventMonitor.swift */,
 				1151CDE72072AA49001150F7 /* UserDefaultsExtension.swift */,
@@ -445,6 +449,7 @@
 				115BA13B20599E29004CC5C2 /* SonosDevice.swift in Sources */,
 				11CF320520629C6B00A79D9A /* CustomScrolllView.swift in Sources */,
 				11F796C02066ED5600E4FBE9 /* SonosSpeakerGroup.swift in Sources */,
+				11E2B42C207A6EE300B08E09 /* SonosStereoPair.swift in Sources */,
 				11F64BEE20509F08005ED2E3 /* SSDPMSearchResponse.swift in Sources */,
 				11F64BE820509F08005ED2E3 /* SSDPUPnP.swift in Sources */,
 				11F64BE920509F08005ED2E3 /* SSDPDiscovery.swift in Sources */,
@@ -476,6 +481,7 @@
 				11453557206BBEF5008C8FC6 /* SonosDevice.swift in Sources */,
 				11453558206BBEF5008C8FC6 /* CustomScrolllView.swift in Sources */,
 				11453559206BBEF5008C8FC6 /* SonosSpeakerGroup.swift in Sources */,
+				11E2B42E207A6EE700B08E09 /* SonosStereoPair.swift in Sources */,
 				1145355A206BBEF5008C8FC6 /* SSDPMSearchResponse.swift in Sources */,
 				1145355B206BBEF5008C8FC6 /* SSDPUPnP.swift in Sources */,
 				1145355C206BBEF5008C8FC6 /* SSDPDiscovery.swift in Sources */,

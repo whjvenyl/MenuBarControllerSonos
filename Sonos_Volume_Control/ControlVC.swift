@@ -143,6 +143,8 @@ class ControlVC: NSViewController {
     
     func updateSonosDeviceList() {
         guard self.showState == .speakers else {return}
+        self.detectStereoPairs()
+        
         //Remove error label
         if self.sonosSystems.count > 0 {
             self.errorMessageLabel.isHidden = true
@@ -169,6 +171,27 @@ class ControlVC: NSViewController {
         }
         
         self.setupScrollView()
+    }
+    
+    /// Detects all stereo pairs in the current device lists and removes the uuncontrollable speaker
+    func detectStereoPairs() {
+        var stereoPairs = Set<SonosStereoPair>()
+        for sonos in self.sonosSystems {
+            guard let zoneName = sonos.deviceInfo?.zoneName else {continue}
+            //Find stereo pair
+            let pair = self.sonosSystems.filter({$0.deviceInfo?.zoneName == zoneName})
+            if pair.count == 2,
+                let sPair = SonosStereoPair(s1: pair.first!, s2: pair.last!) {
+                stereoPairs.insert(sPair)
+            }
+        }
+        
+        //Remove the other speaker from the list of Stereo Pair speakers
+        for pair in stereoPairs {
+            guard let idx = self.sonosSystems.index(of: pair.otherSpeaker) else {continue}
+            self.sonosSystems.remove(at: idx)
+            pair.controller.isInStereoSetup = true
+        }
     }
     
     /**
