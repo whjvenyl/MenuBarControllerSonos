@@ -10,10 +10,10 @@ import Cocoa
 import SWXMLHash
 
 protocol SonosControllerDelegate {
-    func didUpdateActiveState(forSonos sonos: SonosController, isActive: Bool)
+    func didUpdateActiveState(forSonos sonos: SonosDevice, isActive: Bool)
 }
 
-class SonosController: Equatable, Hashable {
+class SonosDevice: Equatable, Hashable {
     //   MARK:  Properties
     
     /// Name of the room
@@ -72,7 +72,7 @@ class SonosController: Equatable, Hashable {
     
     //   MARK: - Init
     
-    init(xml: XMLIndexer, url: URL,_ completion: @escaping(_ sonos: SonosController)->Void) {
+    init(xml: XMLIndexer, url: URL,_ completion: @escaping(_ sonos: SonosDevice)->Void) {
         let device = xml["root"]["device"]
         let displayName = device["displayName"].element?.text
         let roomName = device["roomName"].element?.text
@@ -363,7 +363,7 @@ class SonosController: Equatable, Hashable {
         return xml
     }
     
-    static func ==(l:SonosController, r:SonosController) -> Bool {
+    static func ==(l:SonosDevice, r:SonosDevice) -> Bool {
         return l.udn == r.udn
     }
     

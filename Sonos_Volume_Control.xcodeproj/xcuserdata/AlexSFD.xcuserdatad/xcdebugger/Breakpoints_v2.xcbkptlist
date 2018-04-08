@@ -286,7 +286,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
             endingLineNumber = "70"
-            landmarkName = "SonosController"
+            landmarkName = "SonosDevice"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
@@ -414,8 +414,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
             endingLineNumber = "99"
-            landmarkName = "SonosController"
-            landmarkType = "3">
+            landmarkName = "init(roomName:deviceName:url:ip:udn:deviceInfo:groupState:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -430,8 +430,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "250"
             endingLineNumber = "250"
-            landmarkName = "SonosController"
-            landmarkType = "3">
+            landmarkName = "updateAll(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -446,8 +446,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "251"
             endingLineNumber = "251"
-            landmarkName = "SonosController"
-            landmarkType = "3">
+            landmarkName = "updateAll(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -606,7 +606,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "323"
             endingLineNumber = "323"
-            landmarkName = "SonosController"
+            landmarkName = "SonosDevice"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
@@ -622,8 +622,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "304"
             endingLineNumber = "304"
-            landmarkName = "getPlayState(_:)"
-            landmarkType = "7">
+            landmarkName = "SonosDevice"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

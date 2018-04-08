@@ -9,10 +9,10 @@
 import Cocoa
 
 struct SonosStereoPair: Hashable {
-    let controller: SonosController
-    let otherSpeaker: SonosController
+    let controller: SonosDevice
+    let otherSpeaker: SonosDevice
     
-    init?(s1: SonosController, s2: SonosController) {
+    init?(s1: SonosDevice, s2: SonosDevice) {
         guard s1.deviceInfo?.zoneName == s2.deviceInfo?.zoneName else {return nil}
         
         if let gID = s1.groupState?.groupID,

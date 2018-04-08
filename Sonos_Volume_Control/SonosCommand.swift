@@ -27,15 +27,15 @@ class SonosCommand {
         self.service = service
     }
     
-    static func downloadSpeakerInfo(sonos: SonosController,_ completion:@escaping ((_ data: Data?)->Void) ) {
+    static func downloadSpeakerInfo(sonos: SonosDevice,_ completion:@escaping ((_ data: Data?)->Void) ) {
         self.getFromSpeaker(sonos: sonos, path: "/status/zp", completion)
     }
     
-    static func downloadNetworkTopologyInfo(sonos: SonosController, _ completion: @escaping ((_ data: Data?)-> Void)) {
+    static func downloadNetworkTopologyInfo(sonos: SonosDevice, _ completion: @escaping ((_ data: Data?)-> Void)) {
         self.getFromSpeaker(sonos: sonos, path: "/topology", completion)
     }
     
-    static func getFromSpeaker(sonos: SonosController, path: String,_ completion: @escaping ((_ data: Data?)-> Void)) {
+    static func getFromSpeaker(sonos: SonosDevice, path: String,_ completion: @escaping ((_ data: Data?)-> Void)) {
         let uri = "http://" + sonos.ip + ":" + String(sonos.port) +  path
         var request = URLRequest(url: URL(string: uri)!)
         request.httpMethod = "GET"
@@ -53,7 +53,7 @@ class SonosCommand {
             }.resume()
     }
     
-    func execute(sonos: SonosController,_ completion: ((_ data: Data?)->Void)?=nil ) {
+    func execute(sonos: SonosDevice,_ completion: ((_ data: Data?)->Void)?=nil ) {
         
         let uri = "http://" + sonos.ip + ":" + String(sonos.port) + self.endpoint.rawValue;
         let content = "<s:Envelope\n xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\""

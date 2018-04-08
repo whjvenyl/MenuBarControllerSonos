@@ -31,10 +31,10 @@ class ControlVC: NSViewController {
     private let discovery: SSDPDiscovery = SSDPDiscovery.defaultDiscovery
     fileprivate var session: SSDPDiscoverySession?
     
-    var sonosSystems = [SonosController]()
+    var sonosSystems = [SonosDevice]()
     var sonosGroups: [String : SonosSpeakerGroup] = [:]
-    var speakerButtons: [SonosController: NSButton] = [:]
-    var lastDiscoveryDeviceList = [SonosController]()
+    var speakerButtons: [SonosDevice: NSButton] = [:]
+    var lastDiscoveryDeviceList = [SonosDevice]()
     var devicesFoundCurrentSearch = 0
     
     var groupButtons: [SonosSpeakerGroup: NSButton] = [:]
@@ -83,23 +83,23 @@ class ControlVC: NSViewController {
     func showDemo() {
         self.stopDiscovery()
 
-        let t1 = SonosController(roomName: "Bedroom_3", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1", deviceInfo: SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "01"), groupState: SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"]))
+        let t1 = SonosDevice(roomName: "Bedroom_3", deviceName: "PLAY:3", url: URL(string:"http://192.168.178.91")!, ip: "192.168.178.91", udn: "some-udn-1", deviceInfo: SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "01"), groupState: SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"]))
         t1.playState = .playing
         self.addDeviceToList(sonos: t1)
         self.updateGroups(sonos: t1)
         
-        let t2 = SonosController(roomName: "Bedroom_1", deviceName: "One", url: URL(string:"http://192.168.178.92")!, ip: "192.168.178.92", udn: "some-udn-2", deviceInfo:SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "02"), groupState:  SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"]))
+        let t2 = SonosDevice(roomName: "Bedroom_1", deviceName: "One", url: URL(string:"http://192.168.178.92")!, ip: "192.168.178.92", udn: "some-udn-2", deviceInfo:SonosDeviceInfo(zoneName: "Bedroom_3+1", localUID: "02"), groupState:  SonosGroupState(name: "Bedroom", groupID: "01", deviceIds: ["01", "02"]))
         t2.playState = .playing
         self.addDeviceToList(sonos: t2)
         self.updateGroups(sonos: t2)
         
-        let t3 = SonosController(roomName: "Kitchen", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.93")!, ip: "192.168.178.93", udn: "some-udn-3",
+        let t3 = SonosDevice(roomName: "Kitchen", deviceName: "PLAY:1", url: URL(string:"http://192.168.178.93")!, ip: "192.168.178.93", udn: "some-udn-3",
                                  deviceInfo: SonosDeviceInfo(zoneName: "Kitchen", localUID: "03"), groupState: SonosGroupState(name: "Kitchen", groupID: "03", deviceIds: ["03"]))
         t3.playState = .paused
         self.addDeviceToList(sonos: t3)
         self.updateGroups(sonos: t3)
 
-        let t4 = SonosController(roomName: "Living room", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.94")!, ip: "192.168.178.94", udn: "some-udn-4",
+        let t4 = SonosDevice(roomName: "Living room", deviceName: "PLAY:5", url: URL(string:"http://192.168.178.94")!, ip: "192.168.178.94", udn: "some-udn-4",
                                  deviceInfo: SonosDeviceInfo(zoneName: "Living room", localUID: "04"),
                                  groupState: SonosGroupState(name: "Living room", groupID: "04", deviceIds: ["04", "05"]))
         t4.playState = .paused
@@ -125,7 +125,7 @@ class ControlVC: NSViewController {
      - Parameters:
      - sonos: The Sonos Device which was found and should be added
      */
-    func addDeviceToList(sonos: SonosController) {
+    func addDeviceToList(sonos: SonosDevice) {
         guard sonosSystems.contains(sonos) == false else {return}
         
         //New sonos system. Add it to the list
@@ -163,7 +163,7 @@ class ControlVC: NSViewController {
         
         //Add all sonos buttons
         for sonos in sonosSystems {
-            let button = NSButton(checkboxWithTitle: sonos.readableName, target: sonos, action: #selector(SonosController.activateDeactivate(button:)))
+            let button = NSButton(checkboxWithTitle: sonos.readableName, target: sonos, action: #selector(SonosDevice.activateDeactivate(button:)))
             button.state = sonos.active ? .on : .off
             button.font = NSFont.systemFont(ofSize: 12.5)
             self.sonosStack.addArrangedSubview(button)
@@ -240,7 +240,7 @@ class ControlVC: NSViewController {
      - Parameters:
      - sonos: The Sonos speaker which should be added to the group
      */
-    func updateGroups(sonos: SonosController) {
+    func updateGroups(sonos: SonosDevice) {
         guard let gId = sonos.groupState?.groupID else {return}
         
         if let group = self.sonosGroups[gId] {
@@ -332,7 +332,7 @@ class ControlVC: NSViewController {
         - idx: Index at which the equal sonos is placed in sonosSystems
         - sonos: The newly discovered sonos
      */
-    func replaceSonos(atIndex idx: Int, withSonos sonos: SonosController) {
+    func replaceSonos(atIndex idx: Int, withSonos sonos: SonosDevice) {
         let eqSonos = sonosSystems[idx]
         if eqSonos.ip != sonos.ip {
             //Ip address changes
@@ -514,7 +514,7 @@ class ControlVC: NSViewController {
         
     }
     
-    private func playPause(forSonos sonos: SonosController, actionState: PlayPauseButton.State) {
+    private func playPause(forSonos sonos: SonosDevice, actionState: PlayPauseButton.State) {
         //Play or pause based on the button state
         switch actionState {
         case .pause, .stop:
@@ -525,11 +525,11 @@ class ControlVC: NSViewController {
         self.updatePlayButton(forState: sonos.playState, isPlayingRadio: sonos.trackInfo?.isPlayingRadio ?? false)
     }
     
-    private func pause(sonos: SonosController) {
+    private func pause(sonos: SonosDevice) {
         
     }
     
-    private func play(sonos: SonosController) {
+    private func play(sonos: SonosDevice) {
         
     }
     
@@ -636,7 +636,7 @@ extension ControlVC: SSDPDiscoveryDelegate {
                     }
                     self.lastDiscoveryDeviceList.append(sonos)
                 }else {
-                    let sonosDevice = SonosController(xml: xml, url: response.location, { (sonos) in
+                    let sonosDevice = SonosDevice(xml: xml, url: response.location, { (sonos) in
                         self.updateGroups(sonos: sonos)
                         
                         DispatchQueue.main.async {
@@ -690,7 +690,7 @@ extension ControlVC {
 
 //MARK: Sonos Delegate
 extension ControlVC: SonosControllerDelegate {
-    func didUpdateActiveState(forSonos sonos: SonosController, isActive: Bool) {
+    func didUpdateActiveState(forSonos sonos: SonosDevice, isActive: Bool) {
         self.updateState()
     }
 }

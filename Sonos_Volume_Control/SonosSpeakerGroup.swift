@@ -17,7 +17,7 @@ protocol SonosSpeakerGroupDelegate {
 class SonosSpeakerGroup: Hashable {
     var name: String
     let groupID: String
-    private (set) var speakers: Set<SonosController> = Set()
+    private (set) var speakers: Set<SonosDevice> = Set()
     private var speakerOrder: [String]
     public var delegate: SonosSpeakerGroupDelegate?
     
@@ -27,7 +27,7 @@ class SonosSpeakerGroup: Hashable {
         return self.mainSpeaker?.trackInfo
     }
     
-    init?(groupID: String, firstSpeaker: SonosController) {
+    init?(groupID: String, firstSpeaker: SonosDevice) {
         guard let deviceIds = firstSpeaker.groupState?.deviceIds,
             let name = firstSpeaker.groupState?.name,
             groupID.isEmpty == false
@@ -40,7 +40,7 @@ class SonosSpeakerGroup: Hashable {
     }
     
     /// Get the group's controller
-    private var mainSpeaker: SonosController? {
+    private var mainSpeaker: SonosDevice? {
         if let main = speakers.first(where: {speakerOrder.first == $0.deviceInfo?.localUID}) {
             return main
         }
@@ -71,7 +71,7 @@ class SonosSpeakerGroup: Hashable {
         }
     }
     
-    func addSpeaker(_ sonos: SonosController) {
+    func addSpeaker(_ sonos: SonosDevice) {
         guard sonos.groupState?.groupID == self.groupID else {return}
         
         self.speakers.insert(sonos)
@@ -80,13 +80,13 @@ class SonosSpeakerGroup: Hashable {
         }
     }
     
-    func removeIfGroupChanged(_ sonos: SonosController) {
+    func removeIfGroupChanged(_ sonos: SonosDevice) {
         guard sonos.groupState?.groupID != self.groupID else {return}
         
         self.speakers.remove(sonos)
     }
     
-    func remove(sonos: SonosController) {
+    func remove(sonos: SonosDevice) {
         self.speakers.remove(sonos)
     }
     
