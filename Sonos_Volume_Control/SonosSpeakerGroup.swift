@@ -9,12 +9,12 @@
 import Cocoa
 import SWXMLHash
 
-protocol SonosSpeakerGroupDelegate {
+public protocol SonosSpeakerGroupDelegate {
     func didChangeActiveState(group: SonosSpeakerGroup)
 }
 
 //TODO: Add delegate
-class SonosSpeakerGroup: Hashable {
+public class SonosSpeakerGroup: Hashable {
     var name: String
     let groupID: String
     private (set) var speakers: Set<SonosDevice> = Set()
@@ -166,11 +166,11 @@ class SonosSpeakerGroup: Hashable {
     }
     
     
-    var hashValue: Int {
+    public var hashValue: Int {
         return self.groupID.hashValue
     }
     
-    static func ==(l:SonosSpeakerGroup, r:SonosSpeakerGroup) -> Bool {
+    public static func ==(l:SonosSpeakerGroup, r:SonosSpeakerGroup) -> Bool {
         return l.groupID == r.groupID
     }
     

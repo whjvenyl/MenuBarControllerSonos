@@ -9,11 +9,11 @@
 import Cocoa
 import SWXMLHash
 
-protocol SonosControllerDelegate {
+public protocol SonosDeviceDelegate {
     func didUpdateActiveState(forSonos sonos: SonosDevice, isActive: Bool)
 }
 
-class SonosDevice: Equatable, Hashable {
+public class SonosDevice: Equatable, Hashable {
     //   MARK:  Properties
     
     /// Name of the room
@@ -51,7 +51,7 @@ class SonosDevice: Equatable, Hashable {
     /// Speakers device info
     public private(set) var deviceInfo: SonosDeviceInfo?
     
-    public var delegate: SonosControllerDelegate?
+    public var delegate: SonosDeviceDelegate?
     
     /// A timer which waits a short time before the volume will be updated
     private var volumeTimer: Timer?
@@ -134,23 +134,21 @@ class SonosDevice: Equatable, Hashable {
             updateVolume = 100
         }
         
-        self.currentVolume = updateVolume
-//        self.volumeTimer?.invalidate()
-//        self.volumeTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false, block: self.setVolume(fromTimer:))
-        self.setVolume(fromTimer: nil)
-    }
-    
-    fileprivate func setVolume(fromTimer timer: Timer?) {
+        guard updateVolume != currentVolume else {return}
+        
         let command = SonosCommand(endpoint: .rendering_endpoint, action: .setVolume, service: .rendering_service)
         command.put(key: "InstanceID", value: "0")
         command.put(key: "Channel", value: "Master")
-        command.put(key: "DesiredVolume", value: String(self.currentVolume))
+        command.put(key: "DesiredVolume", value: String(updateVolume))
         command.execute(sonos: self)
+        self.currentVolume = updateVolume
         
-        if self.muted && self.currentVolume > 0 {
+        if self.muted && updateVolume > 0 {
             //Unmute speaker
             self.setMute(muted: false)
         }
+
+        print("Updating volume to: ", updateVolume)
     }
     
     /**
@@ -363,11 +361,11 @@ class SonosDevice: Equatable, Hashable {
         return xml
     }
     
-    static func ==(l:SonosDevice, r:SonosDevice) -> Bool {
+    public static func ==(l:SonosDevice, r:SonosDevice) -> Bool {
         return l.udn == r.udn
     }
     
-    var hashValue: Int {
+    public var hashValue: Int {
         return self.deviceInfo?.localUID.hashValue ?? "no-id".hashValue
     }
 }

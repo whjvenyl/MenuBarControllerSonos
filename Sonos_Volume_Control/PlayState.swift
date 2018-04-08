@@ -8,7 +8,7 @@
 
 import Cocoa
 
-enum PlayState: String {
+public enum PlayState: String {
     case error = "ERROR"
     case stopped = "STOPPED"
     case playing = "PLAYING"
