@@ -13,7 +13,7 @@ struct SonosStereoPair: Hashable {
     let otherSpeaker: SonosDevice
     
     init?(s1: SonosDevice, s2: SonosDevice) {
-        guard s1.deviceInfo?.zoneName == s2.deviceInfo?.zoneName else {return nil}
+        guard s1.roomName == s2.roomName && s1 != s2 else {return nil}
         
         if let gID = s1.groupState?.groupID,
             gID.isEmpty == false {

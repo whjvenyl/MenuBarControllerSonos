@@ -47,10 +47,27 @@ public class SonosController {
     func addDeviceToList(sonos: SonosDevice) {
         guard sonosSystems.contains(sonos) == false else {return}
         
+//        if let stereoPartner = sonosSystems.first(where: {$0.roomName == sonos.roomName && $0.udn != sonos.udn}) {
+//            if let gId = stereoPartner.groupState?.groupID,
+//                gId.isEmpty == false {
+//                //Stereo partner is the controller
+//                stereoPartner.isInStereoSetup = true
+//            }else if let idx = sonosSystems.index(of: stereoPartner) {
+//                self.sonosSystems.remove(at: idx)
+//                //This is the stereo controller
+//                sonos.isInStereoSetup = true
+//                self.sonosSystems.append(sonos)
+//            }
+//        }else {
+//            //New sonos system. Add it to the list
+//            self.sonosSystems.append(sonos)
+//        }
+        
         //New sonos system. Add it to the list
         self.sonosSystems.append(sonos)
         
         self.detectStereoPairs()
+        self.sortSpeakers()
         self.delegate?.didUpdateSpeakers()
     }
     
@@ -59,9 +76,8 @@ public class SonosController {
     func detectStereoPairs() {
         var stereoPairs = Set<SonosStereoPair>()
         for sonos in self.sonosSystems {
-            guard let zoneName = sonos.deviceInfo?.zoneName else {continue}
             //Find stereo pair
-            let pair = self.sonosSystems.filter({$0.deviceInfo?.zoneName == zoneName})
+            let pair = self.sonosSystems.filter({$0.roomName == sonos.roomName})
             if pair.count == 2,
                 let sPair = SonosStereoPair(s1: pair.first!, s2: pair.last!) {
                 stereoPairs.insert(sPair)
@@ -92,6 +108,7 @@ public class SonosController {
         }
         
         self.sonosSystems = Array(self.lastDiscoveryDeviceList)
+        self.detectStereoPairs()
         
         for group in self.sonosGroups.values {
             if group.speakers.count == 0 {

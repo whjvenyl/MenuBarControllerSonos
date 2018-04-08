@@ -63,7 +63,7 @@ public class SonosDevice: Equatable, Hashable {
 //        }
         var rName = "\(roomName) - \(deviceName)"
         if isInStereoSetup {
-            rName += " \(NSLocalizedString("Stereo", comment: ""))"
+            rName += " (\(NSLocalizedString("Stereo", comment: "")))"
         }
         return rName
     }
@@ -85,6 +85,7 @@ public class SonosDevice: Equatable, Hashable {
         self.udn = device["UDN"].element?.text ?? "no-udn"
         
         self.updateAll({ completion(self) })
+        self.getNetworkTopology()
     }
     
     init(roomName:String, deviceName:String, url:URL, ip: String, udn: String, deviceInfo: SonosDeviceInfo, groupState: SonosGroupState) {
@@ -114,7 +115,9 @@ public class SonosDevice: Equatable, Hashable {
     }
     
     func getNetworkTopology() {
-        
+        SonosCommand.downloadNetworkTopologyInfo(sonos: self) { (data) in
+            guard let xml = self.parseXml(data: data) else {return}
+        }
     }
     
     //    MARK: - Interactions
